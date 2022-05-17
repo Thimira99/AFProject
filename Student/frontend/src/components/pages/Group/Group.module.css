@@ -1,0 +1,14 @@
+.header p {
+    background-color: aqua;
+}
+
+.table {
+    display: flex;
+    flex-direction: row;
+    padding: 3px;
+    padding-right: 300px;
+}
+
+.tableT {
+    margin-left: 300px;
+}
