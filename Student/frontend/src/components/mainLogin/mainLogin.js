@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import login from './mainlogin.module.css';
 import axios from 'axios';
 import { useState } from 'react';
+import { Button, Dropdown } from 'react-bootstrap';
 
 
 function MainLogin() {
@@ -73,16 +74,32 @@ function MainLogin() {
                 <div className={login.right}>
                     <h1>New Here ?</h1>
                     <Link to='/login'>
-                        <button type='button' className={login.whiteButton}>
-                            Sign up
-                        </button>
+
                     </Link>
 
+                   
+
+
+                    <Dropdown>
+                        <Dropdown.Toggle variant="adds">
+                            <button type='button' className={login.whiteButton} >
+                                Sign up
+                            </button>
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu >
+                            <Dropdown.Item href="/login">STUDENT</Dropdown.Item>
+                            <Dropdown.Item href="/loginRegister">STAFF</Dropdown.Item>
+
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </div>
+
+
 
             </div>
 
-        </div>
+        </div >
 
     )
 }
