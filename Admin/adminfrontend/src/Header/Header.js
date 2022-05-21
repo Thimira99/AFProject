@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
-import admin from '../images/admin.jpg';
+import logo from '../images/logo1.png';
 
 function Header() {
     return (
         <div className='header'>
-            <img src={admin} />
-            <button className="header-logout-button">Logout</button>
+            <img src={logo} />
+            <a href='/login'>
+            <button className="header-logout-button" style={{marginLeft:'1000px'}}>Logout</button>
+            </a>
         </div>
 
     )

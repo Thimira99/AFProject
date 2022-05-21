@@ -1,6 +1,7 @@
 # dependencies
 admin_backend/node_modules
 adminfrontend/node_modules
+
 /.pnp
 .pnp.js
 
