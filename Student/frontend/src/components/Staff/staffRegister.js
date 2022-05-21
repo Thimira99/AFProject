@@ -14,6 +14,28 @@ function staffRegister() {
         password: ""
     })
 
+    const [reserchFields , setreserchfields ] = useState({});
+
+    setreserchfields("Artificial Intelligence",
+        "Computational & Synthetic Biology",
+        "Computer Architecture",
+        "Computer Graphics, Vision, Animation, and Game Science",
+        "Computing for Development",
+        "Data Science",
+        "Data Management and Visualization",
+       " Human Computer Interaction",
+        "Machine Learning",
+        "Molecular Information Systems",
+        "Natural Language Processing",
+        "Programming Languages and Software Engineering",
+       " Robotics",
+        "Security and Privacy",
+       " Systems and Networking",
+        "Theory of Computation",
+        "Ubiquitous Computing",
+       " Wireless and Sensor Systems",
+        "Cloud Computing")
+
     const history = useHistory();
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
@@ -53,46 +75,43 @@ function staffRegister() {
                         </button>
                     </Link>
                 </div>
-                <div className={loginStyles.right} style={{'height': '500px', 'overflow':'auto', 'display': 'block'}}>
-                
+                <div className={loginStyles.right} style={{ 'height': '500px', 'overflow': 'auto', 'display': 'block' }}>
+
                     <form className={loginStyles.form_container} onSubmit={handleSubmit}>
                         <h1>Staff Registration</h1>
                         <input
                             type='text'
                             placeholder='Student Name'
-                            name='studentName'
+                            name='Name'
                             value={data.studentName}
                             onChange={handleChange}
                             required
                             className={loginStyles.input}
                         />
                         <input
-                            type='text'
-                            placeholder='Student Id'
-                            name='studentId'
+                            type='email'
+                            placeholder='Email'
+                            name='Email'
                             value={data.studentId}
                             onChange={handleChange}
                             required
                             className={loginStyles.input}
                         />
                         <input
-                            type='email'
-                            placeholder='Student Email'
-                            name='email'
+                            type='text'
+                            placeholder='Phone Number'
+                            name='Phone Number'
                             value={data.email}
                             onChange={handleChange}
                             required
                             className={loginStyles.input}
                         />
-                        <input
-                            type='text'
-                            placeholder='Student Gender'
-                            name='gender'
-                            value={data.gender}
-                            onChange={handleChange}
-                            required
-                            className={loginStyles.input}
-                        />
+                        <select id="jobRole" name="Job Role" className={loginStyles.input}>
+                            <option value="Superviosr">Superviosr </option>
+                            <option value="Co-Superviosr">Co-Superviosr</option>
+                            
+                        </select>
+                       
                         <input
                             type='password'
                             placeholder='Password'
