@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import Home from "./Home/Home";
-
+import Login from "./components/login"
 
 function App() {
 
@@ -13,8 +13,10 @@ function App() {
     <div>
       <Router>
         <Switch>
-          <Home />
+          <Route path='/home' exact component={Home} />
+          <Route path='/login' exact component={Login} />
 
+          <Redirect to='/login'/>
         </Switch>
 
       </Router>
