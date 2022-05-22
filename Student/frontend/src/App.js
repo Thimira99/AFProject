@@ -9,6 +9,7 @@ import Group from './components/pages/Group/Group';
 import MainLogin from './components/mainLogin/mainLogin';
 import Login from './components/login/login';
 import staffRegister from './components/Staff/staffRegister'
+import staffHome from "./components/Staff/StaffHome/staffHome";
 
 
 function App() {
@@ -22,12 +23,16 @@ function App() {
           <Route exact path='/group' component={Group} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/mainLogin' component={MainLogin} />
-          <Route exact path='/loginRegister' component={staffRegister} />
+        
+           {/* Staff */}
+           <Route exact path='/Staffdashboard' component={staffHome} />
+           <Route exact path='/loginRegister' component={staffRegister} />
+           
           <Redirect from='/' to='/mainLogin' />
 
           <Route exact path='/mainLogin' component={MainLogin} />
 
-          {/* Staff */}
+         
           
 
 
