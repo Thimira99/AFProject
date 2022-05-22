@@ -59,21 +59,20 @@ const staffSchema = new schema({
         trim: true
 
     },
-    stfUserQuestion:{
-        stfUserQ1: {
-            type: String,
-            required: true,
-            trim: true
-    
-        },
-        stfUserQ2: {
-            type: String,
-            required: true,
-            trim: true
-    
-        },
+    stfUserQ1: {
+        type: String,
+        required: true,
+        trim: true
 
     },
+    stfUserQ2: {
+        type: String,
+        required: true,
+        trim: true
+
+    },
+
+   
     
 },{timestamps:true})
 
