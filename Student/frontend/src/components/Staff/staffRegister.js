@@ -80,7 +80,7 @@ function staffRegister() {
                 axios.post(url, data).then((res) => {
                     if (res.status == "200") {
                         alert(res.data.message);
-                        history.push('/dashboard');
+                        history.push('/Staffdashboard');
                     } else {
                         alert(res.data.message);
                     }

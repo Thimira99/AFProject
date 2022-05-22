@@ -11,14 +11,9 @@ import { BsPersonCircle } from "react-icons/bs";
 
 
 
-
-
-
-
-
-export const SidebarData = [
+export const SidebarDataStaff = [
     {
-        title: "Home",
+        title: "Homeaa",
         icon: <BsHouseFill />,
         Link: "/home"
     },

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/mainStaff')
-const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser} = require('../Controller/staffController')
+const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser , StaffLogin} = require('../Controller/staffController')
 
 
 
@@ -18,6 +18,7 @@ router.get("/staffRegister/get",getAllStaff);
 router.put("/staffRegister/update/:id",updateStaff);
 router.get("/staffRegister/get/:id",getOneStaffUser);
 router.delete("/staffRegister/delete/:id",deleteStaffUser);
+router.post("/staffRegister/login",StaffLogin);
 
 
 module.exports = router;
