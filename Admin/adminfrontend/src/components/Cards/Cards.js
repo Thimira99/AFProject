@@ -25,7 +25,7 @@ function Cards() {
               src={sub}
               text='Create Submission Types'
               label='Submission Types'
-              path='/'
+              path='/viewSubmissions'
             />
 
             <CardItem

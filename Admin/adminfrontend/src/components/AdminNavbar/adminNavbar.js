@@ -46,7 +46,7 @@ const [logStatus, setLoginStatus] = useState(false);
          <nav className="navbar">
          <div className='navbar-container'>
             
-         <Link to="/" className="navbar-logo" onClick = {closeMobileMenu}>
+         <Link to="/home" className="navbar-logo" onClick = {closeMobileMenu}>
             <img  style={{width:60}} class="" src={logo} alt="" />  ADMIN PANEL</Link>
 
             
