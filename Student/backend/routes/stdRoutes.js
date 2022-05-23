@@ -25,5 +25,50 @@ router.post("/", async (req, res) => {
 
 })
 
+router.route("/get").get((req, res) => {
+    Student.find().then((students) => {
+        res.json(students);
+    }).catch((error) => {
+        console.log(error);
+    })
+})
+
+router.route("/update/:id").put((req, res) => {
+    let id = req.params.id;
+    const { studentName, studentId, email, gender } = req.body;
+
+
+    const updateStudent = {
+        studentName,
+        studentId,
+        email,
+        gender
+    }
+
+    const update = Student.findByIdAndUpdate(id, updateStudent).then(() => {
+
+        res.status(200).send({ status: "Student Updated", student: update });
+    }).catch((error) => {
+        res.status(500).send({ status: "error", error: error });
+    })
+})
+
+router.route("/get/:id").get((req, res) => {
+    const id = req.params.id;
+    Student.findById(id).then((student) => {
+        res.json(student);
+    }).catch((error) => {
+        console.log(error);
+    })
+})
+
+router.route("/delete/:id").delete((req, res) => {
+    const id = req.params.id;
+    Student.findByIdAndDelete(id).then(() => {
+        res.status(200).send({ status: "Student Deleted" });
+    }).catch((error) => {
+        console.log(error);
+    })
+})
 
 module.exports = router;

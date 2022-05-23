@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
+
 const joi = require('joi');
 const passwordComplexity = require('joi-password-complexity');
 
@@ -26,10 +26,6 @@ const studentSchema = new mongoose.Schema({
     }
 });
 
-studentSchema.method.generateAuthToken = function () {
-    const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, { expiresIn: "7d" });
-    return token;
-}
 
 const Student = mongoose.model("student", studentSchema);
 

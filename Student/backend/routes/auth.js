@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Student } = require('../models/student');
 const joi = require('joi');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
 router.post("/post", async (req, res) => {
@@ -24,12 +25,13 @@ router.post("/post", async (req, res) => {
             return res.status(200).send({ message: "Invalid Password" });
         }
 
+        const token = jwt.sign({ _id: student._id, studentName: student.studentName }, process.env.JWTPRIVATEKEY, { expiresIn: 1440 });
+
         if ((!student) && (!validPassword)) {
             return res.status(200).send({ message: "Invalid Email and Password" });
         }
 
-        const token = req.headers['x-access-token']
-        res.status(200).send({ data: token, message: "Logged in successfully" });
+        res.status(200).send({ student, message: "Logged in successfully" });
     } catch (error) {
         res.status(500).send({ message: "Internel server error " });
     }
