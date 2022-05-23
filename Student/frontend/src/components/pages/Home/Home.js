@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Header from '../../header/header';
 import Sidebar from '../../sidebar/Sidebar';
 
 import './Home.module.css';
 
+// import jwt_decode from 'jwt_decode';
 
 function Home() {
+
+    useEffect(() => {
+        
+    })
 
     return (
         <div className='main-wrapper'>

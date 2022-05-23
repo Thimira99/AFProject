@@ -102,5 +102,9 @@ body {
     width: 10%;
     height: 50%;
     margin-top: 1.3rem;
-    margin-left: 1100px;
+    margin-left: 90px;
+}
+
+.app-header h3 {
+    text-align: right;
 }

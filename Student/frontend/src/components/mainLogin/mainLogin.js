@@ -8,10 +8,16 @@ import { useState } from 'react';
 function MainLogin() {
     const history = useHistory();
 
+
     const [data, setData] = useState({
         email: "",
         password: ""
     })
+
+    //student
+    const [studentid, setStudentid] = useState("");
+
+
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
@@ -23,8 +29,9 @@ function MainLogin() {
         try {
             const url = 'http://localhost:8080/api/auth/post';
             axios.post(url, data).then((res) => {
+
                 if (res.data.message === "Logged in successfully") {
-                    localStorage.setItem('token', res.data);
+
                     window.location = ('/dashboard');
                 } else if (res.data.message === "Invalid Password") {
                     alert(res.data.message)
@@ -33,6 +40,12 @@ function MainLogin() {
                 } else {
                     alert(res.data.message)
                 }
+                localStorage.setItem("id", res.data.student._id);
+                localStorage.setItem("studentName", res.data.student.studentName);
+                localStorage.setItem("studentId", res.data.student.studentId);
+                localStorage.setItem("email", res.data.student.email);
+                localStorage.setItem("gender", res.data.student.gender);
+
             }).catch((error) => {
                 console.log(error);
             });
@@ -42,6 +55,8 @@ function MainLogin() {
         }
 
     }
+
+    console.log("ID" + studentid)
 
     return (
         <div className={login.login_container}>
