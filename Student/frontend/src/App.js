@@ -14,6 +14,8 @@ import UpdateStudent from "./components/UpdateStudent/updateStudent";
 
 import staffRegister from './components/Staff/staffRegister'
 import staffHome from "./components/Staff/StaffHome/staffHome";
+import profile from "./components/Staff/profile";
+import studentmsg from "./components/Staff/studentmsg";
 
 
 
@@ -36,6 +38,8 @@ function App() {
            {/* Staff */}
            <Route exact path='/Staffdashboard' component={staffHome} />
            <Route exact path='/loginRegister' component={staffRegister} />
+           <Route exact path='/profile' component={profile} />
+           <Route exact path='/student' component={studentmsg} />
            
 
           <Redirect from='/' to='/mainLogin' />

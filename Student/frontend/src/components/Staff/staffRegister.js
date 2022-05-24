@@ -72,9 +72,9 @@ function staffRegister() {
         e.preventDefault();
         console.log(rePassword)
 
-        if(rePassword == data.stfUserPassword){
+        if (rePassword == data.stfUserPassword) {
             setData({ ...data, ['stfUserActive']: "Y" })
-        
+
             try {
                 const url = 'http://localhost:8080/api/staffRegister/post';
                 axios.post(url, data).then((res) => {
@@ -87,18 +87,18 @@ function staffRegister() {
                 }).catch((err) => {
                     console.log(err)
                 });
-    
+
                 console.log(res.message);
             } catch (error) {
-    
+
             }
 
-        }else{
+        } else {
 
             console.log("not matching 2")
         }
 
-        
+
 
     }
 
@@ -115,7 +115,7 @@ function staffRegister() {
                     alert(res.data.message);
                     setData({ ...data, ['stfStaffId']: res.data.data.MainStaffId })
 
-                    
+
                 } else {
                     alert(res.data.message);
                 }
@@ -130,7 +130,14 @@ function staffRegister() {
 
     }
 
-console.log(data)
+
+    reserchFields.map((obj) =>{
+        console.log(obj)
+    })
+
+   
+
+    console.log(reserchFields)
     return (
         <div className={loginStyles.signup_container}>
             <div className={loginStyles.signupform_container}>
@@ -143,9 +150,6 @@ console.log(data)
                     </Link>
                 </div>
                 <div className={loginStyles.right} style={{ 'height': '500px', 'overflow': 'auto', 'display': 'block' }}>
-
-
-
 
 
                     {loginStatus ?
@@ -225,7 +229,7 @@ console.log(data)
                                 name='re-password'
 
                                 onChange={(e) => {
-                                    setReEnterdPassword( e.target.value);
+                                    setReEnterdPassword(e.target.value);
                                 }}
                                 required
                                 className={loginStyles.input}
