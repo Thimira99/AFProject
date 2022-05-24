@@ -43,9 +43,9 @@ export const SidebarData = [
         Link: "/template"
     },
     {
-        title: "Submittion",
+        title: "Submission",
         icon: <BsFileEarmarkArrowUpFill />,
-        Link: "/submit"
+        Link: "/submissions"
     },
     {
         title: "My Profile",
