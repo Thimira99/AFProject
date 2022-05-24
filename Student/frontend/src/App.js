@@ -14,8 +14,14 @@ import UpdateStudent from "./components/UpdateStudent/updateStudent";
 
 import staffRegister from './components/Staff/staffRegister'
 import staffHome from "./components/Staff/StaffHome/staffHome";
+
+import viewSubmissions from "./components/pages/viewSubmissions";
+import addSubmissions from "./components/pages/addSubmissions";
+import Submissions from "./components/pages/uploadSubmissions";
+
 import profile from "./components/Staff/profile";
 import studentmsg from "./components/Staff/studentmsg";
+
 
 
 
@@ -42,14 +48,17 @@ function App() {
            <Route exact path='/student' component={studentmsg} />
            
 
-          <Redirect from='/' to='/mainLogin' />
+         
 
           <Route exact path='/mainLogin' component={MainLogin} />
 
          
+          {/*submissions */}
+
+          <Route exact path='/submissions' component={viewSubmissions} />
+          <Route exact path='/addSubmissions' component={addSubmissions} />
+          <Route exact path='/uploadSubmissions' component={Submissions} />
           
-
-
         </Switch>
 
       </Router>

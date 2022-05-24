@@ -15,7 +15,8 @@ module.exports = {
   ],
   devServer: {
     historyApiFallback: true,
-    open: true
+    open: true,
+    port:3000
   },
   resolve: {
     modules: [__dirname, "src", "node_modules"],
