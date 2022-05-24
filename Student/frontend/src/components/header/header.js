@@ -13,6 +13,10 @@ function Header() {
     const [studentName, setStudentName] = useState("");
     const [studentId, setStudentId] = useState("");
 
+    const [logStaffUser, setLogUser] = useState('');
+    const [logStatus, setlogStatus] = useState('');
+    const [logUseName, setloguserName] = useState('');
+
     useEffect(() => {
         axios.get(`http://localhost:8080/api/student/get/${id}`).then((res) => {
             setStudentName(res.data.studentName);
@@ -20,26 +24,6 @@ function Header() {
         }).catch((error) => {
             console.log(error)
         })
-    })
-
-    const itnum = localStorage.getItem('studentId');
-    return (
-        <div className='header'>
-            <img src={student} />
-            <h3 style={{ color: 'white', marginLeft: '870px', marginTop: '1rem' }}>{studentName}({studentId})</h3>
-            <button className="header-logout-button">Logout</button>
-
-
-    const [logStaffUser, setLogUser] = useState('');
-    const [logStatus, setlogStatus] = useState('');
-    const [logUseName, setloguserName] = useState('');
-
-
-
-
-    useEffect(() => {
-
-
 
         const logStaff = sessionStorage.getItem('LogUserId')
         setLogUser(logStaff);
@@ -49,10 +33,9 @@ function Header() {
 
         const logUsername = sessionStorage.getItem('LogUserName')
         setloguserName(logUsername)
+    })
 
-
-
-    });
+    const itnum = localStorage.getItem('studentId');
 
     console.log(logStatus)
 
@@ -61,11 +44,11 @@ function Header() {
             <img src={student} />
 
             {logStatus ? <><h5 style={{ color: 'white', marginLeft: '870px', marginTop: '1.3rem' }}>{logStaffUser}   {logUseName}</h5><button className="header-logout-button">Logout</button></>
-            
-            
- :
 
-                <button style={{marginLeft: '1100px'}} className="header-logout-button">Logout</button>
+
+                :
+
+                <><h3 style={{ color: 'white', marginLeft: '870px', marginTop: '1rem' }}>{studentName}({studentId})</h3><button className="header-logout-button">Logout</button></>
 
             }
 

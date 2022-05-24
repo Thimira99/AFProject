@@ -12,3 +12,24 @@
 .tableT {
     margin-left: 300px;
 }
+
+.mainForm {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 2rem;
+}
+
+.membersDetails {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.membersDetail h3 {
+    margin-top: 2rem;
+}
+
+.submitButton {
+    margin-top: 1rem;
+    text-align: center;
+}

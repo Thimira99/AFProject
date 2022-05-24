@@ -11,6 +11,7 @@ import Login from './components/login/login';
 
 import Profile from "./components/Profile/profile";
 import UpdateStudent from "./components/UpdateStudent/updateStudent";
+import ViewGroup from "./components/ViewGroup/viewGroup";
 
 import staffRegister from './components/Staff/staffRegister'
 import staffHome from "./components/Staff/StaffHome/staffHome";
@@ -30,20 +31,21 @@ function App() {
           <Route exact path='/mainLogin' component={MainLogin} />
 
           <Route exact path='/profile' component={Profile} />
+          <Route exact path='/viewGroups' component={ViewGroup} />
           <Route exact path='/update' component={UpdateStudent} />
 
-        
-           {/* Staff */}
-           <Route exact path='/Staffdashboard' component={staffHome} />
-           <Route exact path='/loginRegister' component={staffRegister} />
-           
+
+          {/* Staff */}
+          <Route exact path='/Staffdashboard' component={staffHome} />
+          <Route exact path='/loginRegister' component={staffRegister} />
+
 
           <Redirect from='/' to='/mainLogin' />
 
           <Route exact path='/mainLogin' component={MainLogin} />
 
-         
-          
+
+
 
 
         </Switch>
