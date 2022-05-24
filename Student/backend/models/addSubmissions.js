@@ -15,6 +15,11 @@ const addSubmissionSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true
+    },
+    supervisorName:{
+        type:String,
+        required:true,
+        trim:true
     }
     
 });

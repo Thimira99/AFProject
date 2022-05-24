@@ -12,10 +12,12 @@ export default class addSubmissions extends Component {
         topic:"",
         researchField:"",
         type:"",
+        supervisorName:"",
            /** */
           errors:{},
           errorsN:{},
-          error:{}
+          error:{},
+          errorS:{}
   
       }
     }
@@ -30,11 +32,12 @@ export default class addSubmissions extends Component {
   
   /** */
   formValidation = () =>{
-    const{groupId,topic,researchField}=this.state;
+    const{groupId,topic,researchField,supervisorName}=this.state;
     let isValid = true;
     const errors ={};
     const error = {};
     const errorsN = {};
+    const errorS= {};
   
     if(groupId.trim().length<3){
         error["groupIdLength"] = "Invalid Group ID";
@@ -56,8 +59,12 @@ export default class addSubmissions extends Component {
         errors["researchFieldInput"] = "research field Field is EMPTY!";
         isValid=false;
     }
+    if(!supervisorName){
+      errorS["supervisorNameInput"]= "Supervisor name field Field is EMPTY!";
+      isValid=false;
+    }
   
-    this.setState({errors:errors,error:error,errorsN:errorsN});
+    this.setState({errors:errors,error:error,errorsN:errorsN,errorS:errorS});
     return isValid;
   }
   /** */
@@ -70,12 +77,13 @@ export default class addSubmissions extends Component {
       if(isValid){
   
   
-      const{groupId,topic,researchField}= this.state;
+      const{groupId,topic,researchField,supervisorName}= this.state;
   
       const data={
           groupId:groupId,
           topic:topic,
           researchField:researchField,
+          supervisorName:supervisorName
       }
           
       console.log(data);
@@ -88,7 +96,7 @@ export default class addSubmissions extends Component {
               groupId:"",
               topic:"",
               researchField:"",
-              
+              supervisorName:""
             }
           )
         }
@@ -100,6 +108,8 @@ export default class addSubmissions extends Component {
         const{errors}=this.state;
         const{error}=this.state;
         const{errorsN}=this.state;
+        const{errorS}=this.state;
+
         const status = this.state;
     return (
         <div>
@@ -166,6 +176,20 @@ export default class addSubmissions extends Component {
             />
             {Object.keys(errors).map((key)=>{
               return <div style={{color:'red'}} key={key}>{errors[key]}</div> })}
+          </div>
+
+          <div className='form-group' style={{marginBottom:'15px'}}>
+            <label style={{marginBottom:'5px',color:'white'}}>SUPERVISOR NAME</label>
+            <input 
+              type="text"
+              className="form-control"
+              name="supervisorName"
+              placeholder="Enter hotel Supervisor Name"
+              value={this.state.supervisorName}
+              onChange={this.handleInputChange}
+            />
+            {Object.keys(errorS).map((key)=>{
+              return <div style={{color:'red'}} key={key}>{errorS[key]}</div> })}
           </div>
 
           <button className="btn btn-success" type="submit" style={{marginTop:'15px',marginBottom:'150px'}} onClick={this.onSubmit}>
