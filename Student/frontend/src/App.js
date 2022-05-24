@@ -16,6 +16,14 @@ import ViewGroup from "./components/ViewGroup/viewGroup";
 import staffRegister from './components/Staff/staffRegister'
 import staffHome from "./components/Staff/StaffHome/staffHome";
 
+import viewSubmissions from "./components/pages/viewSubmissions";
+import addSubmissions from "./components/pages/addSubmissions";
+import Submissions from "./components/pages/uploadSubmissions";
+
+import profile from "./components/Staff/profile";
+import studentmsg from "./components/Staff/studentmsg";
+
+
 
 
 function App() {
@@ -35,12 +43,22 @@ function App() {
           <Route exact path='/update' component={UpdateStudent} />
 
 
+
           {/* Staff */}
           <Route exact path='/Staffdashboard' component={staffHome} />
           <Route exact path='/loginRegister' component={staffRegister} />
 
 
-          <Redirect from='/' to='/mainLogin' />
+        
+           {/* Staff */}
+           <Route exact path='/Staffdashboard' component={staffHome} />
+           <Route exact path='/loginRegister' component={staffRegister} />
+           <Route exact path='/profile' component={profile} />
+           <Route exact path='/student' component={studentmsg} />
+           
+
+
+         
 
           <Route exact path='/mainLogin' component={MainLogin} />
 
@@ -48,6 +66,15 @@ function App() {
 
 
 
+
+         
+          {/*submissions */}
+
+
+          <Route exact path='/submissions' component={viewSubmissions} />
+          <Route exact path='/addSubmissions' component={addSubmissions} />
+          <Route exact path='/uploadSubmissions' component={Submissions} />
+          
         </Switch>
 
       </Router>

@@ -6,6 +6,9 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 
 import Home from "./Home/Home";
 import Login from "./components/login"
+import createSubmissions from './pages/createSubmissions'
+import viewSubmissions from "./pages/viewSubmissions";
+import editSubmissions from "./pages/editSubmissions";
 
 function App() {
 
@@ -15,7 +18,9 @@ function App() {
         <Switch>
           <Route path='/home' exact component={Home} />
           <Route path='/login' exact component={Login} />
-
+          <Route path='/createSubmission' exact component = {createSubmissions}/>
+          <Route path='/viewSubmissions' exact component = {viewSubmissions}/>
+          <Route path='/edit/submissions/:id' exact component = {editSubmissions}/>
           <Redirect to='/login'/>
         </Switch>
 

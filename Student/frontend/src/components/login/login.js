@@ -23,7 +23,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const url = 'http://localhost:8080/api/student';
+            const url = 'http://localhost:8000/api/student';
             axios.post(url, data).then((res) => {
                 if (res.data.message === "Student Created") {
                     alert(res.data.message);
