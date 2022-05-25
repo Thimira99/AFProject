@@ -44,7 +44,7 @@ class studentmsg extends Component {
         }
 
         try {
-            const url = 'http://localhost:8080/api/message/post';
+            const url = 'http://localhost:8000/api/message/post';
             axios.post(url, postData).then((res) => {
                 if (res) {
                     console.log(res)
@@ -67,7 +67,7 @@ class studentmsg extends Component {
         console.log(data);
 
         try {
-            const url = 'http://localhost:8080/api/message/get';
+            const url = 'http://localhost:8000/api/message/get';
             axios.post(url, data).then((res) => {
 
                 this.setState({
@@ -88,7 +88,7 @@ class studentmsg extends Component {
                                 seenStatus : true
                             }
                             
-                            axios.put(`http://localhost:8080/api/message/update/${msgObject._id}`,obj).then((res) => {
+                            axios.put(`http://localhost:8000/api/message/update/${msgObject._id}`,obj).then((res) => {
                                 if(res){
                                     console.log("superman",res)
                                 }

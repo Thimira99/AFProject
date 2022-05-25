@@ -20,7 +20,7 @@ function Profile() {
     const [students, setStudents] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/student/get/${id}`).then((res) => {
+        axios.get(`http://localhost:8000/api/student/get/${id}`).then((res) => {
             setStudents(res.data);
         }).catch((error) => {
             console.log(error)
@@ -28,7 +28,7 @@ function Profile() {
     })
 
     function deleteStudent(id) {
-        axios.delete(`http://localhost:8080/api/student/delete/${id}`).then((res) => {
+        axios.delete(`http://localhost:8000/api/student/delete/${id}`).then((res) => {
             alert(res.data.status)
         }).catch((error) => {
             console.log(error)

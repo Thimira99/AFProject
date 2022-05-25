@@ -55,7 +55,7 @@ class staffMsg extends Component {
         }
 
         try {
-            const url = 'http://localhost:8080/api/message/post';
+            const url = 'http://localhost:8000/api/message/post';
             axios.post(url, postData).then((res) => {
 
                 if (res) {
@@ -120,7 +120,7 @@ class staffMsg extends Component {
         console.log(data);
 
         try {
-            const url = 'http://localhost:8080/api/message/get';
+            const url = 'http://localhost:8000/api/message/get';
             axios.post(url, data).then((res) => {
 
                

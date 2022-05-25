@@ -16,7 +16,7 @@ function UpdateStudent() {
     const [gender, setStudentGender] = useState("");
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/student/get/${id}`).then((res) => {
+        axios.get(`http://localhost:8000/api/student/get/${id}`).then((res) => {
             setStudentNames(res.data.studentName);
             setStudentId(res.data.studentId);
             setStudentEmail(res.data.email);
@@ -41,7 +41,7 @@ function UpdateStudent() {
         console.log(newStudent);
 
 
-        axios.put(`http://localhost:8080/api/student/update/${id}`, newStudent).then(() => {
+        axios.put(`http://localhost:8000/api/student/update/${id}`, newStudent).then(() => {
             alert("Student Updated")
             history.push('/profile')
         }).catch((error) => {

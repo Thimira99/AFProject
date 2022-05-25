@@ -56,7 +56,7 @@ app.post('/uploads',(req,res)=>{
     }); //mv-move it
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`Listning on port ${port}`)
 });
