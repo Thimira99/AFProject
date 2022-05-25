@@ -20,7 +20,7 @@ import viewSubmissions from "./components/pages/viewSubmissions";
 import addSubmissions from "./components/pages/addSubmissions";
 import Submissions from "./components/pages/uploadSubmissions";
 
-import profile from "./components/Staff/profile";
+import staffMsg from "./components/Staff/staffMsg";
 import studentmsg from "./components/Staff/studentmsg";
 
 
@@ -44,16 +44,14 @@ function App() {
 
 
 
-          {/* Staff */}
-          <Route exact path='/Staffdashboard' component={staffHome} />
-          <Route exact path='/loginRegister' component={staffRegister} />
+          
 
 
         
            {/* Staff */}
            <Route exact path='/Staffdashboard' component={staffHome} />
            <Route exact path='/loginRegister' component={staffRegister} />
-           <Route exact path='/profile' component={profile} />
+           <Route exact path='/staffMsg' component={staffMsg} />
            <Route exact path='/student' component={studentmsg} />
            
 
@@ -75,6 +73,8 @@ function App() {
           <Route exact path='/addSubmissions' component={addSubmissions} />
           <Route exact path='/uploadSubmissions' component={Submissions} />
           
+
+          <Redirect to='/mainLogin' component={MainLogin} />
         </Switch>
 
       </Router>
