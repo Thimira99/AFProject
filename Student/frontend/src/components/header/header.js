@@ -31,7 +31,7 @@ function Header() {
         const logUsername = sessionStorage.getItem('LogUserName')
         setloguserName(logUsername)
 
-        axios.get(`http://localhost:8080/api/student/get/${id}`).then((res) => {
+        axios.get(`http://localhost:8000/api/student/get/${id}`).then((res) => {
 
             setStudentName(res.data.studentName);
             setStudentId(res.data.studentId);

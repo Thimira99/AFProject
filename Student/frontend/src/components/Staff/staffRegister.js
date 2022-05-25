@@ -76,7 +76,7 @@ function staffRegister() {
             setData({ ...data, ['stfUserActive']: "Y" })
 
             try {
-                const url = 'http://localhost:8080/api/staffRegister/post';
+                const url = 'http://localhost:8000/api/staffRegister/post';
                 axios.post(url, data).then((res) => {
                     if (res.status == "200") {
                         alert(res.data.message);
@@ -107,7 +107,7 @@ function staffRegister() {
         e.preventDefault();
 
         try {
-            const url = 'http://localhost:8080/api/mainstaffRegister/login';
+            const url = 'http://localhost:8000/api/mainstaffRegister/login';
             axios.post(url, loginData).then((res) => {
                 if (res.status == "200") {
                     console.log(res)

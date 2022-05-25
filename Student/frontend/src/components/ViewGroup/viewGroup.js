@@ -19,7 +19,7 @@ function ViewGroup() {
         e.preventDefault();
 
 
-        axios.get(`http://localhost:8080/api/group/getbyLeader/${groupLeaderId}`).then((res) => {
+        axios.get(`http://localhost:8000/api/group/getbyLeader/${groupLeaderId}`).then((res) => {
             setStudentGroup(res.data);
             if (studentGroup.length === 0 || (!(groupLeaderId) === res.data.groupLeaderId)) {
                 setStatus(false);
