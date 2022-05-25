@@ -33,7 +33,7 @@ function MainLogin() {
         if (itnumber == 'ST') {
 
             try {
-                const url = 'http://localhost:8000/api/staffRegister/login';
+                const url = 'http://localhost:8080/api/staffRegister/login';
                 axios.post(url, data).then((res) => {
                   
                     if (res.status == "200") {
@@ -57,7 +57,7 @@ function MainLogin() {
         }
 
         try {
-            const url = 'http://localhost:8000/api/auth/post';
+            const url = 'http://localhost:8080/api/auth/post';
             axios.post(url, data).then((res) => {
 
                 if (res.data.message === "Logged in successfully") {

@@ -11,7 +11,7 @@ import '../Staff/StaffHome/Home.module.css';
 
 
 
-class studentmsg extends Component {
+class staffMsg extends Component {
 
     constructor(props) {
         super(props)
@@ -201,7 +201,7 @@ class studentmsg extends Component {
                                
 
                                <><h5 style={{ "textAlign": "left", "width": "280px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all","marginLeft":"5px" }}><span 
-                               style={{"backgroundColor":" #c7e0f4","fontSize":"17px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == 'sf201020' &&  <BsFillPersonFill/>}</div>{muBobject.sennder == 'sf201020' ? muBobject.msg :""}
+                               style={{"backgroundColor":" #c7e0f4","fontSize":"17px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == 'sf201020' &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == 'sf201020' && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == 'sf201020' ? muBobject.msg :""}
                                <div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == 'sf201020' && muBobject.seenStatus == 'true' ? <BsCheckAll/> :muBobject.sennder == 'sf201020' && <BsCheck/>}</div></span></h5><h5 
                                style={{ "textAlign": "right", "width": "270px","position":"inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}><span 
                                style={{"backgroundColor":"rgb(243 241 241)","fontSize":"17px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != 'sf201020' && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder != 'sf201020' && muBobject.msg}</span></h5></>
@@ -243,7 +243,7 @@ class studentmsg extends Component {
     }
 }
 
-export default studentmsg;
+export default staffMsg;
 
 
 // {this.state.msgData &&
