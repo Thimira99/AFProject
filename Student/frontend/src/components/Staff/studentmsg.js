@@ -39,7 +39,8 @@ class studentmsg extends Component {
             "studentId": "stu20390",
             "sennder": "stu20390",
             "reciver": "sf201020",
-            "msg": this.state.message
+            "msg": this.state.message,
+            "seenStatus" : false
         }
 
         try {
@@ -72,7 +73,32 @@ class studentmsg extends Component {
                 this.setState({
                     msgData: res.data.data
                 }, () => {
-                    console.log(this.state.msgData)
+
+                    const len = (this.state.msgData.length)-1
+                    console.log("xcxc",(this.state.msgData[len]._id))
+                    const id = (this.state.msgData[len]._id)
+
+                    this.state.msgData.map((msgObject) =>{
+                        console.log("z",msgObject)
+                        
+                        if(msgObject.seenStatus == "false"){
+                            console.log("superman 111111111")
+    
+                            const obj = {
+                                seenStatus : true
+                            }
+                            
+                            axios.put(`http://localhost:8080/api/message/update/${msgObject._id}`,obj).then((res) => {
+                                if(res){
+                                    console.log("superman",res)
+                                }
+                            })
+                        }
+
+                    })
+
+                   
+
                 })
 
                 console.log(res);

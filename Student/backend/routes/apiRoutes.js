@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const { postMesage , getMsgfillter , getbyDatebySennder } = require('../Controller/messsage')
+const { postMesage , getMsgfillter , getbyDatebySennder ,updateStats } = require('../Controller/messsage')
 const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/mainStaff')
 const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser , StaffLogin} = require('../Controller/staffController')
 
@@ -27,6 +27,8 @@ router.post("/staffRegister/login",StaffLogin);
 router.post("/message/post",postMesage);
 router.post("/message/get",getMsgfillter);
 router.post("/message/get/sennder",getbyDatebySennder);
+router.put("/message/update/:id",updateStats);
+
 
 
 

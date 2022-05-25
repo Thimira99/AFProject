@@ -59,10 +59,28 @@ const getbyDatebySennder = async (req, res) => {
 
 }
 
+// update seenStatus
+
+const updateStats = async (req, res) => {
+    message.findByIdAndUpdate(
+        req.params.id,
+        {
+            $set: req.body
+        },
+
+    ).then(() => {
+        res.status(200).send({ status: "200", statusmsg: "status updated" });
+    }).catch((err) => {
+        console.error(err);
+        res.status(500).send({ status: "500", statusmsg: "error with updating data" });
+
+    })
+}
 
 
 module.exports = {
     postMesage,
     getMsgfillter,
-    getbyDatebySennder
+    getbyDatebySennder,
+    updateStats
 }
