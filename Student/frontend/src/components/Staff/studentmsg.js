@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Form, Button, Table, Row, Col } from "react-bootstrap";
 import axios from 'axios';
+import { BsFillPersonFill ,BsCheckAll,BsCheck} from "react-icons/bs";
+import { IoMdSend } from "react-icons/io";
+import Header from '../header/header'
+import Sidebar from '../sidebar/Sidebar'
+import '../Staff/StaffHome/Home.module.css';
 
 
 class studentmsg extends Component {
@@ -12,7 +17,8 @@ class studentmsg extends Component {
 
             message: '',
             sendmessage: '',
-            msgData: ''
+            msgData: '',
+            itnum:''
 
         }
 
@@ -27,6 +33,47 @@ class studentmsg extends Component {
         });
     }
 
+    dateConverter(e){
+
+        console.log("eeeeeeeeeeeee",e)
+
+       
+
+            const current = new Date();
+            var date = current.getDate();
+            var month =current.getMonth();
+            var year =current.getFullYear();
+            var my2 = date + "/" + month + "/" + year
+            console.log("sukith",my2)
+
+
+            var myDate = new Date(e);
+           
+
+
+            var date = myDate.getDate();
+            var month = myDate.getMonth();
+            var year = myDate.getFullYear();
+            console.log("date",date)
+            var hour = myDate.getHours();
+            var minute = myDate.getMinutes();
+            var second = myDate.getSeconds();
+            var ap = "AM";
+            if (hour   > 11) { ap = "PM";             }
+            if (hour   > 12) { hour = hour - 12;      }
+            if (hour   == 0) { hour = 12;             }
+            if (hour   < 10) { hour   = "0" + hour;   }
+            if (minute < 10) { minute = "0" + minute; }
+            if (second < 10) { second = "0" + second; }
+            var timeString = (hour + ':' + minute +" " + ap);
+            var yearStrinig = date + "/" + month + "/" + year
+
+
+
+           var dilDate = ((yearStrinig == my2 ? "" : yearStrinig ) +" "+" " + timeString)
+            return dilDate;
+    }
+
 
     addMessage = (e) => {
 
@@ -36,12 +83,16 @@ class studentmsg extends Component {
 
         const postData = {
             "staffId": "sf201020",
-            "studentId": "stu20390",
-            "sennder": "stu20390",
+            "studentId": this.state.itnum,
+            "sennder": this.state.itnum,
             "reciver": "sf201020",
             "msg": this.state.message,
             "seenStatus" : false
         }
+
+        this.setState({
+            message : ""
+        })
 
         try {
             const url = 'http://localhost:8000/api/message/post';
@@ -63,7 +114,7 @@ class studentmsg extends Component {
     getMessages() {
 
 
-        const data = { 'staffId': 'sf201020', 'studentId': 'stu20390' }
+        const data = { 'staffId': 'sf201020', 'studentId': this.state.itnum }
         console.log(data);
 
         try {
@@ -74,14 +125,14 @@ class studentmsg extends Component {
                     msgData: res.data.data
                 }, () => {
 
-                    const len = (this.state.msgData.length)-1
-                    console.log("xcxc",(this.state.msgData[len]._id))
-                    const id = (this.state.msgData[len]._id)
+                    console.log("sukii",this.state.msgData);
+                    // const len = (this.state.msgData.length)-1
+                  
+                    // const id = (this.state.msgData[len]._id)
 
                     this.state.msgData.map((msgObject) =>{
-                        console.log("z",msgObject)
-                        
-                        if(msgObject.seenStatus == "false"){
+                     
+                        if(msgObject.seenStatus == "false" && msgObject.sennder != this.state.itnum){
                             console.log("superman 111111111")
     
                             const obj = {
@@ -116,6 +167,13 @@ class studentmsg extends Component {
 
     componentDidMount() {
 
+        const itnum = localStorage.getItem('studentId');
+        this.setState({
+              itnum : itnum
+        })
+
+        console.log("sukitha",itnum)
+
         this.getMessages();
         this.interval = setInterval(()=>{
             this.getMessages()
@@ -130,57 +188,70 @@ class studentmsg extends Component {
 
     render() {
         return (
-            <div>
-                <div style={{ "marginTop": "50px", "minHeight": "100vh", "width": "600px", "marginBottom": "50px","backgroundColor":"cadetblue", "boxShadow": "0px 3px 3px -2px rgb(0 0 0/20%), 0px 3px 4px 0px rgb(0 0 0/14%), 0px 1px 8px 0px rgb(0 0 0/12%)" }} className="container ">
-                    <Table >
-                        <thead>
-                            <tr>
+            <div className='main-wrapper'>
+            <div className='app-header'>
+         <Header />
+            </div>
+            <div className='app-body'>
+                <div className='body-wrapper'>
+                    <div className='app-sidebar'>
+                        <Sidebar />
+                    </div>
+                    <div className='app-content' style={{"backgroundColor":"hsl(0deg 0% 97%)"}}>
 
-                            </tr>
-                        </thead>
-                        <tbody  style={{'height': '650px', 'overflow':'auto', 'display': 'block'}}>
-                            {this.state.msgData &&
+                        <div className='homeMain'>
+                           
+                        <div style={{  "minHeight": "50vh", "width": "1300px","backgroundColor":"hsl(0deg 0% 97%)", "boxShadow": "0px 3px 3px -2px rgb(0 0 0/20%), 0px 3px 4px 0px rgb(0 0 0/14%), 0px 1px 8px 0px rgb(0 0 0/12%)" }} className="container ">
+                    
+                         <div style={{ "minHeight": "20vh","width":"900px",'height': '485px', 'overflow':'auto', 'display': 'block',"marginLeft":"400px","backgroundColor":"rgb(255 255 255)" }} className="container " >
+                        
+                        {
+                            this.state.msgData &&
 
-                                this.state.msgData.map(
-                                    msgObject =>
-                                    
-                                    <><tr>
-                                        <td style={{"border":"none","textalign": "end","paddingBottom":"0",}}>{msgObject.sennder == 'stu20390' ? msgObject.msg : null}</td>
+                            this.state.msgData.map( muBobject => (
 
-                                    </tr><tr>
-                                    <td style={{"border":"none"}}></td>
-                                                {/* <td style={{"border":"none"}}></td> */}
-                                                <td style={{"border":"none","padding":"300"}}></td>
-                                                <td style={{"border":"none","textAlign":"end","paddingTop":"0"}} >{msgObject.sennder != 'stu20390' ? msgObject.msg : null }</td>
+                                console.log("ccccccxxxxxxxxxxsssssssss",muBobject),
+                               
 
-                                        </tr></>
-                                        
-                                )
-                            }
+                               <><h5 style={{ "textAlign": "left", "width": "280px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all","marginLeft":"5px" }}><span 
+                               style={{"backgroundColor":" #c7e0f4","fontSize":"17px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == this.state.itnum &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == this.state.itnum ? muBobject.msg :""}
+                               <div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll/> :muBobject.sennder == this.state.itnum && <BsCheck/>}</div></span></h5><h5 
+                               style={{ "textAlign": "right", "width": "270px","position":"inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}><span 
+                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"17px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder != this.state.itnum && muBobject.msg}</span></h5></>
+                            ))
+                        
+                        
+                        
+                        }
 
 
-                        </tbody>
-                    </Table>
+                    </div>
 
-                    <div style={{ "marginTop": "20px", "minHeight": "30vh" }} className="container p-3 my-80 bg-secondary text-gradient bg-opacity-50 fw-bold" >
-                        <Form>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="name@example.com" />
-                            </Form.Group>
+                    <div style={{  "minHeight": "10vh","marginLeft":"400px" ,"width":"880px","backgroundColor":"rgb(255 255 255)" }} className="container" >
+                        <Form style={{"marginTop":"20px"}}>
+                            
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                <Form.Label>Example textarea</Form.Label>
-                                <Form.Control onChange={this.changeMessageHandler} value={this.state.message} as="textarea" rows={3} />
+                                <Form.Label></Form.Label>
+                                <Form.Control onChange={this.changeMessageHandler} value={this.state.message} as="textarea" rows={2} />
                             </Form.Group>
-                            <Button size="sm" className="btn btn-secondary" variant="addDel" type="submit" onClick={this.addMessage}>
-                                Add
+                            
+                            <Button style={{"marginBottom":"10px","backgroundColor":"#e8e5e5"}}  className="btn " variant="addDel" type="submit" onClick={this.addMessage}>
+                            <IoMdSend style={{"siz":"10px"}}/>
                             </Button>
                         </Form>
                     </div>
                 </div>
 
 
+
+
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
+        </div>
         );
     }
 }

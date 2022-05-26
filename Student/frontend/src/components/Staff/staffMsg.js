@@ -22,7 +22,8 @@ class staffMsg extends Component {
             sendmessage: '',
             msgData: '',
             convertedDate:{},
-            seenStatus:false
+            seenStatus:false,
+            logUserId:''
 
         }
 
@@ -41,18 +42,25 @@ class staffMsg extends Component {
 
     addMessage = (e) => {
 
+
         e.preventDefault()
+
+        
         console.log("inside add")
 
 
         const postData = {
-            "staffId": "sf201020",
-            "studentId": "stu20390",
-            "sennder": "sf201020",
-            "reciver": "stu20390",
+            "staffId": this.state.logUserId,
+            "studentId": "it20045326",
+            "sennder": this.state.logUserId,
+            "reciver": "it20045326",
             "msg": this.state.message,
             "seenStatus" : false,
         }
+
+        this.setState({
+            message : ""
+        })
 
         try {
             const url = 'http://localhost:8000/api/message/post';
@@ -116,7 +124,7 @@ class staffMsg extends Component {
     getMessages() {
 
 
-        const data = { 'staffId': 'sf201020', 'studentId': 'stu20390' }
+        const data = { 'staffId': this.state.logUserId, 'studentId': 'it20045326' }
         console.log(data);
 
         try {
@@ -126,22 +134,32 @@ class staffMsg extends Component {
                
                 this.setState({
                     msgData: res.data.data
-                },() => {
+                }, () => {
 
-                    console.log("inside resss")
-                    const len = (this.state.msgData.length)-1
-                    // console.log("xcxc",(this.state.msgData[len].seenStatus))
+                    console.log("sukii",this.state.msgData);
+                    // const len = (this.state.msgData.length)-1
+                  
                     // const id = (this.state.msgData[len]._id)
 
-                    // if(this.state.msgData[len].seenStatus == "true"){
-                    //     console.log("superman 111111111")
-                        
-                    //     this.setState({
-                    //         seenStatus : true
-                    //     })
-                       
-                    // }
+                    this.state.msgData.map((msgObject) =>{
+                     
+                        if(msgObject.seenStatus == "false" && msgObject.sennder != this.state.logUserId){
+                            console.log("superman 111111111")
+    
+                            const obj = {
+                                seenStatus : true
+                            }
+                            
+                            axios.put(`http://localhost:8000/api/message/update/${msgObject._id}`,obj).then((res) => {
+                                if(res){
+                                    console.log("superman",res)
+                                }
+                            })
+                        }
 
+                    })
+
+                   
 
                 })
 
@@ -160,6 +178,15 @@ class staffMsg extends Component {
 
 
     componentDidMount() {
+
+
+        const logUser = sessionStorage.getItem('LogUserId')
+        this.setState({
+            logUserId:logUser
+        });
+
+
+
 
         this.getMessages();
         this.interval = setInterval(()=>{
@@ -201,10 +228,10 @@ class staffMsg extends Component {
                                
 
                                <><h5 style={{ "textAlign": "left", "width": "280px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all","marginLeft":"5px" }}><span 
-                               style={{"backgroundColor":" #c7e0f4","fontSize":"17px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == 'sf201020' &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == 'sf201020' && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == 'sf201020' ? muBobject.msg :""}
-                               <div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == 'sf201020' && muBobject.seenStatus == 'true' ? <BsCheckAll/> :muBobject.sennder == 'sf201020' && <BsCheck/>}</div></span></h5><h5 
+                               style={{"backgroundColor":" #c7e0f4","fontSize":"17px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == this.state.logUserId ? muBobject.msg :""}
+                               <div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId && muBobject.seenStatus == 'true' ? <BsCheckAll/> :muBobject.sennder == this.state.logUserId && <BsCheck/>}</div></span></h5><h5 
                                style={{ "textAlign": "right", "width": "270px","position":"inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}><span 
-                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"17px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != 'sf201020' && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder != 'sf201020' && muBobject.msg}</span></h5></>
+                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"17px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder != this.state.logUserId && muBobject.msg}</span></h5></>
                             ))
                         
                         
