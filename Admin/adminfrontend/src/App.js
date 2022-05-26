@@ -10,6 +10,10 @@ import createSubmissions from './pages/createSubmissions'
 import viewSubmissions from "./pages/viewSubmissions";
 import editSubmissions from "./pages/editSubmissions";
 
+import ViewMarkings from "./pages/ViewMarkings";
+import AddMarking from "./pages/AddMarking";
+import EditMarking from "./pages/EditMarking";
+
 function App() {
 
   return (
@@ -21,6 +25,9 @@ function App() {
           <Route path='/createSubmission' exact component = {createSubmissions}/>
           <Route path='/viewSubmissions' exact component = {viewSubmissions}/>
           <Route path='/edit/submissions/:id' exact component = {editSubmissions}/>
+          <Route path='/viewMarkings' exact component = {ViewMarkings}/>
+          <Route path='/addMarking' exact component = {AddMarking}/>
+          <Route path='/edit/markings/:id' exact component = {EditMarking}/>
           <Redirect to='/login'/>
         </Switch>
 
