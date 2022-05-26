@@ -9,6 +9,12 @@ import Login from "./components/login"
 import createSubmissions from './pages/createSubmissions'
 import viewSubmissions from "./pages/viewSubmissions";
 import editSubmissions from "./pages/editSubmissions";
+import viewRoles from "./pages/viewRoles";
+import createPanel from "./pages/createPannel";
+import viewPanels from "./pages/viewPanels";
+import createResearchTopics from "./pages/addResearchTopics";
+import viewResearchTopics from "./pages/viewResearchTopics";
+import editTopics from "./pages/editResearchTopics";
 
 function App() {
 
@@ -21,6 +27,16 @@ function App() {
           <Route path='/createSubmission' exact component = {createSubmissions}/>
           <Route path='/viewSubmissions' exact component = {viewSubmissions}/>
           <Route path='/edit/submissions/:id' exact component = {editSubmissions}/>
+
+          
+          <Route path='/viewRoles' exact component = {viewRoles}/>
+          <Route path='/createPanels' exact component = {createPanel}/>
+          <Route path='/viewPanels' exact component = {viewPanels}/>
+
+          <Route path='/createTopics' exact component = {createResearchTopics}/>
+          <Route path='/getTopics' exact component = {viewResearchTopics}/>
+          <Route path='/topics/edit/:id' exact component = {editTopics}/>
+
           <Redirect to='/login'/>
         </Switch>
 
