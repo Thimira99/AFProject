@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Table, Row, Col } from "react-bootstrap";
 import axios from 'axios';
-import { BsFillPersonFill ,BsCheckAll,BsCheck} from "react-icons/bs";
+import { BsFillPersonFill ,BsCheckAll,BsCheck ,BsChatLeftTextFill} from "react-icons/bs";
 import { IoMdSend } from "react-icons/io";
 import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
@@ -25,7 +25,12 @@ class staffMsg extends Component {
             seenStatus:false,
             logUserId:'',
             sennderId : 'it20045326s',
-            msgHistory:''
+            msgHistory:'',
+            studentData:'',
+            allstudents:{},
+            statuss : true,
+            selectChatStatus : true,
+            selectAllStatus : false,
 
         }
 
@@ -35,6 +40,10 @@ class staffMsg extends Component {
         this.dateConverter = this.dateConverter.bind(this);
         this.addMsgHistory = this.addMsgHistory.bind(this);
         this.getMsgListByUserId = this.getMsgListByUserId.bind(this);
+        this.getStudentName = this.getStudentName.bind(this);
+        this.getAllStudents = this.getAllStudents.bind(this);
+        this.selectChat = this.selectChat.bind(this);
+        this.selectAll = this.selectAll.bind(this);
     }
 
     changeMessageHandler = (event) => {
@@ -46,7 +55,7 @@ class staffMsg extends Component {
 
 
     addMsgHistory(){
-       console.log("inside add")
+       
 
       const data = { 
         "personOne" : this.state.logUserId+"9",
@@ -69,7 +78,7 @@ class staffMsg extends Component {
 
                 if (res.status == 200){
 
-                    this.getMsgListByUserId();
+                    // this.getMsgListByUserId();
                    
                 }
 
@@ -109,6 +118,27 @@ class staffMsg extends Component {
 
     }
 
+
+    selectChat = (e) =>{
+        e.preventDefault()
+
+        this.setState({
+            selectAllStatus : false,
+            selectChatStatus : true
+        })
+    }
+
+    selectAll = (e) =>{
+        e.preventDefault()
+
+        this.setState({
+
+            selectChatStatus : false,
+            selectAllStatus : true
+            
+ 
+        })
+    }
 
     addMessage = (e) => {
 
@@ -247,11 +277,65 @@ class staffMsg extends Component {
 
     }
 
+    getStudentName(data){
+
+
+        this.setState({
+            statuss : false
+        })
+
+      
+
+       
+
+        if(this.state.allstudents){
+            
+            this.state.allstudents.map((obj) =>{
+                if(data == obj.studentId){
+                    console.log("per",obj.studentName)
+                    this.setState({
+                        statuss : true
+                    },()=>{
+
+                        return obj.studentName;
+
+                    })
+               
+                 
+                }
+                
+            })
+        }
+      
+        
+       "return this.state.studentData;"
+        
+    }
+
+
+    getAllStudents(){
+
+        const url = 'http://localhost:8000/api/student/get'
+
+        axios.get(url).then((res) =>{
+
+            if(res.status == 200){
+
+                this.setState({
+                    allstudents : res.data
+                })
+            }
+           
+        })
+
+    }
+
+
 
     componentDidMount() {
 
 
-        
+        // this.getAllStudents()
 
         const logUser = sessionStorage.getItem('LogUserId')
         this.getMsgListByUserId(logUser);
@@ -291,8 +375,68 @@ class staffMsg extends Component {
                         <div className='homeMain'>
                            
                         <div style={{  "minHeight": "50vh", "width": "1300px","backgroundColor":"hsl(0deg 0% 97%)", "boxShadow": "0px 3px 3px -2px rgb(0 0 0/20%), 0px 3px 4px 0px rgb(0 0 0/14%), 0px 1px 8px 0px rgb(0 0 0/12%)" }} className="container ">
+
+                        <div className='container' style={{"backgroundColor":"rgb(142 164 184)","width":"400px","position":"absolute"}}>
+                            <Row style={{"height":"55px"}}>
+
+                              <Col>   
+                        <Button style={{"backgroundColor":"#e8e5e5"}}  className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
+                            <BsChatLeftTextFill style={{"siz":"10px",}}/>
+                            
+                        </Button>
+                        <p>Chat</p>
+
+                        </Col>
+
+                        <Col>
+                        <Button style={{"marginBottom":"5px","backgroundColor":"#e8e5e5"}}  className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
+                            <IoMdSend style={{"siz":"10px"}}/>
+                        </Button>
+                        <p>All</p>
+                        </Col>
+
+                        <Col></Col><Col></Col><Col></Col>
+
+                        </Row>
+                        </div>
+
+                       { this.state.selectChatStatus &&
+                       
+                       <><div className='container' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px" }}>
+
+                                                {this.state.msgHistory &&
+
+                                                    this.state.msgHistory.map(obj => (
+
+
+                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}>{(obj.personOne != this.state.logUserId ? obj.personOne : obj.personTwo)}</p>
+
+                                                        // <p>{this.getStudentName(obj.personOne)}</p>
+                                                    ))}
+                                            </div></>}
+
+
+                          {/*   this is for all students */}
+ 
+                           
+                           { this.state.selectAllStatus && <div className='container' style={{"backgroundColor":"rgb(144 169 206 / 25%)","width":"400px","position":"absolute","marginTop":"75px"}}>
+
+                                {
+                                    this.state.msgHistory &&
+                                
+                                    this.state.msgHistory.map( obj => (
+
+
+                                //   <p style={{"backgroundColor":"#b8cae4","padding":"inherit"}}>{(obj.personOne != this.state.logUserId ? obj.personOne : obj.personTwo)}</p> 
+
+                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}>test</p>
+
+                                    // <p>{this.getStudentName(obj.personOne)}</p>
+                                ))}
+                            </div>}
                     
-                         <div style={{ "minHeight": "20vh","width":"900px",'height': '485px', 'overflow':'auto', 'display': 'block',"marginLeft":"400px","backgroundColor":"rgb(255 255 255)" }} className="container " >
+                    
+                         <div style={{ "minHeight": "20vh","width":"880px",'height': '485px', 'overflow':'auto', 'display': 'block',"marginLeft":"399px","backgroundColor":"rgb(255 255 255)" }} className="container " >
                         
                         {
                             this.state.msgData &&
