@@ -400,6 +400,8 @@ class staffMsg extends Component {
                         </Row>
                         </div>
 
+
+
                        { this.state.selectChatStatus &&
                        
                        <><div className='container' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px" }}>
