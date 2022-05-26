@@ -33,6 +33,11 @@ const messageSchema = new schema({
         required: true,
         trim: true
     },
+    seenStatus: {
+        type: String,
+        required: true,
+        trim: true
+    },
 
     
 },{timestamps:true})

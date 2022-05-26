@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 
-const { postMesage , getMsgfillter , getbyDatebySennder } = require('../Controller/messsage')
+const { postMesage , getMsgfillter , getbyDatebySennder ,updateStats } = require('../Controller/messsage')
 const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/mainStaff')
 const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser , StaffLogin} = require('../Controller/staffController')
-
+const { getHistoryMsgByName , postHistoryMesage , getHistoryMsgBySennder} = require('../Controller/msgHistoryController')
+const { getStudentDetails} = require('../Controller/studentMsgController')
 
 
 /*Main Staff registration */
@@ -27,6 +28,13 @@ router.post("/staffRegister/login",StaffLogin);
 router.post("/message/post",postMesage);
 router.post("/message/get",getMsgfillter);
 router.post("/message/get/sennder",getbyDatebySennder);
+router.put("/message/update/:id",updateStats);
+
+router.post("/msgHistory/post",postHistoryMesage);
+router.post("/msgHistory/get",getHistoryMsgByName);
+router.post("/msgHistory/getbySennder",getHistoryMsgBySennder);
+router.post("/msgHistory/getStudent",getStudentDetails);
+
 
 
 

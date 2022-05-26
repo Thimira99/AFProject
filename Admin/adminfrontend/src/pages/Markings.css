@@ -1,0 +1,31 @@
+.containerA {
+    display: flex;
+    flex-flow: column;
+    /* align-items: center; */
+    max-width: 1120px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: rgb(97, 197, 228);
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.dateBox {
+    /* content: attr(data-category); */
+    /* position: absolute; */
+    /* bottom: 0; */
+    margin-left: 4px;
+    padding: 6px 8px;
+    max-width: calc((100%) - 950px);
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #1d1f30;
+    box-sizing: border-box;
+  }
+
+  .message{
+      font-weight: 900;
+      color: tomato;
+      padding: 1rem 1rem 1rem 0;
+  }

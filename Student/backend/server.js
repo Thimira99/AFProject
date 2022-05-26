@@ -8,13 +8,17 @@ require('./db/db')
 
 express.Router()
 
-const studentRoutes =  require('./routes/stdRoutes');
+const studentRoutes = require('./routes/stdRoutes');
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/apiRoutes');
+
+const groupRoutes = require('./routes/groupRoutes');
+
 const submissionApiRoutes = require("./routes/submissions");
 
 /**file upload*/
 const fileUpload = require('express-fileupload')
+
 
 
 //midlewares
@@ -22,10 +26,17 @@ app.use(express.json());
 app.use(cors());
 
 
+
+app.use("/api/student", studentRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api", apiRoutes);
+app.use("/api/group", groupRoutes);
+
 app.use("/api/student",studentRoutes);
 app.use("/api/auth",authRoutes);
 app.use("/api", apiRoutes)
 app.use("/api/student",submissionApiRoutes);
+
 
 /**file upload */
 app.use(fileUpload())

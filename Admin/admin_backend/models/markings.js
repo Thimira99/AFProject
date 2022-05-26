@@ -1,22 +1,27 @@
 const mongoose = require('mongoose')
 
-const addSubmissionSchema = new mongoose.Schema({
-    groupId:{
+const markingSchema = new mongoose.Schema({
+    markingId:{
         type:String,
         required:true,
         trim:true
     },
-    topic:{
+    title:{
         type:String,
         required:true,
         trim:true
     },
-    researchField:{
+    category:{
         type:String,
         required:true,
         trim:true
     },
-    supervisorName:{
+    updatedDate:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    description:{
         type:String,
         required:true,
         trim:true
@@ -25,5 +30,5 @@ const addSubmissionSchema = new mongoose.Schema({
 });
 
 
-const addSubmission = mongoose.model("Research",addSubmissionSchema)
-module.exports = addSubmission
+const marking = mongoose.model("Marking",markingSchema)
+module.exports = marking

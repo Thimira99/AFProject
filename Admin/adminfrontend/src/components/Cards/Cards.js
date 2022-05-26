@@ -40,7 +40,7 @@ function Cards() {
               src={marking}
               text='Create Marking Schemes'
               label='Marking schemes'
-              path='/'
+              path='/viewMarkings'
             />
             <CardItem
               src={doc}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Header from '../../header/header';
 import Sidebar from '../../sidebar/Sidebar';
 
@@ -9,12 +9,18 @@ console.log(logEmail)
 const logn = sessionStorage.getItem('LogUserType')
 console.log(logn)
 
+
+
+
 function staffHome() {
+
+
+   
 
     return (
         <div className='main-wrapper'>
             <div className='app-header'>
-                <Header />
+                <Header  />
             </div>
             <div className='app-body'>
                 <div className='body-wrapper'>
