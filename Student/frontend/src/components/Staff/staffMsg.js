@@ -23,7 +23,9 @@ class staffMsg extends Component {
             msgData: '',
             convertedDate:{},
             seenStatus:false,
-            logUserId:''
+            logUserId:'',
+            sennderId : 'it20045326s',
+            msgHistory:''
 
         }
 
@@ -31,6 +33,8 @@ class staffMsg extends Component {
         this.changeMessageHandler = this.changeMessageHandler.bind(this);
         this.getMessages = this.getMessages.bind(this);
         this.dateConverter = this.dateConverter.bind(this);
+        this.addMsgHistory = this.addMsgHistory.bind(this);
+        this.getMsgListByUserId = this.getMsgListByUserId.bind(this);
     }
 
     changeMessageHandler = (event) => {
@@ -40,11 +44,78 @@ class staffMsg extends Component {
     }
 
 
+
+    addMsgHistory(){
+       console.log("inside add")
+
+      const data = { 
+        "personOne" : this.state.logUserId+"9",
+        "personTwo" : this.state.sennderId
+
+        // "personOne" : "it20045326",
+        // "personTwo" : "sf204090"
+       }
+
+       try {
+        const url = 'http://localhost:8000/api/msgHistory/get';
+        axios.post(url, data).then((res) => {
+            
+
+            if (res.data.data.length == 0) {
+              
+                const url =' http://localhost:8000/api/msgHistory/post';
+                axios.post(url,data).then((res) => {
+                console.log("ch",res)
+
+                if (res.status == 200){
+
+                    this.getMsgListByUserId();
+                   
+                }
+
+                })
+
+            }else{
+                console.log(" else check")
+
+            }
+
+        })
+
+
+    } catch {
+
+    }
+
+
+    }
+
+
+    getMsgListByUserId(loguser){
+
+        const data = {
+
+            "personOne" : loguser
+
+        }
+        const url ='http://localhost:8000/api/msgHistory/getbySennder';
+        axios.post(url,data).then((res) =>{
+
+            this.setState({
+                msgHistory:res.data.data
+            })
+            console.log("ssv",res.data.data)
+        })
+
+    }
+
+
     addMessage = (e) => {
 
 
         e.preventDefault()
 
+        this.addMsgHistory();
         
         console.log("inside add")
 
@@ -180,13 +251,17 @@ class staffMsg extends Component {
     componentDidMount() {
 
 
+        
+
         const logUser = sessionStorage.getItem('LogUserId')
+        this.getMsgListByUserId(logUser);
         this.setState({
             logUserId:logUser
+            
         });
 
 
-
+       
 
         this.getMessages();
         this.interval = setInterval(()=>{
