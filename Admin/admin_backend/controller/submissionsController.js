@@ -1,4 +1,5 @@
 const submission = require('../models/submissions')
+const researchTopic = require('../models/researchTopics')
 
 /*create submissions*/
 const postSubmissions = async(req,res)=>{
@@ -82,10 +83,98 @@ const deleteSubmission = async(req,res)=>{
     });
 };
 
+
+/*create topics*/
+const postResearchTopics = async(req,res)=>{
+    let newTopicSubmission = new researchTopic(req.body);
+
+    newTopicSubmission.save((err)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:"New Research topic successfully added to the system!"
+        });
+    });
+
+}
+
+//get topics
+const getTopics =  async(req,res)=>{
+    researchTopic.find().exec((err,topics)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingTopics:topics
+        });
+    });
+}
+
+//get a specific topic by id
+const getASpecificTopic=async(req,res)=>{
+    let topicId = req.params.id;
+    researchTopic.findById(topicId,(err,researchTopic)=>{
+        if(err){
+            return res.status(400).json({success:false,err});
+        }
+
+        return res.status(200).json({
+            success:true,
+            researchTopic
+        });
+    });
+
+}
+
+//update topic details
+const updateTopics = async(req,res)=>{
+    researchTopic.findByIdAndUpdate(
+        req.params.id,
+        {
+            $set:req.body
+        },
+        (err)=>{
+            if(err){
+                return res.status(400).json({
+                    error:err
+                });
+            }
+            return res.status(200).json({
+                success:"Topic details updated successfully!"
+            });
+        }
+    )
+}
+
+//delete topic from the system
+const deleteTopic = async(req,res)=>{
+    researchTopic.findByIdAndRemove(req.params.id).exec((err,deletedTopic)=>{
+        if(err){
+            return res.status(400).json({
+                message:"Couldn't delete the topic something is wrong!",deletedTopic
+            });
+        }
+        return res.status(200).json({
+            success:"Topic removed successfully!",deletedTopic
+        });
+    });
+};
+
 module.exports = {
     postSubmissions,
     getSubmission,
     getASpecificSubmission,
     updateSubmission,
-    deleteSubmission
+    deleteSubmission,
+    postResearchTopics,
+    getTopics,
+    updateTopics,
+    deleteTopic,
+    getASpecificTopic
 }
