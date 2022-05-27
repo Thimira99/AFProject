@@ -17,7 +17,7 @@ import viewResearchTopics from "./pages/viewResearchTopics";
 import editTopics from "./pages/editResearchTopics";
 
 import ViewMarkings from "./pages/ViewMarkings";
-import AddMarking from "./pages/AddMarking";
+import CreateMarking from "./pages/CreateMarking";
 import EditMarking from "./pages/EditMarking";
 
 function App() {
@@ -44,7 +44,7 @@ function App() {
 
 
           <Route path='/viewMarkings' exact component = {ViewMarkings}/>
-          <Route path='/addMarking' exact component = {AddMarking}/>
+          <Route path='/createMarking' exact component = {CreateMarking}/>
           <Route path='/edit/markings/:id' exact component = {EditMarking}/>
 
           <Redirect to='/login'/>
