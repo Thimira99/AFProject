@@ -29,6 +29,23 @@ export default class viewRoles extends Component {
         });
     }
 
+
+
+    onClickDisabled = (data,id) =>{
+      if (data=='N' || data=='n'){
+       
+          if (window.confirm("Do you want to remove this Role?")) {
+              axios.delete(`http://localhost:8000/api/admin/role/delete/${id}`).then((res) => {
+              alert("Role removed Successfully!");
+              this.retrieveRoles();
+            });
+          
+        };
+            
+      }
+      console.log(data)
+    }
+
        //Search bar
   filterData(roles, searchKey) {
     const result = roles.filter(
@@ -63,17 +80,13 @@ export default class viewRoles extends Component {
                     // marginLeft: "0px",
                     width: "100%",
                     borderRadius: "0px",
-                    marginTop: "-20px",
+                   
                     background: "#D3D3D3",
                     }}>
-               
-            <br />
-            <div className='card'
-                style={{
-                    marginTop:'400px',
-                    height:'auto'
-                }}
-            ><br/>
+
+            <br /><br/>
+            <div className='card'>            
+          <br/>
             <h4
               style={{
                 color: 'rgba(6, 21, 117)',
@@ -81,7 +94,9 @@ export default class viewRoles extends Component {
                 fontWeight: "bold",
                 textAlign: "center",
                 marginLeft:'100px',
-                marginTop:'-400px'
+                marginTop:'0px',
+                
+
               }}
             >
               All Roles
@@ -105,16 +120,7 @@ export default class viewRoles extends Component {
           </div>
           <br />
           
-{/* 
-          <button className='btn btn-success' style={{width:'200px'}}><a href='/createSubmission' style={{textDecoration:'none',color:'white'}}>
-                        Add a new Submission
-          </a></button> */}
-{/* 
-          &nbsp;&nbsp;
-          <button className='btn btn-success'><a href='/home' style={{textDecoration:'none',color:'white'}}>
-                        Dashboard
-          </a></button> */}
-          
+
           
               <br/><br/>
                 <table className="table table-hover"
@@ -132,8 +138,11 @@ export default class viewRoles extends Component {
                             <th scope='col'>STAFF ID</th>
                             <th scope='col'>STAFF JOB ROLE</th>
                             <th scope='col'>RESEARCH FIELD</th>
-                            <th scope='col'>PANEL MEMBER</th>
-                            <th scope='col'>USER ACTIVE</th>
+
+                            <th scope='col'>NAME</th>
+                            <th scope='col'>ACTIVE/INACTIVE STATUS</th>
+                            <th scope='col'>EMAIL</th>
+
                             <th scope='col'>ACTION</th>
                         </tr>
                     </thead>
@@ -141,29 +150,28 @@ export default class viewRoles extends Component {
                         {this.state.roles.map((roles,index)=>(
                             <tr>
                                 <th scope='row'>{index+1}</th>
-                                <td>
-                                <a href={`/hotels/${roles._id}`} style={{textDecoration:'none'}}>
+
+                                <td onClick={()=>this.onClickDisabled(roles.stfUserActive,roles._id)}>
+                                
                                  {roles.stfStaffId}
-                                </a>
+                                
                                 </td>
                                 <td>{roles.stfJobRole}</td>
                                 <td>{roles.stfResField}</td>
-                                <td>{roles.stfPanellMember}</td>
+                                <td>{roles.stfName}</td>
                                 <td>{roles.stfUserActive}</td>
-                               
+                                <td>{roles.stfEmail}</td>
+                                
                                 <td>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="adds">
-                                            <button type='button' className='btn btn-success'>
-                                                ADD
-                                            </button>
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu >
-                                            <Dropdown.Item href="/login">EXISTING PANEL</Dropdown.Item>
-                                            <Dropdown.Item href="/loginRegister">NEW PANEL</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </td>
+                                   <button className='btn btn-warning'><a href={`/edit/roles/${roles._id}`} style={{color:'white',textDecoration:'none'}}>
+                                      EDIT
+                                   </a>
+
+                                   </button>
+                                
+                      </td>
+                               
+                                
                             </tr>
                         ))}
                     </tbody>
@@ -172,7 +180,7 @@ export default class viewRoles extends Component {
                    
            
         </div>
-        <br/></div>
+        </div>
         <Footer/>
         </div>
 

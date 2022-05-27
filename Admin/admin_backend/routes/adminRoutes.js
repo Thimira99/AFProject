@@ -2,7 +2,9 @@ const express= require('express')
 const router = express.Router()
 const AdminLogin = require('../controller/adminController')
 
-const { getRoles, createPanel, getPanels } = require('../controller/panelController')
+
+const { getRoles, createPanel, getPanels, updatePanel, getASpecificPanel, deletePanel, getASpecificRole, updateRole, deleteRole } = require('../controller/panelController')
+
 const { postSubmissions, getSubmission, getASpecificSubmission, updateSubmission, deleteSubmission, postResearchTopics, getTopics, updateTopics, deleteTopic, getASpecificTopic } = require('../controller/submissionsController')
 
 
@@ -22,10 +24,17 @@ router.delete("/submission/delete/:id",deleteSubmission)
 
 /* role routes */
 router.get("/roles/get",getRoles)
+router.get("/role/get/:id",getASpecificRole)
+router.put("/role/update/:id",updateRole)
+router.delete("/role/delete/:id",deleteRole)
+
 
 /*panel routes */
 router.post("/panels/create",createPanel)
 router.get("/panels/get",getPanels)
+router.put("/panel/update/:id",updatePanel)
+router.get("/panel/get/:id",getASpecificPanel)
+router.delete("/panel/delete/:id",deletePanel)
 
 /*Research topics*/
 router.post("/topics/create",postResearchTopics)
