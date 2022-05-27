@@ -15,7 +15,7 @@ import viewPanels from "./pages/viewPanels";
 import createResearchTopics from "./pages/addResearchTopics";
 import viewResearchTopics from "./pages/viewResearchTopics";
 import editTopics from "./pages/editResearchTopics";
-
+import editRoles from "./pages/editRoles";
 import ViewMarkings from "./pages/ViewMarkings";
 import CreateMarking from "./pages/CreateMarking";
 import EditMarking from "./pages/EditMarking";
@@ -32,11 +32,11 @@ function App() {
           <Route path='/viewSubmissions' exact component = {viewSubmissions}/>
           <Route path='/edit/submissions/:id' exact component = {editSubmissions}/>
 
-
-          
           <Route path='/viewRoles' exact component = {viewRoles}/>
+          <Route path='/edit/roles/:id' exact component = {editRoles}/>
           <Route path='/createPanels' exact component = {createPanel}/>
           <Route path='/viewPanels' exact component = {viewPanels}/>
+          
 
           <Route path='/createTopics' exact component = {createResearchTopics}/>
           <Route path='/getTopics' exact component = {viewResearchTopics}/>
