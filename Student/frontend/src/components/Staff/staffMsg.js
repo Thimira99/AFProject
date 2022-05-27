@@ -24,14 +24,15 @@ class staffMsg extends Component {
             convertedDate:{},
             seenStatus:false,
             logUserId:'',
-            sennderId : 'it20045326s',
+            sennderId : '',
             msgHistory:'',
             studentData:'',
             allstudents:{},
             statuss : true,
             selectChatStatus : true,
             selectAllStatus : false,
-
+            msgSennderNames:[],
+            studentId:''
         }
 
         this.addMessage = this.addMessage.bind(this);
@@ -44,6 +45,8 @@ class staffMsg extends Component {
         this.getAllStudents = this.getAllStudents.bind(this);
         this.selectChat = this.selectChat.bind(this);
         this.selectAll = this.selectAll.bind(this);
+        this.selectedUser = this.selectedUser.bind(this);
+        
     }
 
     changeMessageHandler = (event) => {
@@ -58,8 +61,9 @@ class staffMsg extends Component {
        
 
       const data = { 
-        "personOne" : this.state.logUserId+"9",
-        "personTwo" : this.state.sennderId
+
+        "personOne" : this.state.logUserId,
+        "personTwo" : this.state.studentId
 
         // "personOne" : "it20045326",
         // "personTwo" : "sf204090"
@@ -102,6 +106,10 @@ class staffMsg extends Component {
 
     getMsgListByUserId(loguser){
 
+        
+
+    
+
         const data = {
 
             "personOne" : loguser
@@ -112,8 +120,38 @@ class staffMsg extends Component {
 
             this.setState({
                 msgHistory:res.data.data
+            },()=>{
+
+               
+                    this.state.msgHistory.map(obj => {
+        
+        
+                       var idNum =  obj.personOne != this.state.logUserId ? obj.personOne : obj.personTwo
+        
+                        var data = {
+                           "studentId" : idNum
+                       }
+        
+                       const url = 'http://localhost:8000/api/msgHistory/getStudent'
+                       axios.post(url,data).then((res) =>{
+                           console.log("index", res)
+
+                           var nameData = res.data.data[0].studentName + "  " + res.data.data[0].studentId
+                           var index = obj.index
+                           this.setState({
+
+                            msgSennderNames : this.state.msgSennderNames.concat(nameData)
+                            
+                           })
+
+                           console.log("index2",this.state.msgSennderNames)
+                       })
+                       
+        
+                    })
+               
             })
-            console.log("ssv",res.data.data)
+            // console.log("ssv",res.data.data)
         })
 
     }
@@ -121,6 +159,15 @@ class staffMsg extends Component {
 
     selectChat = (e) =>{
         e.preventDefault()
+
+        const id = this.state.logUserId
+
+        this.setState({
+
+            msgSennderNames : []
+           })
+       
+        this.getMsgListByUserId(id);
 
         this.setState({
             selectAllStatus : false,
@@ -152,9 +199,9 @@ class staffMsg extends Component {
 
         const postData = {
             "staffId": this.state.logUserId,
-            "studentId": "it20045326",
+            "studentId": this.state.studentId,
             "sennder": this.state.logUserId,
-            "reciver": "it20045326",
+            "reciver": this.state.studentId,
             "msg": this.state.message,
             "seenStatus" : false,
         }
@@ -225,7 +272,7 @@ class staffMsg extends Component {
     getMessages() {
 
 
-        const data = { 'staffId': this.state.logUserId, 'studentId': 'it20045326' }
+        const data = { 'staffId': this.state.logUserId, 'studentId': this.state.studentId }
         console.log(data);
 
         try {
@@ -324,6 +371,7 @@ class staffMsg extends Component {
                 this.setState({
                     allstudents : res.data
                 })
+                console.log("allstudents",this.state.allstudents)
             }
            
         })
@@ -331,14 +379,22 @@ class staffMsg extends Component {
     }
 
 
+    selectedUser(id){
+        console.log("id",id)
+        this.setState({
+            studentId : id
+        })
+    }
+
+
 
     componentDidMount() {
 
-
-        // this.getAllStudents()
-
+        
+        this.getAllStudents()
         const logUser = sessionStorage.getItem('LogUserId')
         this.getMsgListByUserId(logUser);
+       
         this.setState({
             logUserId:logUser
             
@@ -400,38 +456,45 @@ class staffMsg extends Component {
                         </Row>
                         </div>
 
-
+                        
 
                        { this.state.selectChatStatus &&
                        
-                       <><div className='container' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px" }}>
+                       <><div className='container' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px",'height': '600px', 'overflow':'auto', 'display': 'block' }}>
 
-                                                {this.state.msgHistory &&
+                                                {this.state.msgSennderNames &&
 
-                                                    this.state.msgHistory.map(obj => (
+                                                    this.state.msgSennderNames.map(obj => (
 
 
-                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}>{(obj.personOne != this.state.logUserId ? obj.personOne : obj.personTwo)}</p>
+                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}>{
+                                                            
+                                                            
+                                                            
+                                                            obj}</p>
 
                                                         // <p>{this.getStudentName(obj.personOne)}</p>
                                                     ))}
-                                            </div></>}
+
+                                            </div></>
+                                            
+                                            }
 
 
                           {/*   this is for all students */}
  
                            
-                           { this.state.selectAllStatus && <div className='container' style={{"backgroundColor":"rgb(144 169 206 / 25%)","width":"400px","position":"absolute","marginTop":"75px"}}>
+                           { this.state.selectAllStatus && <div className='container' style={{"backgroundColor":"rgb(144 169 206 / 25%)","width":"400px","position":"absolute","marginTop":"75px",'height': '600px', 'overflow':'auto', 'display': 'block'}}>
 
                                 {
-                                    this.state.msgHistory &&
+                                    this.state.allstudents &&
                                 
-                                    this.state.msgHistory.map( obj => (
+                                    this.state.allstudents.map( obj => (
 
 
                                 //   <p style={{"backgroundColor":"#b8cae4","padding":"inherit"}}>{(obj.personOne != this.state.logUserId ? obj.personOne : obj.personTwo)}</p> 
 
-                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}>test</p>
+                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }  } onClick={()=> this.selectedUser(obj.studentId)} ><Row><Col>{obj.studentName}</Col><Col>{obj.studentId}</Col><Col></Col></Row></p>
 
                                     // <p>{this.getStudentName(obj.personOne)}</p>
                                 ))}
@@ -452,7 +515,7 @@ class staffMsg extends Component {
                                style={{"backgroundColor":" #c7e0f4","fontSize":"17px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == this.state.logUserId ? muBobject.msg :""}
                                <div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId && muBobject.seenStatus == 'true' ? <BsCheckAll/> :muBobject.sennder == this.state.logUserId && <BsCheck/>}</div></span></h5><h5 
                                style={{ "textAlign": "right", "width": "270px","position":"inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}><span 
-                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"17px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder != this.state.logUserId && muBobject.msg}</span></h5></>
+                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"17px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.logUserId && this.dateConverter(muBobject.createdAt)}<div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.logUserId && muBobject.reciver}</div></div>{muBobject.sennder != this.state.logUserId && muBobject.msg}</span></h5></>
                             ))
                         
                         
