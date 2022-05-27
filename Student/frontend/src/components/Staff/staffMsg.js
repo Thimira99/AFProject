@@ -139,14 +139,21 @@ class staffMsg extends Component {
                            console.log("index", res)
 
                            var nameData = res.data.data[0].studentName + "  " + res.data.data[0].studentId
-                           var index = obj.index
-                           this.setState({
+                          
+                      
 
-                            msgSennderNames : this.state.msgSennderNames.concat(nameData)
+                           let {msgSennderNames} = this.state
+
+                            if(msgSennderNames.indexOf(nameData) === -1)
+                            {
+                                
+                                msgSennderNames.push(nameData)
+
+                            }
+                             this.setState({msgSennderNames})
                             
-                           })
-
-                           console.log("index2",this.state.msgSennderNames)
+                        
+                           
                        })
                        
         
@@ -164,10 +171,7 @@ class staffMsg extends Component {
 
         const id = this.state.logUserId
 
-        this.setState({
-
-            msgSennderNames : []
-           })
+       
        
         this.getMsgListByUserId(id);
 
@@ -421,7 +425,7 @@ class staffMsg extends Component {
         this.getMessages();
         this.interval = setInterval(()=>{
             this.getMessages()
-        },10000);
+        },5000);
 
     }
 
@@ -482,7 +486,7 @@ class staffMsg extends Component {
                                                     this.state.msgSennderNames.map(obj => (
 
 
-                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}  onClick={()=> this.selectedChatUser(obj)}>{
+                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" ,"fontWeight":"500","WebkitTextStroke":"thin" }}  onClick={()=> this.selectedChatUser(obj)}>{
                                                             
                                                             
                                                             
@@ -509,13 +513,13 @@ class staffMsg extends Component {
 
                        
 
-                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }  } onClick={()=> this.selectedUser(obj.studentId , obj.studentName)} ><Row><Col>{obj.studentName}</Col><Col>{obj.studentId}</Col><Col></Col></Row></p>
+                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" ,"fontWeight":"500","WebkitTextStroke":"thin"}  } onClick={()=> this.selectedUser(obj.studentId , obj.studentName)} >{obj.studentName}{" "}{obj.studentId}</p>
 
                                     
                                 ))}
                             </div>}
                     
-                            <div className='container' style={{"backgroundColor":"rgb(142 164 184)","width":"890px","position":"absolute","marginLeft":"400px","height":"40px"}}><span style={{"fontWeight":"bolder","WebkitTextStroke":"thin"}} >{this.state.selectStudentName}{" "}{this.state.studentId}</span></div>
+                            <div className='container' style={{"backgroundColor":"rgb(142 164 184)","width":"890px","position":"absolute","marginLeft":"400px","height":"40px"}}><span style={{"fontWeight":"bolder","WebkitTextStroke":"thin"}} >{this.state.selectStudentName}{" "}&nbsp;{" "}{this.state.studentId}</span></div>
 
                          <div style={{ "minHeight": "20vh","width":"880px",'height': '485px', 'overflow':'auto', 'display': 'block',"marginLeft":"399px","backgroundColor":"rgb(255 255 255)","marginTop":"50px" }} className="container " >
                         
@@ -569,22 +573,3 @@ class staffMsg extends Component {
 }
 
 export default staffMsg;
-
-
-// {this.state.msgData &&
-
-//     this.state.msgData.map(
-//         msgObject =>
-//             <><tr>
-//                 <td>{msgObject.msg}</td>
-
-//             </tr><tr>
-//                     <td></td>
-//                     <td></td>
-//                     <td></td>
-//                     <td>{msgObject.msg}</td>
-
-//                 </tr></>
-            
-//     )
-// }

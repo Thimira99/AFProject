@@ -61,6 +61,7 @@ function staffRegister() {
     const history = useHistory();
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
+      
     }
 
     const handleChangeLogin = ({ currentTarget: input }) => {
@@ -80,7 +81,7 @@ function staffRegister() {
                 axios.post(url, data).then((res) => {
                     if (res.status == "200") {
                         alert(res.data.message);
-                        history.push('/Staffdashboard');
+                        history.push('/mainLogin');
                     } else {
                         alert(res.data.message);
                     }

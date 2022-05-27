@@ -18,13 +18,24 @@ class studentmsg extends Component {
             message: '',
             sendmessage: '',
             msgData: '',
-            itnum:''
+            itnum:'',
+            msgHistory:'',
+            selectChatStatus : true,
+            selectAllStatus : false,
+            msgSennderNames:[],
+            staffId:'',
+            selectStafftName:'',
+            allStaff:''
 
         }
 
         this.addMessage = this.addMessage.bind(this);
         this.changeMessageHandler = this.changeMessageHandler.bind(this);
         this.getMessages = this.getMessages.bind(this);
+        this.selectedChatUser = this.selectedChatUser.bind(this);
+        this.selectChat = this.selectChat.bind(this);
+        this.selectAll = this.selectAll.bind(this);
+        this.getAllStaffMemebers = this.getAllStaffMemebers.bind(this);
     }
 
     changeMessageHandler = (event) => {
@@ -82,10 +93,10 @@ class studentmsg extends Component {
 
 
         const postData = {
-            "staffId": "ST209089",
+            "staffId": this.state.staffId,
             "studentId": this.state.itnum,
             "sennder": this.state.itnum,
-            "reciver": "ST209089",
+            "reciver": this.state.staffId,
             "msg": this.state.message,
             "seenStatus" : false
         }
@@ -114,7 +125,7 @@ class studentmsg extends Component {
     getMessages() {
 
 
-        const data = { 'staffId': 'ST209089', 'studentId': this.state.itnum }
+        const data = { 'staffId': this.state.staffId, 'studentId': this.state.itnum }
         console.log(data);
 
         try {
@@ -133,7 +144,7 @@ class studentmsg extends Component {
                     this.state.msgData.map((msgObject) =>{
                      
                         if(msgObject.seenStatus == "false" && msgObject.sennder != this.state.itnum){
-                            console.log("superman 111111111")
+                           
     
                             const obj = {
                                 seenStatus : true
@@ -164,20 +175,146 @@ class studentmsg extends Component {
 
     }
 
+    getMsgListByUserId(loguser){
+
+        
+
+    
+
+        const data = {
+
+            "personOne" : loguser
+
+        }
+        const url ='http://localhost:8000/api/msgHistory/getbySennder';
+        axios.post(url,data).then((res) =>{
+
+            this.setState({
+                msgHistory:res.data.data
+            },()=>{
+
+             
+                    this.state.msgHistory.map(obj => {
+        
+        
+                       var idNum =  obj.personOne != this.state.itnum ? obj.personOne : obj.personTwo
+       
+                        var data = {
+                           "stfStaffId" : idNum
+                       }
+        
+                       const url = 'http://localhost:8000/api/msgHistory/getStaff'
+                       axios.post(url,data).then((res) =>{
+                           console.log("index", res)
+
+                           var nameData = res.data.data[0].stfName + "  " + res.data.data[0].stfStaffId
+                           
+                           let {msgSennderNames} = this.state
+
+                           if(msgSennderNames.indexOf(nameData) === -1)
+                           {
+                               
+                               msgSennderNames.push(nameData)
+
+                           }
+                            this.setState({msgSennderNames})
+                           
+
+                           
+                       })
+                       
+        
+                    })
+               
+            })
+            // console.log("ssv",res.data.data)
+        })
+
+    }
+
+
+    selectChat = (e) =>{
+        e.preventDefault()
+
+        const id = this.state.itnum
+
+      
+       
+        this.getMsgListByUserId(id);
+
+        this.setState({
+            selectAllStatus : false,
+            selectChatStatus : true
+        })
+    }
+
+    selectAll = (e) =>{
+        e.preventDefault()
+
+        this.setState({
+
+            selectChatStatus : false,
+            selectAllStatus : true
+            
+ 
+        })
+    }
+
+
+    selectedChatUser(obj){
+
+        console.log("z",obj) 
+        const value = obj.split("  ")
+        console.log("z",value)
+
+        this.setState({
+            staffId : value[1],
+            selectStafftName : value[0]
+        })
+
+    }
+
+    selectedUser(id , name){
+        console.log("id",id)
+        this.setState({
+            staffId : id,
+            selectStafftName : name
+        })
+    }
+
+    getAllStaffMemebers(){
+
+       
+        const url = 'http://localhost:8000/api/staffRegister/get'
+
+        axios.get(url).then((res) =>{
+            
+           
+            if(res.status == 200){
+
+                this.setState({
+                    allStaff : res.data.data
+                })
+                console.log("allstudents",this.state.allstudents)
+            }
+        })
+
+    }
 
     componentDidMount() {
 
+        this.getAllStaffMemebers();
         const itnum = localStorage.getItem('studentId');
         this.setState({
               itnum : itnum
         })
 
-        console.log("sukitha",itnum)
+        this.getMsgListByUserId(itnum);
 
         this.getMessages();
         this.interval = setInterval(()=>{
             this.getMessages()
-        },10000);
+        },5000);
 
     }
 
@@ -238,8 +375,9 @@ class studentmsg extends Component {
 
                                                     this.state.msgSennderNames.map(obj => (
 
+                                                       console.log("ooo",obj),
 
-                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}  onClick={()=> this.selectedChatUser(obj)}>{
+                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit","fontWeight":"500","WebkitTextStroke":"thin" }}  onClick={()=> this.selectedChatUser(obj)}>{
                                                             
                                                             
                                                             
@@ -259,20 +397,21 @@ class studentmsg extends Component {
                            { this.state.selectAllStatus && <div className='container' style={{"backgroundColor":"rgb(144 169 206 / 25%)","width":"400px","position":"absolute","marginTop":"75px",'height': '600px', 'overflow':'auto', 'display': 'block'}}>
 
                                 {
-                                    this.state.allstudents &&
+                                    this.state.allStaff &&
                                 
-                                    this.state.allstudents.map( obj => (
+                                    this.state.allStaff.map( obj => (
 
+                                        console.log("inside all",obj),
 
                        
 
-                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }  } onClick={()=> this.selectedUser(obj.studentId , obj.studentName)} ><Row><Col>{obj.studentName}</Col><Col>{obj.studentId}</Col><Col></Col></Row></p>
+                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" ,"fontWeight":"500","WebkitTextStroke":"thin" }  } onClick={()=> this.selectedUser(obj.stfStaffId , obj.stfName)} >{obj.stfName}{" "}{obj.stfStaffId}</p>
 
                                     
                                 ))}
                             </div>}
                     
-                            <div className='container' style={{"backgroundColor":"rgb(142 164 184)","width":"890px","position":"absolute","marginLeft":"400px","height":"40px"}}><span style={{"fontWeight":"bolder","WebkitTextStroke":"thin"}} >{this.state.selectStudentName}{" "}{this.state.studentId}</span></div>
+                            <div className='container' style={{"backgroundColor":"rgb(142 164 184)","width":"890px","position":"absolute","marginLeft":"400px","height":"40px"}}><span style={{"fontWeight":"bolder","WebkitTextStroke":"thin"}} >{this.state.selectStafftName}{" "}&nbsp;{" "}{this.state.staffId}</span></div>
 
                          <div style={{ "minHeight": "20vh","width":"880px",'height': '485px', 'overflow':'auto', 'display': 'block',"marginLeft":"399px","backgroundColor":"rgb(255 255 255)","marginTop":"50px" }} className="container " >
                         
@@ -331,20 +470,3 @@ class studentmsg extends Component {
 export default studentmsg;
 
 
-// {this.state.msgData &&
-
-//     this.state.msgData.map(
-//         msgObject =>
-//             <><tr>
-//                 <td>{msgObject.msg}</td>
-
-//             </tr><tr>
-//                     <td></td>
-//                     <td></td>
-//                     <td></td>
-//                     <td>{msgObject.msg}</td>
-
-//                 </tr></>
-            
-//     )
-// }
