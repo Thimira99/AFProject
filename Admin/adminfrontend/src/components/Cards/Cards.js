@@ -19,7 +19,7 @@ function Cards() {
               src={user}
               text='Students & Staff Members'
               label='User Management'
-              path='/'
+              path='/viewRoles'
             />
             <CardItem
               src={sub}
@@ -32,7 +32,7 @@ function Cards() {
               src={panel}
               text='Allocate panel members to student groups'
               label='Panel Members Allocation'
-              path='/'
+              path='/viewPanels'
             />
           </ul>
           <ul className='cards__items'>
@@ -40,7 +40,7 @@ function Cards() {
               src={marking}
               text='Create Marking Schemes'
               label='Marking schemes'
-              path='/'
+              path='/viewMarkings'
             />
             <CardItem
               src={doc}

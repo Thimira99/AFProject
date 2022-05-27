@@ -9,10 +9,10 @@ function Footer() {
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
-          Join the Adventure newsletter to receive our best vacation deals
+          Research Management Admin Panel
         </p>
         <p className='footer-subscription-text'>
-          You can unsubscribe at any time.
+        Manage all of your work in one place: Tasks, Docs, Chat, Goals, & more.
         </p>
         <div className='input-areas'>
           <form>
