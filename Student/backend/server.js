@@ -6,11 +6,15 @@ require('./db/db')
 // const uploads = require('./models/uploads')
 
 
+const bodyParser = require("body-parser")
+
+app.use(bodyParser.urlencoded({ extended: true }));
 express.Router()
 
 const studentRoutes = require('./routes/stdRoutes');
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/apiRoutes');
+const registerTopicRoutes = require('./routes/registerTopicRoutes');
 
 const groupRoutes = require('./routes/groupRoutes');
 
@@ -31,28 +35,29 @@ app.use("/api/student", studentRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api", apiRoutes);
 app.use("/api/group", groupRoutes);
+app.use("/api/topic", registerTopicRoutes);
 
-app.use("/api/student",studentRoutes);
-app.use("/api/auth",authRoutes);
+app.use("/api/student", studentRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api", apiRoutes)
-app.use("/api/student",submissionApiRoutes);
+app.use("/api/student", submissionApiRoutes);
 
 
 /**file upload */
 app.use(fileUpload())
 // app.use("/uploads")
 
-app.post('/uploads',(req,res)=>{
-    if(req.files === null){
-        return res.status(400).json({message:"No file to upload!"}) //${__dirname}/adminfrontend/public/uploads/${file.name}
+app.post('/uploads', (req, res) => {
+    if (req.files === null) {
+        return res.status(400).json({ message: "No file to upload!" }) //${__dirname}/adminfrontend/public/uploads/${file.name}
     }
     const file = req.files.file; //.file renders in the frontend 
-    file.mv(`../frontend/src/components/public/uploads/${file.name}`,err =>{
-        if(err){
+    file.mv(`../frontend/src/components/public/uploads/${file.name}`, err => {
+        if (err) {
             console.error(err);
             return res.status(500).send(err);
         }
-        res.json({fileName:file.name,filePath:`/uploads/${file.name}`});
+        res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
     }); //mv-move it
 });
 

@@ -2,60 +2,52 @@ import React, { Component } from 'react';
 import AdminNavbar from '../components/AdminNavbar/adminNavbar';
 import Footer from '../components/Footer/Footer';
 import axios from 'axios'
+import { Button, Dropdown } from 'react-bootstrap';
 
-export default class viewSubmissions extends Component {
+export default class viewRoles extends Component {
 
     constructor(props){
         super(props);
 
         this.state={
-            submissions:[]
+            roles:[]
         };
     }
 
     componentDidMount(){
-        this.retrieveSubmissions();
+        this.retrieveRoles();
     }
 
-    retrieveSubmissions(){
-        axios.get("http://localhost:8000/api/admin/submission/get").then(res=>{
+    retrieveRoles(){
+        axios.get("http://localhost:8000/api/admin/roles/get").then(res=>{
             if(res.data.success){
                 this.setState({
-                    submissions:res.data.existingSubmissions
+                    roles:res.data.existingRoles
                 });
-                console.log(this.state.submissions)
+                console.log(this.state.roles)
             }
         });
     }
 
-    onDelete = (id) => {
-        if (window.confirm("Do you want to remove this submission?")) {
-          axios.delete(`http://localhost:8000/api/admin/submission/delete/${id}`).then((res) => {
-            alert("Submission removed Successfully!");
-            this.retrieveSubmissions();
-          });
-        }
-      };
-
        //Search bar
-  filterData(submissions, searchKey) {
-    const result = submissions.filter(
+  filterData(roles, searchKey) {
+    const result = roles.filter(
       (item) =>
-        item.submissionId.toLowerCase().includes(searchKey) || //toLowerCase() helps to filter the data using the lowercase letters.
-        item.submissionId.toUpperCase().includes(searchKey) || //toUpperCase() helps to filter the data using the Uppercase letters.
-        item.topic.toUpperCase().includes(searchKey) ||
-        item.topic.toLowerCase().includes(searchKey)
+        item.stfStaffId.toLowerCase().includes(searchKey) || //toLowerCase() helps to filter the data using the lowercase letters.
+        item.stfStaffId.toUpperCase().includes(searchKey) || //toUpperCase() helps to filter the data using the Uppercase letters.
+        item.stfResField.toUpperCase().includes(searchKey) ||
+        item.stfResField.toLowerCase().includes(searchKey)
     );
 
-    this.setState({ submissions: result });
+    this.setState({ roles: result });
   }
 
   handleSearchArea = (e) => {
     const searchKey = e.currentTarget.value;
 
-    axios.get("http://localhost:8000/api/admin/submission/get").then((res) => {
+    axios.get("http://localhost:8000/api/admin/roles/get").then((res) => {
       if (res.data.success) {
-        this.filterData(res.data.existingSubmissions, searchKey);
+        this.filterData(res.data.existingRoles, searchKey);
       }
     });
   };
@@ -92,7 +84,7 @@ export default class viewSubmissions extends Component {
                 marginTop:'-400px'
               }}
             >
-              All Submissions
+              All Roles
             </h4>
      
 
@@ -113,15 +105,10 @@ export default class viewSubmissions extends Component {
           </div>
           <br />
           
-
+{/* 
           <button className='btn btn-success' style={{width:'200px'}}><a href='/createSubmission' style={{textDecoration:'none',color:'white'}}>
                         Add a new Submission
-          </a></button>
-
-           
-          <button className='btn btn-success' style={{width:'200px',marginLeft:'250px',marginTop:'-41px'}}><a href='/createTopics' style={{textDecoration:'none',color:'white'}}>
-                        Add Research topics
-          </a></button>
+          </a></button> */}
 {/* 
           &nbsp;&nbsp;
           <button className='btn btn-success'><a href='/home' style={{textDecoration:'none',color:'white'}}>
@@ -142,40 +129,40 @@ export default class viewSubmissions extends Component {
                     <thead>
                         <tr>
                             <th scope='col'>#</th>
-                            <th scope='col'>SUBMISSION ID</th>
-                            <th scope='col'>TOPIC</th>
-                            <th scope='col'>DESCRIPTION</th>
-                            <th scope='col'>DUE DATE</th>
-                            <th scope='col'>DUE TIME</th>
-                            <th scope='col'>TYPE</th>
+                            <th scope='col'>STAFF ID</th>
+                            <th scope='col'>STAFF JOB ROLE</th>
+                            <th scope='col'>RESEARCH FIELD</th>
+                            <th scope='col'>PANEL MEMBER</th>
+                            <th scope='col'>USER ACTIVE</th>
                             <th scope='col'>ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.submissions.map((submissions,index)=>(
+                        {this.state.roles.map((roles,index)=>(
                             <tr>
                                 <th scope='row'>{index+1}</th>
                                 <td>
-                                <a href={`/hotels/${submissions._id}`} style={{textDecoration:'none'}}>
-                                 {submissions.submissionId}
+                                <a href={`/hotels/${roles._id}`} style={{textDecoration:'none'}}>
+                                 {roles.stfStaffId}
                                 </a>
                                 </td>
-                                <td>{submissions.topic}</td>
-                                <td>{submissions.description}</td>
-                                <td>{submissions.dueDate}</td>
-                                <td>{submissions.dueTime}</td>
-                                <td>{submissions.type}</td>
+                                <td>{roles.stfJobRole}</td>
+                                <td>{roles.stfResField}</td>
+                                <td>{roles.stfPanellMember}</td>
+                                <td>{roles.stfUserActive}</td>
+                               
                                 <td>
-                                    <a className='btn btn-warning' href={`/edit/submissions/${submissions._id}`} style={{color:'black'}}>
-                                        <i className='fas fa-edit'></i>
-                                        &nbsp;EDIT
-                                    </a>
-                                    &nbsp;
-                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(submissions._id)} style={{ textDecoration: "none", color: "white" }}
-                                        >
-                                        <i className='fas fa-trash-alt'></i>
-                                        &nbsp;REMOVE
-                                    </a>
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="adds">
+                                            <button type='button' className='btn btn-success'>
+                                                ADD
+                                            </button>
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu >
+                                            <Dropdown.Item href="/login">EXISTING PANEL</Dropdown.Item>
+                                            <Dropdown.Item href="/loginRegister">NEW PANEL</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                                 </td>
                             </tr>
                         ))}

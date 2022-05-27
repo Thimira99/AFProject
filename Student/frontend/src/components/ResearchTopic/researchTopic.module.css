@@ -1,0 +1,16 @@
+.mainPage {
+    display: flex;
+    flex-direction: row;
+}
+
+.supervisors {
+    border: 1px solid black;
+    align-items: right;
+    padding: 1rem;
+    justify-content: space-between;
+    margin-left: 30rem;
+}
+
+.supervisors h2 {
+    text-align: center;
+}

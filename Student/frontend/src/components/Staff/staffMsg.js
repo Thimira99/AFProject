@@ -8,7 +8,10 @@ import Sidebar from '../sidebar/Sidebar'
 import '../Staff/StaffHome/Home.module.css';
 
 
-class studentmsg extends Component {
+
+
+
+class staffMsg extends Component {
 
     constructor(props) {
         super(props)
@@ -18,19 +21,213 @@ class studentmsg extends Component {
             message: '',
             sendmessage: '',
             msgData: '',
-            itnum:''
-
+            convertedDate:{},
+            seenStatus:false,
+            logUserId:'',
+            sennderId : '',
+            msgHistory:'',
+            studentData:'',
+            allstudents:{},
+            statuss : true,
+            selectChatStatus : true,
+            selectAllStatus : false,
+            msgSennderNames:[],
+            studentId:'',
+            selectStudentName:''
         }
 
         this.addMessage = this.addMessage.bind(this);
         this.changeMessageHandler = this.changeMessageHandler.bind(this);
         this.getMessages = this.getMessages.bind(this);
+        this.dateConverter = this.dateConverter.bind(this);
+        this.addMsgHistory = this.addMsgHistory.bind(this);
+        this.getMsgListByUserId = this.getMsgListByUserId.bind(this);
+        this.getStudentName = this.getStudentName.bind(this);
+        this.getAllStudents = this.getAllStudents.bind(this);
+        this.selectChat = this.selectChat.bind(this);
+        this.selectAll = this.selectAll.bind(this);
+        this.selectedUser = this.selectedUser.bind(this);
+        this.selectedChatUser = this.selectedChatUser.bind(this);
+        
     }
 
     changeMessageHandler = (event) => {
         this.setState({ message: event.target.value }, () => {
             console.log(this.state.message)
         });
+    }
+
+
+
+    addMsgHistory(){
+       
+
+      const data = { 
+
+        "personOne" : this.state.logUserId,
+        "personTwo" : this.state.studentId
+
+        // "personOne" : "it20045326",
+        // "personTwo" : "sf204090"
+       }
+
+       try {
+        const url = 'http://localhost:8000/api/msgHistory/get';
+        axios.post(url, data).then((res) => {
+            
+
+            if (res.data.data.length == 0) {
+              
+                const url =' http://localhost:8000/api/msgHistory/post';
+                axios.post(url,data).then((res) => {
+                console.log("ch",res)
+
+                if (res.status == 200){
+
+                    // this.getMsgListByUserId();
+                   
+                }
+
+                })
+
+            }else{
+                console.log(" else check")
+
+            }
+
+        })
+
+
+    } catch {
+
+    }
+
+
+    }
+
+
+    getMsgListByUserId(loguser){
+
+        
+
+    
+
+        const data = {
+
+            "personOne" : loguser
+
+        }
+        const url ='http://localhost:8000/api/msgHistory/getbySennder';
+        axios.post(url,data).then((res) =>{
+
+            this.setState({
+                msgHistory:res.data.data
+            },()=>{
+
+               
+                    this.state.msgHistory.map(obj => {
+        
+        
+                       var idNum =  obj.personOne != this.state.logUserId ? obj.personOne : obj.personTwo
+        
+                        var data = {
+                           "studentId" : idNum
+                       }
+        
+                       const url = 'http://localhost:8000/api/msgHistory/getStudent'
+                       axios.post(url,data).then((res) =>{
+                           console.log("index", res)
+
+                           var nameData = res.data.data[0].studentName + "  " + res.data.data[0].studentId
+                           var index = obj.index
+                           this.setState({
+
+                            msgSennderNames : this.state.msgSennderNames.concat(nameData)
+                            
+                           })
+
+                           console.log("index2",this.state.msgSennderNames)
+                       })
+                       
+        
+                    })
+               
+            })
+            // console.log("ssv",res.data.data)
+        })
+
+    }
+
+
+    selectChat = (e) =>{
+        e.preventDefault()
+
+        const id = this.state.logUserId
+
+        this.setState({
+
+            msgSennderNames : []
+           })
+       
+        this.getMsgListByUserId(id);
+
+        this.setState({
+            selectAllStatus : false,
+            selectChatStatus : true
+        })
+    }
+
+    selectAll = (e) =>{
+        e.preventDefault()
+
+        this.setState({
+
+            selectChatStatus : false,
+            selectAllStatus : true
+            
+ 
+        })
+    }
+
+    addMessage = (e) => {
+
+
+        e.preventDefault()
+
+        this.addMsgHistory();
+        
+        console.log("inside add")
+
+
+        const postData = {
+            "staffId": this.state.logUserId,
+            "studentId": this.state.studentId,
+            "sennder": this.state.logUserId,
+            "reciver": this.state.studentId,
+            "msg": this.state.message,
+            "seenStatus" : false,
+        }
+
+        this.setState({
+            message : ""
+        })
+
+        try {
+            const url = 'http://localhost:8000/api/message/post';
+            axios.post(url, postData).then((res) => {
+
+                if (res) {
+                    console.log(res)
+                }
+
+            })
+
+
+        } catch {
+
+        }
+
+        
     }
 
     dateConverter(e){
@@ -74,53 +271,17 @@ class studentmsg extends Component {
             return dilDate;
     }
 
-
-    addMessage = (e) => {
-
-        e.preventDefault()
-        console.log("inside add")
-
-
-        const postData = {
-            "staffId": "ST209089",
-            "studentId": this.state.itnum,
-            "sennder": this.state.itnum,
-            "reciver": "ST209089",
-            "msg": this.state.message,
-            "seenStatus" : false
-        }
-
-        this.setState({
-            message : ""
-        })
-
-        try {
-            const url = 'http://localhost:8000/api/message/post';
-            axios.post(url, postData).then((res) => {
-                if (res) {
-                    console.log(res)
-                }
-
-            })
-
-
-        } catch {
-
-        }
-
-    }
-
-
     getMessages() {
 
 
-        const data = { 'staffId': 'ST209089', 'studentId': this.state.itnum }
+        const data = { 'staffId': this.state.logUserId, 'studentId': this.state.studentId }
         console.log(data);
 
         try {
             const url = 'http://localhost:8000/api/message/get';
             axios.post(url, data).then((res) => {
 
+               
                 this.setState({
                     msgData: res.data.data
                 }, () => {
@@ -132,7 +293,7 @@ class studentmsg extends Component {
 
                     this.state.msgData.map((msgObject) =>{
                      
-                        if(msgObject.seenStatus == "false" && msgObject.sennder != this.state.itnum){
+                        if(msgObject.seenStatus == "false" && msgObject.sennder != this.state.logUserId){
                             console.log("superman 111111111")
     
                             const obj = {
@@ -162,17 +323,100 @@ class studentmsg extends Component {
 
         }
 
+
+    }
+
+    getStudentName(data){
+
+
+        this.setState({
+            statuss : false
+        })
+
+      
+
+       
+
+        if(this.state.allstudents){
+            
+            this.state.allstudents.map((obj) =>{
+                if(data == obj.studentId){
+                    console.log("per",obj.studentName)
+                    this.setState({
+                        statuss : true
+                    },()=>{
+
+                        return obj.studentName;
+
+                    })
+               
+                 
+                }
+                
+            })
+        }
+      
+        
+       "return this.state.studentData;"
+        
+    }
+
+
+    getAllStudents(){
+
+        const url = 'http://localhost:8000/api/student/get'
+
+        axios.get(url).then((res) =>{
+
+            if(res.status == 200){
+
+                this.setState({
+                    allstudents : res.data
+                })
+                console.log("allstudents",this.state.allstudents)
+            }
+           
+        })
+
+    }
+
+
+    selectedUser(id , name){
+        console.log("id",id)
+        this.setState({
+            studentId : id,
+            selectStudentName : name
+        })
+    }
+
+    selectedChatUser(obj){
+
+        console.log("z",obj) 
+        const value = obj.split("  ")
+        console.log("z",value)
+
+        this.setState({
+            studentId : value[1],
+            selectStudentName : value[0]
+        })
+
     }
 
 
     componentDidMount() {
 
-        const itnum = localStorage.getItem('studentId');
+        
+        this.getAllStudents()
+        const logUser = sessionStorage.getItem('LogUserId')
+        this.getMsgListByUserId(logUser);
+       
         this.setState({
-              itnum : itnum
-        })
+            logUserId:logUser
+            
+        });
 
-        console.log("sukitha",itnum)
+
+       
 
         this.getMessages();
         this.interval = setInterval(()=>{
@@ -182,15 +426,14 @@ class studentmsg extends Component {
     }
 
     componentWillUnmount(){
-        clearInterval(this.interval);
+        clearInterval(this.interval)
     }
 
 
     render() {
         return (
             <div className='main-wrapper'>
-
-<div className='app-header'>
+            <div className='app-header'>
          <Header />
             </div>
             <div className='app-body'>
@@ -281,14 +524,12 @@ class studentmsg extends Component {
 
                             this.state.msgData.map( muBobject => (
 
-                                console.log("vbb",muBobject),
 
-
-                               <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all","marginLeft":"5px" }}><span 
-                               style={{"backgroundColor":" #c7e0f4","fontSize":"16px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == this.state.itnum &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == this.state.itnum ? muBobject.msg :""}
-                               <div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll/> :muBobject.sennder == this.state.itnum && <BsCheck/>}</div></span></h5><h5 
+                               <><h5 style={{ "textAlign": "left", "width": "310px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all","marginLeft":"5px" }}><span 
+                               style={{"backgroundColor":" #c7e0f4","fontSize":"16px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == this.state.logUserId ? muBobject.msg :""}
+                               <div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId && muBobject.seenStatus == 'true' ? <BsCheckAll/> :muBobject.sennder == this.state.logUserId && <BsCheck/>}</div></span></h5><h5 
                                style={{ "textAlign": "right", "width": "310px","position":"inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}><span 
-                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"16px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{ "  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder != this.state.itnum && muBobject.msg}</span></h5></>
+                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"16px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.logUserId && muBobject.sennder}{ "  "}&nbsp;{" "}{muBobject.sennder != this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder != this.state.logUserId && muBobject.msg}</span></h5></>
                             ))
                         
                         
@@ -322,13 +563,12 @@ class studentmsg extends Component {
                     </div>
                 </div>
             </div>
-           
         </div>
         );
     }
 }
 
-export default studentmsg;
+export default staffMsg;
 
 
 // {this.state.msgData &&

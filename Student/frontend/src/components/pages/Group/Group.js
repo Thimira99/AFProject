@@ -38,7 +38,7 @@ function Group() {
             memberFourId
         }
 
-        axios.post("http://localhost:8080/api/group/post", newGroup).then((res) => {
+        axios.post("http://localhost:8000/api/group/post", newGroup).then((res) => {
             alert("Group Created")
             localStorage.setItem('groupId', res.data.student._id);
             localStorage.setItem('groupLeaderId', res.data.student.groupLeaderId);

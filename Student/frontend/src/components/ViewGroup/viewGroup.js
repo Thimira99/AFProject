@@ -19,8 +19,9 @@ function ViewGroup() {
         e.preventDefault();
 
 
-        axios.get(`http://localhost:8080/api/group/getbyLeader/${groupLeaderId}`).then((res) => {
+        axios.get(`http://localhost:8000/api/group/getbyLeader/${groupLeaderId}`).then((res) => {
             setStudentGroup(res.data);
+            localStorage.setItem('leaderId', groupLeaderId);
             if (studentGroup.length === 0 || (!(groupLeaderId) === res.data.groupLeaderId)) {
                 setStatus(false);
 
@@ -81,7 +82,7 @@ function ViewGroup() {
                                         <h5>Group Name:<span>{studentGroup.memberFourId}</span></h5>
                                     </div>
                                     <div className={viewStyles.cardstat}>
-                                        <button className='btn btn-primary'>Register A Topic</button>
+                                        <a href='/topic'><button className='btn btn-primary'>Register A Topic</button></a>
                                     </div>
 
                                 </div>

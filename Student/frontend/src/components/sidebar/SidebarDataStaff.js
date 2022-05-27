@@ -45,7 +45,7 @@ export const SidebarDataStaff = [
     {
         title: "My Profile",
         icon: <BsPersonCircle />,
-        Link: "/profile"
+        Link: "/staffMsg"
     },
     {
         title: "student",

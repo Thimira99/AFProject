@@ -27,11 +27,11 @@ export const SidebarData = [
         icon: <BsPeopleFill />,
         Link: "/group"
     },
-    {
-        title: "Research Topic",
-        icon: <BsStickiesFill />,
-        Link: "/topic"
-    },
+    // {
+    //     title: "Research Topic",
+    //     icon: <BsStickiesFill />,
+    //     Link: "/topic"
+    // },
     {
         title: "Supervisor/Co-supervisor",
         icon: <BsPersonLinesFill />,
@@ -51,5 +51,9 @@ export const SidebarData = [
         title: "My Profile",
         icon: <BsPersonCircle />,
         Link: "/profile"
+    }, {
+        title: "Message",
+        icon: <BsPersonCircle />,
+        Link: "/student"
     }
 ]

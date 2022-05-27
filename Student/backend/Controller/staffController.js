@@ -4,12 +4,12 @@ const staffRegistration = require('../models/staff');
 
 /*Post Staff registration */
 
-const postStaffRegistration = async(req,res) => {
+const postStaffRegistration = async (req, res) => {
     let newStaff = new staffRegistration(req.body);
 
-    newStaff.save((err)=>{
-        if(err) {
-            return res.status(400).json({Error:err});
+    newStaff.save((err) => {
+        if (err) {
+            return res.status(400).json({ Error: err });
         }
 
         return res.status(200).json({
@@ -56,16 +56,16 @@ const updateStaff = async (req, res) => {
 
 /*get one staff user */
 
-const getOneStaffUser = async(req,res) => {
+const getOneStaffUser = async (req, res) => {
 
     try {
 
         const user = await staffRegistration.findById(req.params.id);
         return res.status(200).json({ data: user })
 
-    } catch(error){
+    } catch (error) {
         console.error(error);
-        res.status(500).json({message:"Server Error"});
+        res.status(500).json({ message: "Server Error" });
     }
 
 }
@@ -87,7 +87,7 @@ const deleteStaffUser = async (req, res) => {
 }
 
 const StaffLogin = async (req, res) => {
-   
+
     const { email, password } = req.body;
     staffRegistration.findOne({ stfStaffId: email }, (err, user) => {
         if (user) {
@@ -101,9 +101,22 @@ const StaffLogin = async (req, res) => {
             return res.status(400).json({ error: "Not registered!" })
         }
     })
-    
+
 }
 
+const getAllSupervisors = async (req, res) => {
+    const stfJobRole = "Supervisor";
+    try {
+
+        const user = await staffRegistration.find({ stfJobRole: stfJobRole });
+        return res.status(200).json({ data: user })
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server Error" });
+    }
+
+}
 
 
 
@@ -113,5 +126,6 @@ module.exports = {
     updateStaff,
     getOneStaffUser,
     deleteStaffUser,
-    StaffLogin
+    StaffLogin,
+    getAllSupervisors
 }
