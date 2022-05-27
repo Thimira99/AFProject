@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import './Markings.css';
 import axios from "axios"
@@ -7,37 +6,45 @@ import {toast} from 'react-toastify';
 import AdminNavbar from '../components/AdminNavbar/adminNavbar';
 import Footer from '../components/Footer/Footer';
 
+
 toast.configure()
-const EditMarking = props =>{
+const CreateMarking =() =>{
     const [markingId, setMarkingId] = useState('');
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [updatedDate, setUpdatedDate] = useState('');
     
+         
+  //  function setUpdatedDate(object){               
+           
+  //  }
 
-    const notify1 = () =>{
-    toast.success('Marking Scheme is updated Successfully !', {position: toast.POSITION.TOP_CENTER})
+
+  const notify1 = () =>{
+        toast.success('Marking Scheme is created Successfully !', {position: toast.POSITION.TOP_CENTER})
+  };
+
+  const notify2 = () =>{
+    toast.error('Marking Scheme is not added !', {position: toast.POSITION.TOP_CENTER})
+   };
+
+  const changeOnClick = e => {
+    e.preventDefault();
+
+    /** */
+    // const valid = this.validate();
+
+    const markings = {
+        markingId,
+        title,
+        category,
+        description,
+        updatedDate
+
     };
 
-    const notify2 = () =>{
-      toast.error('Marking Scheme is not updated !', {position: toast.POSITION.TOP_CENTER})
-      };
-
-
-    const changeOnClick = e => {
-        e.preventDefault();
-
-        const markings = {
-            markingId,
-            title,
-            category,
-            description,
-            updatedDate
-
-        };
-
-        setMarkingId("");
+    setMarkingId("");
     setTitle("");
     
     if((category >= 'a' && category <= 'z') || (category >= 'A' && category <= 'Z'))
@@ -84,37 +91,38 @@ const EditMarking = props =>{
             alert("Date is invalid! It should be greater than or equal to current date")
             return false;
           }
+     
 
-        axios.put(`http://localhost:8000/api/admin/marking/update/${props.match.params.id}`, markings)
-            .then(res => {
-              notify1("");
-              console.log(res.data)
-            })
-            .catch(error =>{
-               alert("Some Fields are Empty"),
-               notify2("")
-            }
-            );
-        };
+     
 
-    useEffect(() =>{
-        axios
-        .get(`http://localhost:8000/api/admin/marking/get/${props.match.params.id}`)
-        .then(res => [
-            setMarkingId(res.data.marking.markingId),
-            setTitle(res.data.marking.title),
-            setCategory(res.data.marking.category),
-            setDescription(res.data.marking.description),
-            setUpdatedDate(res.data.marking.updatedDate)
-        ])
-        .catch(error => console.log(error));
-    }, []);
+    axios.post("http://localhost:8000/api/admin/marking/create", markings)
+        .then(res => {
+          notify1("");
+          console.log(res.data)
+          
+        }
+          )
+        // .catch(err =>{
+        //     console.log(err);
+        // });
+        .catch(error=> {
+          alert("Some Fields are Empty")
+          notify2("");
+          });  
+     
 
-
+  }
+    
 
     return (
+      <div>
+        <div>
+             <AdminNavbar/> 
+             </div>
+             <br></br>
+       
         <div className='containerA'> 
-        <h2>Update Marking Scheme</h2>
+        <h2>Create New Marking Scheme</h2>
         <form onSubmit={changeOnClick} encType="multipart/form-data">
     <div className="form-group">
     <label htmlFor="markingId">ID</label>
@@ -123,7 +131,7 @@ const EditMarking = props =>{
         value={markingId}
         onChange={e => setMarkingId(e.target.value)}
         className="form-control" 
-        placeholder="Enter marking scheme ID"/>
+        placeholder="Enter Marking Scheme ID"/>
   </div>
 
 
@@ -134,7 +142,7 @@ const EditMarking = props =>{
         value={title}
         onChange={e => setTitle(e.target.value)}
         className="form-control" 
-        placeholder="Enter title"/>
+        placeholder="Enter the title"/>
   </div>
 
   <div className="form-group">
@@ -144,16 +152,16 @@ const EditMarking = props =>{
     value={category}
     onChange={e => setCategory(e.target.value)}
     className="form-control" 
-    placeholder="Enter category"/>
+    placeholder="Enter the category"/>
   </div>
 
   <div className="form-group">
-    <label htmlFor="description">Description</label>
+    <label htmlFor="description">Marking Scheme</label>
     <textarea 
       value={description}
     className="form-control" 
     onChange={e => setDescription(e.target.value)}
-    rows="3"></textarea>
+    rows="7"></textarea>
   </div>
 
   <div className="form-group">
@@ -163,13 +171,19 @@ const EditMarking = props =>{
     value={updatedDate}
     className="form-control"
     onChange={e => setUpdatedDate(e.target.value)} 
-    placeholder="Enter updated date"/>
+    placeholder="Enter the relevant updated date"/>
   </div>
    
-  <button type="submit" className="btn btn-primary">Submit</button>
+  <button type="submit" className="btn btn-primary" >Create</button>
 </form>
+</div>
+            <div>
+              <br></br>
+             <Footer/> 
+             </div>
+             
 </div>
     )
 };
 
-export default EditMarking;
+export default CreateMarking;
