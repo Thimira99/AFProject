@@ -119,6 +119,25 @@ const getAllSupervisors = async (req, res) => {
 }
 
 
+/* get one staff details */
+const getStaffDetails = async (req, res) => {
+    const { stfStaffId } = req.body;
+
+    staffRegistration.find({ stfStaffId : stfStaffId}, (err, data) => {
+
+        if (data) {
+
+            return res.status(200).json({ message: "staff Data fetch", data: data })
+
+        } else {
+            return res.status(400).json({ error: "No Data" })
+        }
+    })
+}
+
+
+
+
 
 module.exports = {
     postStaffRegistration,
@@ -127,5 +146,6 @@ module.exports = {
     getOneStaffUser,
     deleteStaffUser,
     StaffLogin,
-    getAllSupervisors
+    getAllSupervisors,
+    getStaffDetails
 }

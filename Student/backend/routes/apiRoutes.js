@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 
-const { postStaffRegistration, getAllStaff, updateStaff, getOneStaffUser, deleteStaffUser, StaffLogin, getAllSupervisors } = require('../Controller/staffController')
+const { postStaffRegistration, getAllStaff, updateStaff, getOneStaffUser, deleteStaffUser, StaffLogin, getAllSupervisors , getStaffDetails } = require('../Controller/staffController')
 
 
 const { postMesage , getMsgfillter , getbyDatebySennder ,updateStats } = require('../Controller/messsage')
 const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/mainStaff')
-const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser , StaffLogin} = require('../Controller/staffController')
+// const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser , StaffLogin} = require('../Controller/staffController')
 const { getHistoryMsgByName , postHistoryMesage , getHistoryMsgBySennder} = require('../Controller/msgHistoryController')
 const { getStudentDetails} = require('../Controller/studentMsgController')
 
@@ -27,6 +27,7 @@ router.get("/staffRegister/get/:id", getOneStaffUser);
 router.delete("/staffRegister/delete/:id", deleteStaffUser);
 router.post("/staffRegister/login", StaffLogin);
 router.get("/staffRegister/supervisor", getAllSupervisors);
+router.post("/msgHistory/getStaff", getStaffDetails);
 
 
 /* Message */
