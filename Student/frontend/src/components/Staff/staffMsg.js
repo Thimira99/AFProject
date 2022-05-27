@@ -32,7 +32,8 @@ class staffMsg extends Component {
             selectChatStatus : true,
             selectAllStatus : false,
             msgSennderNames:[],
-            studentId:''
+            studentId:'',
+            selectStudentName:''
         }
 
         this.addMessage = this.addMessage.bind(this);
@@ -46,6 +47,7 @@ class staffMsg extends Component {
         this.selectChat = this.selectChat.bind(this);
         this.selectAll = this.selectAll.bind(this);
         this.selectedUser = this.selectedUser.bind(this);
+        this.selectedChatUser = this.selectedChatUser.bind(this);
         
     }
 
@@ -379,13 +381,26 @@ class staffMsg extends Component {
     }
 
 
-    selectedUser(id){
+    selectedUser(id , name){
         console.log("id",id)
         this.setState({
-            studentId : id
+            studentId : id,
+            selectStudentName : name
         })
     }
 
+    selectedChatUser(obj){
+
+        console.log("z",obj) 
+        const value = obj.split("  ")
+        console.log("z",value)
+
+        this.setState({
+            studentId : value[1],
+            selectStudentName : value[0]
+        })
+
+    }
 
 
     componentDidMount() {
@@ -467,7 +482,7 @@ class staffMsg extends Component {
                                                     this.state.msgSennderNames.map(obj => (
 
 
-                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}>{
+                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }}  onClick={()=> this.selectedChatUser(obj)}>{
                                                             
                                                             
                                                             
@@ -492,30 +507,29 @@ class staffMsg extends Component {
                                     this.state.allstudents.map( obj => (
 
 
-                                //   <p style={{"backgroundColor":"#b8cae4","padding":"inherit"}}>{(obj.personOne != this.state.logUserId ? obj.personOne : obj.personTwo)}</p> 
+                       
 
-                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }  } onClick={()=> this.selectedUser(obj.studentId)} ><Row><Col>{obj.studentName}</Col><Col>{obj.studentId}</Col><Col></Col></Row></p>
+                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" }  } onClick={()=> this.selectedUser(obj.studentId , obj.studentName)} ><Row><Col>{obj.studentName}</Col><Col>{obj.studentId}</Col><Col></Col></Row></p>
 
-                                    // <p>{this.getStudentName(obj.personOne)}</p>
+                                    
                                 ))}
                             </div>}
                     
-                    
-                         <div style={{ "minHeight": "20vh","width":"880px",'height': '485px', 'overflow':'auto', 'display': 'block',"marginLeft":"399px","backgroundColor":"rgb(255 255 255)" }} className="container " >
+                            <div className='container' style={{"backgroundColor":"rgb(142 164 184)","width":"890px","position":"absolute","marginLeft":"400px","height":"40px"}}><span style={{"fontWeight":"bolder","WebkitTextStroke":"thin"}} >{this.state.selectStudentName}{" "}{this.state.studentId}</span></div>
+
+                         <div style={{ "minHeight": "20vh","width":"880px",'height': '485px', 'overflow':'auto', 'display': 'block',"marginLeft":"399px","backgroundColor":"rgb(255 255 255)","marginTop":"50px" }} className="container " >
                         
                         {
                             this.state.msgData &&
 
                             this.state.msgData.map( muBobject => (
 
-                                console.log("ccccccxxxxxxxxxxsssssssss",muBobject),
-                               
 
-                               <><h5 style={{ "textAlign": "left", "width": "280px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all","marginLeft":"5px" }}><span 
-                               style={{"backgroundColor":" #c7e0f4","fontSize":"17px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == this.state.logUserId ? muBobject.msg :""}
+                               <><h5 style={{ "textAlign": "left", "width": "310px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all","marginLeft":"5px" }}><span 
+                               style={{"backgroundColor":" #c7e0f4","fontSize":"16px"}}><div style={{"fontSize":"12px","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId &&  <BsFillPersonFill/>}{" "}{muBobject.sennder == this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder == this.state.logUserId ? muBobject.msg :""}
                                <div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder == this.state.logUserId && muBobject.seenStatus == 'true' ? <BsCheckAll/> :muBobject.sennder == this.state.logUserId && <BsCheck/>}</div></span></h5><h5 
-                               style={{ "textAlign": "right", "width": "270px","position":"inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}><span 
-                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"17px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.logUserId && this.dateConverter(muBobject.createdAt)}<div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.logUserId && muBobject.reciver}</div></div>{muBobject.sennder != this.state.logUserId && muBobject.msg}</span></h5></>
+                               style={{ "textAlign": "right", "width": "310px","position":"inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}><span 
+                               style={{"backgroundColor":"rgb(243 241 241)","fontSize":"16px"}}><div style={{"fontSize":"small","marginBottom":"5"}}>{muBobject.sennder != this.state.logUserId && muBobject.sennder}{ "  "}&nbsp;{" "}{muBobject.sennder != this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div>{muBobject.sennder != this.state.logUserId && muBobject.msg}</span></h5></>
                             ))
                         
                         
