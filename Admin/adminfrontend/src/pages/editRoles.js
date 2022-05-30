@@ -105,13 +105,19 @@ export default class editRoles extends Component {
                     <input type="text" className="form-control" name="stfResField" placeholder="Enter stfResField" value={this.state.stfResField} onChange={this.handleInputChange}/>
                     
                 </div>
-
+               
+                {this.state.stfUserActive=='checked' ? 
                 <div className="form-group" style={{marginBottom:'15px'}}>
+                    <label style={{marginBottom:'5px',fontWeight:'bold',color:'black',fontSize:'20px'}}>ACTIVE/INACTIVE STATUS</label>
+                    <input type="text" className="form-control" name="stfUserActive" placeholder="Enter stfUserActive" value= {this.state.stfUserActive} onChange={this.handleInputChange}/>
+                    
+                </div>: <div className="form-group" style={{marginBottom:'15px'}}>
                     <label style={{marginBottom:'5px',fontWeight:'bold',color:'black',fontSize:'20px'}}>ACTIVE/INACTIVE STATUS</label>
                     <input type="text" className="form-control" name="stfUserActive" placeholder="Enter stfUserActive" value={this.state.stfUserActive} onChange={this.handleInputChange}/>
                     
-                </div>
+                </div> }
 
+               
 
                 <button className="btn btn-success" type="submit" style={{marginTop:'15px'}} onClick={this.onSubmit}>
                     <i className="far fa-check-square"></i>

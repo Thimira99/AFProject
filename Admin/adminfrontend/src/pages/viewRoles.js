@@ -18,17 +18,20 @@ export default class viewRoles extends Component {
         this.retrieveRoles();
     }
 
+
+
     retrieveRoles(){
         axios.get("http://localhost:8000/api/admin/roles/get").then(res=>{
             if(res.data.success){
                 this.setState({
                     roles:res.data.existingRoles
+
+                    
                 });
                 console.log(this.state.roles)
             }
         });
     }
-
 
 
     onClickDisabled = (data,id) =>{
@@ -159,7 +162,17 @@ export default class viewRoles extends Component {
                                 <td>{roles.stfJobRole}</td>
                                 <td>{roles.stfResField}</td>
                                 <td>{roles.stfName}</td>
-                                <td>{roles.stfUserActive}</td>
+                                
+                                <td>
+                                {roles.stfUserActive=='Y' ? 
+                                <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" id="stfUserActive" checked value={roles.stfUserActive}/>
+                                  
+                                </div>:<div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" id="stfUserActive" value={roles.stfUserActive}/>
+                                  
+                                </div>}
+                                </td>
                                 <td>{roles.stfEmail}</td>
                                 
                                 <td>

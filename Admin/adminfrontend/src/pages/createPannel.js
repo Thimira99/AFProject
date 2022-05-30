@@ -5,9 +5,10 @@ import Footer from '../components/Footer/Footer';
 import Button from 'react-bootstrap/Button';
 
 function createPanel () {
-  const[memberName,setmemberName] = useState([ {memberName:""}]);
+  const [memberName,setmemberName] = useState([ {memberName:""}]);
   const [panelId, setPanelId] = useState('');
   const [studentGroup,setStudentGroup]=useState('')
+ 
 
 const handleMemberAdd = () =>{
   setmemberName([...memberName,{memberName:""}])
@@ -25,31 +26,39 @@ const handleMemberChange = (e,index)=>{
   const array = [...memberName];
   array[index][name] = value;
   setmemberName(array);
+
+  console.log("name",name)
 }
 
 
-
-
-function sendData(e) {
-  e.preventDefault();
+// function sendData(e) {
+  
+//   e.preventDefault();
  
+     
+function checkLength(){
+    const long = [...memberName];
+    if(long.length<4){
+      window.confirm("There should be 4 members to a panel");
+      submitBtn.setDisable(true)
+    }
 
       const newPanel= {
         panelId,
         memberName,
-        studentGroup
+        studentGroup,
         
       }
 
       axios.post("http://localhost:8000/api/admin/panels/create", newPanel).then(() => {
+          
           alert("Panel added successfully");
           window.location.href='/viewPanels';
       }).catch((err) => {
           alert("Unable to add" + err);
       })
-  }
-
-
+  
+    }
   return(
     <div>
     <AdminNavbar/>
@@ -57,12 +66,15 @@ function sendData(e) {
     <br/>
       <h1 style={{color: 'rgba(6, 21, 117)'}}>CREATE A PANEL</h1>
       <br/>
-    <form autoComplete='off' onSubmit={sendData} style={{marginLeft:'100px'}}>
+     
+    <form autoComplete='off' onSubmit={checkLength} style={{marginLeft:'100px'}}>
       <div className='form-field'>
         <label htmlFor='memberName' style={{fontWeight:'bold'}}>MEMBER(S)</label>
+       
           {memberName.map((singleMember,index)=>(
             <div key={index} >
                 <div>
+               
                   <input name="memberName" type="text" id="memberName"
                     className="form-control"
                     value={singleMember.memberName}
@@ -70,7 +82,7 @@ function sendData(e) {
                     style={{width:'300px'}}
                     required
                   />
-                  
+                 
                   {memberName.length-1===index && memberName.length<4 && (
                     <button onClick={handleMemberAdd}
                       style={{marginLeft:'350px',marginTop:'-38px'}}
@@ -95,6 +107,7 @@ function sendData(e) {
             </div>
             
           ))}
+         
       </div>
          <br/>
       <div>
@@ -125,14 +138,17 @@ function sendData(e) {
         
       </div>
         <br/>
-      <Button variant="primary" type="submit" className='submitBtnForm'>
+      
+      <Button variant="primary" type="submit" id="submitBtn" className='submitBtnForm'>
                     ADD PANEL
       </Button>
+     
       &nbsp;
       <Button variant="primary" className='submitBtnForm'><a href="/viewPanels" style={{color:'white',textDecoration:'none'}}>
                     VIEW PANEL
       </a></Button>
     </form>
+   
     <br/>
     
     </div>

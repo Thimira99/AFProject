@@ -19,9 +19,12 @@ import editRoles from "./pages/editRoles";
 import ViewMarkings from "./pages/ViewMarkings";
 import CreateMarking from "./pages/CreateMarking";
 import EditMarking from "./pages/EditMarking";
+import editPanel from "./pages/editPanels";
+import abc from './pages/abc'
+
 
 function App() {
-
+  
   return (
     <div>
       <Router>
@@ -36,7 +39,8 @@ function App() {
           <Route path='/edit/roles/:id' exact component = {editRoles}/>
           <Route path='/createPanels' exact component = {createPanel}/>
           <Route path='/viewPanels' exact component = {viewPanels}/>
-          
+          <Route path='/edit/panels/:id' exact component = {editPanel}/>
+          <Route path='/update/panel/:id' exact component={abc}/>
 
           <Route path='/createTopics' exact component = {createResearchTopics}/>
           <Route path='/getTopics' exact component = {viewResearchTopics}/>
