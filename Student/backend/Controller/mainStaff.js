@@ -31,10 +31,11 @@ const mainStaffLogin = async (req, res) => {
 
                 return res.status(200).json({ message: "Login successful!", data: user })
             } else {
-                return res.status(400).json({ error: "Invalid email or password!" })
+                res.status(404).send({ status: "404", statusmsg: "Login Faild" });
+
             }
         } else {
-            return res.status(400).json({ error: "Not registered!" })
+            return res.status(404).json({ error: "Not registered!" })
         }
     })
     console.log(MainstaffRegistration)
