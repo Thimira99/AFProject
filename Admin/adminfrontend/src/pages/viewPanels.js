@@ -52,6 +52,15 @@ export default class viewPanels extends Component {
     });
   };
 
+  onDelete = (id) => {
+    if (window.confirm("Do you want to remove this panel?")) {
+      axios.delete(`http://localhost:8000/api/admin/panel/delete/${id}`).then((res) => {
+        alert("Panel removed Successfully!");
+        this.retrievePanels();
+      });
+    }
+  };
+
   render() {
     return (
         <div>
@@ -151,7 +160,18 @@ export default class viewPanels extends Component {
 
                                 </td>
                                 <td>{panels.studentGroup}</td>
-                                
+                                <td>
+                                <a className='btn btn-warning' href={`/update/panel/${panels._id}`} style={{color:'black'}}>
+                                        <i className='fas fa-edit'></i>
+                                        &nbsp;EDIT
+                                    </a>
+                                    &nbsp;
+                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(panels._id)} style={{ textDecoration: "none", color: "white" }}
+                                        >
+                                        <i className='fas fa-trash-alt'></i>
+                                        &nbsp;REMOVE
+                                    </a>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
