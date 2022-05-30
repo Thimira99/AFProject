@@ -35,17 +35,65 @@ function MainLogin() {
             try {
                 const url = 'http://localhost:8000/api/staffRegister/login';
                 axios.post(url, data).then((res) => {
+
+                   console.log('xxxxx',res)
+
+                   if(res.data.message === "Your Account is inactive please contact your administartor !"){
+                    alert(res.data.message)
+                    return -1
+                   }
                   
-                    if (res.status == "200") {
+                    if (res.data.message === "Not registered!") {
+                       
+                         alert(res.data.message)
+                    
+                    } else if(res.data.message === "Invalid email or password!") {
+                        alert(res.data.message)
+
+                    }else{
+
                         sessionStorage.setItem('LogUserId',res.data.data.stfStaffId);
                         sessionStorage.setItem('LogUserName',res.data.data.stfName);
                         const logType = 'st'
                         sessionStorage.setItem('LogUserType',logType);
                          window.location = ('/Staffdashboard');
+
+                    }
+
+                }).catch((error) => {
+                   
+                    alert("Staff Number is not valide")
+
                     
+                    console.log("er",error);
+                });
+    
+            } catch (error) {
+    
+            }
+
+        }else{
+
+            try {
+                const url = 'http://localhost:8000/api/auth/post';
+                axios.post(url, data).then((res) => {
+    
+                    if (res.data.message === "Logged in successfully") {
+    
+                        window.location = ('/dashboard');
+                    } else if (res.data.message === "Invalid Password") {
+                        alert(res.data.message)
+                    } else if (res.data.message === "Invalid Email") {
+                        alert(res.data.message)
                     } else {
                         alert(res.data.message)
                     }
+                    localStorage.setItem("id", res.data.student._id);
+                    localStorage.setItem("studentName", res.data.student.studentName);
+                    localStorage.setItem("studentId", res.data.student.studentId);
+                    localStorage.setItem("email", res.data.student.email);
+                    localStorage.setItem("gender", res.data.student.gender);
+    
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -56,33 +104,7 @@ function MainLogin() {
 
         }
 
-        try {
-            const url = 'http://localhost:8000/api/auth/post';
-            axios.post(url, data).then((res) => {
-
-                if (res.data.message === "Logged in successfully") {
-
-                    window.location = ('/dashboard');
-                } else if (res.data.message === "Invalid Password") {
-                    alert(res.data.message)
-                } else if (res.data.message === "Invalid Email") {
-                    alert(res.data.message)
-                } else {
-                    alert(res.data.message)
-                }
-                localStorage.setItem("id", res.data.student._id);
-                localStorage.setItem("studentName", res.data.student.studentName);
-                localStorage.setItem("studentId", res.data.student.studentId);
-                localStorage.setItem("email", res.data.student.email);
-                localStorage.setItem("gender", res.data.student.gender);
-
-            }).catch((error) => {
-                console.log(error);
-            });
-
-        } catch (error) {
-
-        }
+     
 
     }
 
