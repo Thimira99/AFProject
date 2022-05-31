@@ -25,6 +25,12 @@ body {
 
     background-color: #2F4050;
     min-height: 90vh;
+
+
+    /* sukitha */
+    /* min-height: 110vh;
+    max-height: fit-content;
+    max-height: 100vh; */
 }
 
 .body-wrapper {
