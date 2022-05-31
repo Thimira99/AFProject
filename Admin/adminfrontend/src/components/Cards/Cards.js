@@ -60,7 +60,7 @@ function Cards() {
               src={roles}
               text='View Roles'
               label='View Roles'
-              path='/'
+              path='/listRoles'
             />
             <CardItem
               src={student}
