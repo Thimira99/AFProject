@@ -6,10 +6,13 @@ import { IoMdSend } from "react-icons/io";
 import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
 import '../Staff/StaffHome/Home.module.css';
+import ScrollableFeed from 'react-scrollable-feed'
+
 
 
 class studentmsg extends Component {
 
+    
     constructor(props) {
         super(props)
 
@@ -501,9 +504,11 @@ class studentmsg extends Component {
 
 
     }
+   
 
-
+    
     componentDidMount() {
+        
 
         this.getAllStaffMemebers();
         const itnum = localStorage.getItem('studentId');
@@ -676,8 +681,8 @@ class studentmsg extends Component {
 
                                     <div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "890px", "position": "absolute", "marginLeft": "400px", "height": "40px" }}><span style={{ "fontWeight": "bolder", "WebkitTextStroke": "thin" }} >{this.state.selectStafftName}{" "}&nbsp;{" "}{this.state.staffId}</span></div>
 
-                                    <div style={{ "minHeight": "20vh", "width": "880px", 'height': '485px', 'overflow': 'auto', 'display': 'block', "marginLeft": "399px", "backgroundColor": "rgb(255 255 255)", "marginTop": "50px" }} className="container " >
-
+                                    <div style={{ "minHeight": "20vh", "width": "880px", 'height': '485px',  'display': 'block', "marginLeft": "399px", "backgroundColor": "rgb(255 255 255)", "marginTop": "50px" }} className="container " >
+                                    <ScrollableFeed>
                                         {
                                             this.state.msgData &&
 
@@ -690,16 +695,17 @@ class studentmsg extends Component {
                                                     style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.itnum && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
                                                     <span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.itnum ? muBobject.msg : ""}
                                                     </span>
-                                                </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px" }}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.itnum && <BsCheck />}</div><h5
+                                                </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px" ,"marginRight":"10px" }}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.itnum && <BsCheck />}</div><h5
                                                     style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}>{muBobject.sennder != this.state.itnum && <span
-                                                        style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5" }}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
-                                                        <span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right" }} >{muBobject.sennder != this.state.itnum && muBobject.msg}</span></span>}</h5></>
+                                                        style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5","marginRight":"10px" }}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
+                                                        <span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right" , "marginRight":"10px" }} >{muBobject.sennder != this.state.itnum && muBobject.msg}</span></span>}</h5><div ref={this.messagesEndRef} /></>
+                                                        
                                             ))
 
 
 
                                         }
-
+                                     </ScrollableFeed>
 
                                     </div>
 
