@@ -19,6 +19,7 @@
     "react-bootstrap": "^2.4.0",
     "react-icons": "^4.3.1",
     "react-router-dom": "^5.2.0",
+    "react-toastify": "^8.2.0",
     "style-loader": "^1.2.1"
   },
   "devDependencies": {

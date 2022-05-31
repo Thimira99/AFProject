@@ -7,6 +7,8 @@ import panel from "../../Images/panel.jpg"
 import marking from "../../Images/marking.jpg"
 import doc from "../../Images/doc.jpg"
 import roles from "../../Images/roles.jpg"
+import student from "../../Images/student.jpg"
+import research from "../../Images/research.jpg"
 
 function Cards() {
   return (
@@ -34,6 +36,12 @@ function Cards() {
               label='Panel Members Allocation'
               path='/viewPanels'
             />
+            <CardItem
+              src={research}
+              text='Research Topics'
+              label='Research Topics'
+              path='/getTopics'
+            />
           </ul>
           <ul className='cards__items'>
             <CardItem
@@ -53,6 +61,12 @@ function Cards() {
               text='View Roles'
               label='View Roles'
               path='/'
+            />
+            <CardItem
+              src={student}
+              text='Student Management'
+              label='Student Management'
+              path='/getStudentGroups'
             />
           </ul>
         </div>
