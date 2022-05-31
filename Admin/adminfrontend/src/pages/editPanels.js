@@ -145,7 +145,6 @@ export default function editPanel() {
                     
                     required
                 />
-
             </Form.Group>
 
             <center>

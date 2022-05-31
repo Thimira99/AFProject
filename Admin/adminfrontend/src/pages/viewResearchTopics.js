@@ -172,5 +172,3 @@ export default class viewResearchTopics extends Component {
     )
   }
 }
-
-

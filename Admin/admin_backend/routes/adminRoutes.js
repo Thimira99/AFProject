@@ -9,6 +9,7 @@ const { postSubmissions, getSubmission, getASpecificSubmission, updateSubmission
 
 
 const { postMarkings, getMarking, getAMarking, updateMarking, deleteMarking } = require('../controller/markingsController')
+const {getGroups,postGroups, getAssignedGroup, getASpecificGroup} = require('../controller/studentController')
 
 
 /*Login */
@@ -50,5 +51,10 @@ router.get("/marking/get/:id",getAMarking)
 router.put("/marking/update/:id",updateMarking)
 router.delete("/marking/delete/:id",deleteMarking)
 
+/*Student groups */
+router.get("/get/studentGroups",getGroups)
+router.post("/create/studentGroup",postGroups)
+router.get("/get/assignedGroup",getAssignedGroup)
+router.get("/studentGroup/get/:id",getASpecificGroup)
 
 module.exports=router

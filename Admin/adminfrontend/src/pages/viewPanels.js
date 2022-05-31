@@ -3,9 +3,11 @@ import AdminNavbar from '../components/AdminNavbar/adminNavbar';
 import Footer from '../components/Footer/Footer';
 import axios from 'axios'
 import { Button, Dropdown } from 'react-bootstrap';
+//import uuid v4
+import { v4 as uuid } from 'uuid';
 
 export default class viewPanels extends Component {
-
+    
     constructor(props){
         super(props);
 
@@ -62,6 +64,7 @@ export default class viewPanels extends Component {
   };
 
   render() {
+  
     return (
         <div>
             <AdminNavbar/>
@@ -79,7 +82,7 @@ export default class viewPanels extends Component {
             <br />
             <div className='card'
                 style={{
-                    marginTop:'200px',
+                    marginTop:'250px',
                     height:'auto'
                 }}
             ><br/>
@@ -90,7 +93,7 @@ export default class viewPanels extends Component {
                 fontWeight: "bold",
                 textAlign: "center",
                 marginLeft:'100px',
-                marginTop:'-220px'
+                marginTop:'-200px'
               }}
             >
               All Panels
@@ -110,7 +113,7 @@ export default class viewPanels extends Component {
               style={{
                 width: "350px",
                 marginLeft: "10px",
-                marginTop: "30px",
+                marginTop: "10px",
                 borderColor: "rgba(6, 21, 117,0.5)",
               }}
             ></input>
@@ -118,7 +121,7 @@ export default class viewPanels extends Component {
           <br />
 
           
-              <br/><br/>
+              <br/><br/><br/>
               
                 <table className="table table-hover"
                 style={{
@@ -126,7 +129,7 @@ export default class viewPanels extends Component {
                     backgroundColor: "#ffff",
                     borderRadius: "5px",
                     width: "100%",
-                    
+                   
                     //border: "none",
                 }}>
                     <thead>
@@ -187,5 +190,3 @@ export default class viewPanels extends Component {
     )
   }
 }
-
-
