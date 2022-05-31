@@ -25,7 +25,8 @@ class studentmsg extends Component {
             msgSennderNames:[],
             staffId:'',
             selectStafftName:'',
-            allStaff:''
+            allStaff:'',
+            unseenUsers:''
 
         }
 
@@ -36,6 +37,11 @@ class studentmsg extends Component {
         this.selectChat = this.selectChat.bind(this);
         this.selectAll = this.selectAll.bind(this);
         this.getAllStaffMemebers = this.getAllStaffMemebers.bind(this);
+        this.addMsgHistory = this.addMsgHistory.bind(this);
+        this.getUserBySeen = this.getUserBySeen.bind(this);
+        this.getByUnseen = this.getByUnseen.bind(this);
+        this.unseenCount = this.unseenCount.bind(this);
+
     }
 
     changeMessageHandler = (event) => {
@@ -43,6 +49,84 @@ class studentmsg extends Component {
             console.log(this.state.message)
         });
     }
+
+
+
+    getUserBySeen(){
+
+
+        // const logUser = sessionStorage.getItem('LogUserId')
+        const data = { 
+  
+          "seenStatus" : "false",
+          "reciver" : this.state.itnum
+         }
+  
+         const url = 'http://localhost:8000/api/msgHistory/getUsersBySeen';
+         axios.post(url,data).then((res) => {
+  
+          this.setState({
+              unseenUsers : res.data.data
+          },()=>{
+              console.log("seen 22",this.state.unseenUsers)
+          })
+  
+  
+          console.log("seen",res)
+         })
+          
+      }
+  
+
+    addMsgHistory(){
+       
+
+        const data = { 
+  
+          "personOne" : this.state.itnum,
+          "personTwo" : this.state.staffId
+  
+          // "personOne" : "it20045326",
+          // "personTwo" : "sf204090"
+         }
+  
+         try {
+          const url = 'http://localhost:8000/api/msgHistory/get';
+          axios.post(url, data).then((res) => {
+              
+  
+              if (res.data.data.length == 0) {
+                
+                  const url =' http://localhost:8000/api/msgHistory/post';
+                  axios.post(url,data).then((res) => {
+                  console.log("ch",res)
+  
+                  if (res.status == 200){
+  
+                      // this.getMsgListByUserId();
+                     
+                  }
+  
+                  })
+  
+              }else{
+                  console.log(" else check")
+  
+              }
+  
+          })
+  
+  
+      } catch {
+  
+      }
+  
+  
+      }
+  
+
+
+
 
     dateConverter(e){
 
@@ -89,8 +173,8 @@ class studentmsg extends Component {
     addMessage = (e) => {
 
         e.preventDefault()
-        console.log("inside add")
-
+     
+        this.addMsgHistory();
 
         const postData = {
             "staffId": this.state.staffId,
@@ -124,6 +208,26 @@ class studentmsg extends Component {
 
     getMessages() {
 
+
+        const datas = { 
+  
+            "seenStatus" : "false",
+            "reciver" : this.state.itnum
+           }
+    
+           const url = 'http://localhost:8000/api/msgHistory/getUsersBySeen';
+           axios.post(url,datas).then((res) => {
+    
+            this.setState({
+                unseenUsers : res.data.data
+            },()=>{
+                console.log("seen 22",this.state.unseenUsers)
+            })
+    
+    
+            console.log("seen",res)
+           })
+  
 
         const data = { 'staffId': this.state.staffId, 'studentId': this.state.itnum }
         console.log(data);
@@ -301,6 +405,66 @@ class studentmsg extends Component {
 
     }
 
+
+
+    
+    unseenCount(obj){
+        const data = obj.split('  ')[1]
+        console.log("seen data",data)
+    
+    
+    // check the number of unseen messages
+       const msgNumber = this.state.unseenUsers 
+       var val = msgNumber.filter(checknumbermsg).length
+    
+       function checknumbermsg(msgNumber){
+           return msgNumber.sennder == data
+       }
+       console.log("seen value",val)
+
+       return val == 0 ? "" : val
+    
+    }
+
+    
+    getByUnseen(obj){
+
+        const data = obj.split('  ')[1]
+        console.log("seen data",data)
+    
+    
+    
+    
+    
+    // get the status of unseen messages
+        const uniqueTags = [];
+        this.state.unseenUsers.map(object => {
+            if(uniqueTags.indexOf(object.sennder)=== -1){
+                uniqueTags.push(object.sennder)
+            }
+            console.log("seen 10",uniqueTags)
+            
+        })
+    
+    
+    
+        function checkAvailability(arr, val) {
+          return arr.some(function(arrVal) {
+            return val === arrVal;
+          });
+        }
+        
+        var value = checkAvailability(uniqueTags, data);   
+        console.log("seen xoxo",value)
+         
+    
+        return value 
+    
+        
+    
+        }
+
+
     componentDidMount() {
 
         this.getAllStaffMemebers();
@@ -311,11 +475,12 @@ class studentmsg extends Component {
 
         this.getMsgListByUserId(itnum);
 
-        this.getMessages();
+    
         this.interval = setInterval(()=>{
             this.getMessages()
         },5000);
 
+        this.getUserBySeen()
     }
 
     componentWillUnmount(){
@@ -371,20 +536,44 @@ class studentmsg extends Component {
                        
                        <><div className='container' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px",'height': '600px', 'overflow':'auto', 'display': 'block' }}>
 
-                                                {this.state.msgSennderNames &&
+{this.state.msgSennderNames &&
 
-                                                    this.state.msgSennderNames.map(obj => (
+this.state.msgSennderNames.map(obj => 
 
-                                                       console.log("ooo",obj),
+    // this.state.unseenUsers.map(unseenObj =>
 
-                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit","fontWeight":"500","WebkitTextStroke":"thin" }}  onClick={()=> this.selectedChatUser(obj)}>{
-                                                            
-                                                            
-                                                            
-                                                            obj}</p>
+    //     console.log("seen x",unseenObj.sennder),
 
-                                                        // <p>{this.getStudentName(obj.personOne)}</p>
-                                                    ))}
+ 
+  
+
+
+
+
+//       if((unseenUsers.sennder[0]).indexOf(data[1]) === -1)
+//   {
+
+//      msgSennderNames.push(nameData)
+
+//    }
+    this.getByUnseen(obj) ? <p  style={{ "backgroundColor": "hsl(216deg 36% 58%)", "padding": "inherit" ,"fontWeight":"500","WebkitTextStroke":"thin" }}  onClick={()=> this.selectedChatUser(obj)}>
+       
+    { obj }{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{"color":"rgb(255 255 255)","marginLeft":"180px","padding":"5px",
+       "paddingLeft":"inherit","paddingRight":"inherit","backgroundColor":"#2e4d7a",
+       "borderRadius":"100px","fontSize":"12px"}}>{this.unseenCount(obj)}</span> : ""}</p> :  <p  style={{ "backgroundColor": "#b8cae4", "padding": "inherit" ,"fontWeight":"500","WebkitTextStroke":"thin" }}  onClick={()=> this.selectedChatUser(obj)}>
+       
+       { obj }{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{"color":"rgb(255 255 255)","marginLeft":"180px","padding":"5px",
+          "paddingLeft":"inherit","paddingRight":"inherit","backgroundColor":"#2e4d7a",
+          "borderRadius":"100px","fontSize":"12px"}}>{this.unseenCount(obj)}</span> : ""}</p>
+    
+    
+    
+
+
+
+   
+
+    )}
 
                                             </div></>
                                             
