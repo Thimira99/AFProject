@@ -23,6 +23,8 @@ import editPanel from "./pages/editPanels";
 import updatePanels from './pages/updatePanels'
 import assignStudentGroups from "./pages/assignStudentGroups";
 import assignGroups from "./pages/addGroups";
+import ListRoles from "./pages/ListRoles";
+import ViewSingleRole from "./pages/ViewSingleRole";
 
 
 function App() {
@@ -56,6 +58,9 @@ function App() {
 
           <Route path='/getStudentGroups' exact component = {assignStudentGroups}/>
           <Route path='/assign/StudentGroups' exact component = {assignGroups}/>
+
+          <Route path='/listRoles' exact component = {ListRoles}/>
+          <Route path='/view/roles/:id' exact component = {ViewSingleRole}/>
           <Redirect to='/login'/>
         </Switch>
 
