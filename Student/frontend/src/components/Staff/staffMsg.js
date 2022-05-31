@@ -33,7 +33,8 @@ class staffMsg extends Component {
             selectAllStatus : false,
             msgSennderNames:[],
             studentId:'',
-            selectStudentName:''
+            selectStudentName:'',
+            unseenUsers:''
         }
 
         this.addMessage = this.addMessage.bind(this);
@@ -48,6 +49,10 @@ class staffMsg extends Component {
         this.selectAll = this.selectAll.bind(this);
         this.selectedUser = this.selectedUser.bind(this);
         this.selectedChatUser = this.selectedChatUser.bind(this);
+        this.getUserBySeen = this.getUserBySeen.bind(this);
+        this.getByUnseen = this.getByUnseen.bind(this);
+        this.unseenCount = this.unseenCount.bind(this);
+
         
     }
 
@@ -56,6 +61,33 @@ class staffMsg extends Component {
             console.log(this.state.message)
         });
     }
+
+
+    getUserBySeen(){
+
+
+      const logUser = sessionStorage.getItem('LogUserId')
+      const data = { 
+
+        "seenStatus" : "false",
+        "reciver" : logUser
+       }
+
+       const url = 'http://localhost:8000/api/msgHistory/getUsersBySeen';
+       axios.post(url,data).then((res) => {
+
+        this.setState({
+            unseenUsers : res.data.data
+        },()=>{
+            console.log("seen 22",this.state.unseenUsers)
+        })
+
+
+        console.log("seen",res)
+       })
+        
+    }
+
 
 
 
@@ -150,7 +182,14 @@ class staffMsg extends Component {
                                 msgSennderNames.push(nameData)
 
                             }
-                             this.setState({msgSennderNames})
+                             this.setState({msgSennderNames},()=>{
+                                 console.log("seen 3",this.state.msgSennderNames)
+
+                                 const data = this.state.msgSennderNames[0]
+
+                                 let values = data.split('  ')
+                                 console.log("seen 4",values)
+                             })
                             
                         
                            
@@ -201,7 +240,7 @@ class staffMsg extends Component {
 
         this.addMsgHistory();
         
-        console.log("inside add")
+        
 
 
         const postData = {
@@ -277,6 +316,30 @@ class staffMsg extends Component {
     }
 
     getMessages() {
+
+
+
+
+        const logUser = sessionStorage.getItem('LogUserId')
+        const datas = { 
+  
+          "seenStatus" : "false",
+          "reciver" : logUser
+         }
+  
+         const url = 'http://localhost:8000/api/msgHistory/getUsersBySeen';
+         axios.post(url,datas).then((res) => {
+  
+          this.setState({
+              unseenUsers : res.data.data
+          },()=>{
+              console.log("seen 22",this.state.unseenUsers)
+          })
+  
+  
+          console.log("seen",res)
+         })
+
 
 
         const data = { 'staffId': this.state.logUserId, 'studentId': this.state.studentId }
@@ -408,9 +471,71 @@ class staffMsg extends Component {
     }
 
 
+
+
+    unseenCount(obj){
+        const data = obj.split('  ')[1]
+        console.log("seen data",data)
+    
+    
+    // check the number of unseen messages
+       const msgNumber = this.state.unseenUsers 
+       var val = msgNumber.filter(checknumbermsg).length
+    
+       function checknumbermsg(msgNumber){
+           return msgNumber.sennder == data
+       }
+       console.log("seen value",val)
+
+       return val == 0 ? "" : val
+    
+    }
+
+
+
+
+
+    getByUnseen(obj){
+
+    const data = obj.split('  ')[1]
+    console.log("seen data",data)
+
+
+
+
+
+// get the status of unseen messages
+    const uniqueTags = [];
+    this.state.unseenUsers.map(object => {
+        if(uniqueTags.indexOf(object.sennder)=== -1){
+            uniqueTags.push(object.sennder)
+        }
+        console.log("seen 10",uniqueTags)
+        
+    })
+
+
+
+    function checkAvailability(arr, val) {
+      return arr.some(function(arrVal) {
+        return val === arrVal;
+      });
+    }
+    
+    var value = checkAvailability(uniqueTags, data);   
+    console.log("seen xoxo",value)
+     
+
+    return value 
+
+    
+
+    }
+
+
     componentDidMount() {
 
-        
+       
         this.getAllStudents()
         const logUser = sessionStorage.getItem('LogUserId')
         this.getMsgListByUserId(logUser);
@@ -423,10 +548,14 @@ class staffMsg extends Component {
 
        
 
-        this.getMessages();
+       
         this.interval = setInterval(()=>{
+           
             this.getMessages()
         },5000);
+
+        this.getUserBySeen()
+        
 
     }
 
@@ -484,17 +613,42 @@ class staffMsg extends Component {
 
                                                 {this.state.msgSennderNames &&
 
-                                                    this.state.msgSennderNames.map(obj => (
+                                                    this.state.msgSennderNames.map(obj => 
+
+                                                        // this.state.unseenUsers.map(unseenObj =>
+
+                                                        //     console.log("seen x",unseenObj.sennder),
+
+                                                     
+                                                      
+                                                
+                                                    
 
 
-                                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit" ,"fontWeight":"500","WebkitTextStroke":"thin" }}  onClick={()=> this.selectedChatUser(obj)}>{
-                                                            
-                                                            
-                                                            
-                                                            obj}</p>
+                                                //       if((unseenUsers.sennder[0]).indexOf(data[1]) === -1)
+                                                //   {
+                               
+                                                //      msgSennderNames.push(nameData)
 
-                                                        // <p>{this.getStudentName(obj.personOne)}</p>
-                                                    ))}
+                                                //    }
+                                                        this.getByUnseen(obj) ? <p  style={{ "backgroundColor": "hsl(216deg 36% 58%)", "padding": "inherit" ,"fontWeight":"500","WebkitTextStroke":"thin" }}  onClick={()=> this.selectedChatUser(obj)}>
+                                                           
+                                                        { obj }{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{"color":"rgb(255 255 255)","marginLeft":"180px","padding":"5px",
+                                                           "paddingLeft":"inherit","paddingRight":"inherit","backgroundColor":"#2e4d7a",
+                                                           "borderRadius":"100px","fontSize":"12px"}}>{this.unseenCount(obj)}</span> : ""}</p> :  <p  style={{ "backgroundColor": "#b8cae4", "padding": "inherit" ,"fontWeight":"500","WebkitTextStroke":"thin" }}  onClick={()=> this.selectedChatUser(obj)}>
+                                                           
+                                                           { obj }{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{"color":"rgb(255 255 255)","marginLeft":"180px","padding":"5px",
+                                                              "paddingLeft":"inherit","paddingRight":"inherit","backgroundColor":"#2e4d7a",
+                                                              "borderRadius":"100px","fontSize":"12px"}}>{this.unseenCount(obj)}</span> : ""}</p>
+                                                        
+                                                        
+                                                        
+
+
+
+                                                       
+
+                                                        )}
 
                                             </div></>
                                             

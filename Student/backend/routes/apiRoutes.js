@@ -5,7 +5,7 @@ const router = express.Router();
 const { postStaffRegistration, getAllStaff, updateStaff, getOneStaffUser, deleteStaffUser, StaffLogin, getAllSupervisors , getStaffDetails } = require('../Controller/staffController')
 
 
-const { postMesage , getMsgfillter , getbyDatebySennder ,updateStats } = require('../Controller/messsage')
+const { postMesage , getMsgfillter , getbyDatebySennder ,updateStats , getUsersBySeenStatus } = require('../Controller/messsage')
 const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/mainStaff')
 // const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser , StaffLogin} = require('../Controller/staffController')
 const { getHistoryMsgByName , postHistoryMesage , getHistoryMsgBySennder} = require('../Controller/msgHistoryController')
@@ -40,6 +40,7 @@ router.post("/msgHistory/post",postHistoryMesage);
 router.post("/msgHistory/get",getHistoryMsgByName);
 router.post("/msgHistory/getbySennder",getHistoryMsgBySennder);
 router.post("/msgHistory/getStudent",getStudentDetails);
+router.post("/msgHistory/getUsersBySeen",getUsersBySeenStatus);
 
 
 

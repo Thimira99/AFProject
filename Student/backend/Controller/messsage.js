@@ -77,10 +77,31 @@ const updateStats = async (req, res) => {
     })
 }
 
+const getUsersBySeenStatus = async (req, res) => {
+
+
+    const {reciver, seenStatus } = req.body;
+
+    // message.find().sort({'timestamp': -1 })
+
+    message.find({ reciver: reciver , seenStatus:seenStatus }, (err, Msg) => {
+        if (Msg) {
+            
+
+                return res.status(200).json({ message: "User Found", data: Msg })
+           
+        } else {
+            return res.status(200).json({ message: "Users not found" })
+        }
+    }).sort({'timestamp': -1 })
+
+}
+
 
 module.exports = {
     postMesage,
     getMsgfillter,
     getbyDatebySennder,
-    updateStats
+    updateStats,
+    getUsersBySeenStatus
 }
