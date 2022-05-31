@@ -154,7 +154,7 @@ export default class abc extends Component {
 
                 <div className="form-group" style={{marginBottom:'15px'}}>
                     <label style={{marginBottom:'5px',fontWeight:'bold',color:'black',fontSize:'20px'}}>STUDENT GROUP</label>
-                    <input type="text" className="form-control" name="studentGroup" placeholder="Enter studentGroup" value={this.state.studentGroup} onChange={this.handleInputChange}/>
+                    <input type="text" className="form-control" name="studentGroup" placeholder="Enter studentGroup" value={this.state.studentGroup} onChange={this.handleInputChange} readOnly/>
                     
                 </div>
                

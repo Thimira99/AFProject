@@ -63,11 +63,11 @@ function Footer() {
           <div class='footer-logo'>
             <Link to='/' className='social-logo'>
             <img  style={{width:50}} class="logo" src={logo} alt="" />
-              ABC Admin Panel
+              &nbsp; EDUCATX Admin Panel
                
             </Link>
           </div>
-          <small class='website-rights'>ABC Admin Panel © 2022</small>
+          <small class='website-rights'>EDUCATX Admin Panel © 2022</small>
            
         </div>
       </section>

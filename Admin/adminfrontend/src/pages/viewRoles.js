@@ -164,14 +164,7 @@ export default class viewRoles extends Component {
                                 <td>{roles.stfName}</td>
                                 
                                 <td>
-                                {roles.stfUserActive=='Y' ? 
-                                <div class="form-check form-switch">
-                                  <input class="form-check-input" type="checkbox" id="stfUserActive" checked value={roles.stfUserActive}/>
-                                  
-                                </div>:<div class="form-check form-switch">
-                                  <input class="form-check-input" type="checkbox" id="stfUserActive" value={roles.stfUserActive}/>
-                                  
-                                </div>}
+                               {roles.stfUserActive}
                                 </td>
                                 <td>{roles.stfEmail}</td>
                                 
@@ -200,5 +193,3 @@ export default class viewRoles extends Component {
     )
   }
 }
-
-

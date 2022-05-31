@@ -35,5 +35,5 @@ const submissionSchema = new mongoose.Schema({
 });
 
 
-const submission = mongoose.model("Submission",submissionSchema)
+const submission = mongoose.model("SubmissionTypes",submissionSchema)
 module.exports = submission

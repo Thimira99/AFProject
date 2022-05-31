@@ -118,10 +118,6 @@ export default class viewSubmissions extends Component {
                         Add a new Submission
           </a></button>
 
-           
-          <button className='btn btn-success' style={{width:'200px',marginLeft:'250px',marginTop:'-41px'}}><a href='/createTopics' style={{textDecoration:'none',color:'white'}}>
-                        Add Research topics
-          </a></button>
 {/* 
           &nbsp;&nbsp;
           <button className='btn btn-success'><a href='/home' style={{textDecoration:'none',color:'white'}}>
@@ -192,5 +188,3 @@ export default class viewSubmissions extends Component {
     )
   }
 }
-
-
