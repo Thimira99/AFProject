@@ -25,6 +25,7 @@ import assignStudentGroups from "./pages/assignStudentGroups";
 import assignGroups from "./pages/addGroups";
 import ListRoles from "./pages/ListRoles";
 import ViewSingleRole from "./pages/ViewSingleRole";
+import MarkCatA from "./pages/MarkCatA";
 
 
 function App() {
@@ -61,6 +62,8 @@ function App() {
 
           <Route path='/listRoles' exact component = {ListRoles}/>
           <Route path='/view/roles/:id' exact component = {ViewSingleRole}/>
+
+          <Route path='/markingCatA' exact component = {MarkCatA}/>
           <Redirect to='/login'/>
         </Switch>
 

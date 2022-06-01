@@ -8,7 +8,7 @@ const { getRoles, createPanel, getPanels, updatePanel, getASpecificPanel, delete
 const { postSubmissions, getSubmission, getASpecificSubmission, updateSubmission, deleteSubmission, postResearchTopics, getTopics, updateTopics, deleteTopic, getASpecificTopic } = require('../controller/submissionsController')
 
 
-const { postMarkings, getMarking, getAMarking, updateMarking, deleteMarking } = require('../controller/markingsController')
+const { postMarkings, getMarking, getMarkingcategoryA, getMarkingcategoryB, getMarkingcategoryC, getMarkingcategoryD, getAMarking, updateMarking, deleteMarking} = require('../controller/markingsController')
 const {getGroups,postGroups, getAssignedGroup, getASpecificGroup} = require('../controller/studentController')
 
 
@@ -47,9 +47,14 @@ router.get("/topics/get/:id",getASpecificTopic)
 /*Marking Scheme routes */
 router.post("/marking/create",postMarkings)
 router.get("/marking/get",getMarking)
+router.get("/marking/getcategoryA",getMarkingcategoryA)
+router.get("/marking/getcategoryB",getMarkingcategoryB)
+router.get("/marking/getcategoryC",getMarkingcategoryC)
+router.get("/marking/getcategoryD",getMarkingcategoryD)
 router.get("/marking/get/:id",getAMarking)
 router.put("/marking/update/:id",updateMarking)
 router.delete("/marking/delete/:id",deleteMarking)
+
 
 /*Student groups */
 router.get("/get/studentGroups",getGroups)
