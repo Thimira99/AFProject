@@ -18,6 +18,8 @@ function ResearchTopic() {
 
     const [groupDetails, setGroupDetails] = useState([]);
 
+    const [topics, setTopics] = useState([]);
+
 
     const groupName = groupDetails.groupName;
 
@@ -48,13 +50,40 @@ function ResearchTopic() {
 
         if (event.target.value === 'IT') {
             setResearchField('IT')
+            console.log("IT Field");
+            axios.get("http://localhost:8001/api/admin/topics/getIT").then((res) => {
+                setTopics(res.data.existingTopics);
 
+            }).catch((error) => {
+                console.log(error);
+            })
         } else if (event.target.value === 'SE') {
             setResearchField('SE')
+            console.log("SE Field");
+            axios.get("http://localhost:8001/api/admin/topics/getSE").then((res) => {
+                setTopics(res.data.existingTopics);
+
+            }).catch((error) => {
+                console.log(error);
+            })
         } else if (event.target.value === 'CS') {
-            setResearchField('SE')
+            setResearchField('CS')
+            console.log("CS Field");
+            axios.get("http://localhost:8001/api/admin/topics/getCS").then((res) => {
+                setTopics(res.data.existingTopics);
+
+            }).catch((error) => {
+                console.log(error);
+            })
         } else {
-            setResearchField('SE')
+            setResearchField('CSNE')
+            console.log("CSNE Field");
+            axios.get("http://localhost:8001/api/admin/topics/getCSNE").then((res) => {
+                setTopics(res.data.existingTopics);
+
+            }).catch((error) => {
+                console.log(error);
+            })
         }
     }
 
@@ -79,11 +108,18 @@ function ResearchTopic() {
 
         console.log(regTopic)
 
-        axios.post("http://localhost:8000/api/topic/registerTopic", regTopic).then(() => {
-            alert("Topic Registered");
+        axios.post("http://localhost:8000/api/topic/registerTopic", regTopic).then((res) => {
+            if (res.data.status === "Student Group Already exist") {
+                alert("Student Group Already exist");
+            } else {
+                alert("Topic Registered");
+            }
+
         }).catch((error) => {
             console.log(error)
         })
+
+
     }
 
     return (
@@ -161,6 +197,36 @@ function ResearchTopic() {
 
                                 </table>
                             </div>
+                            <div className={topicCss.topics}>
+                                <h2>Topics</h2>
+                                <table className="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Topics</th>
+                                            <th scope="col">Field</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {topics.map((value, key) => (
+
+
+                                            <tr>
+                                                <td >{++key}</td>
+                                                <td>{value.topic}</td>
+                                                <td>{value.researchField}</td>
+                                            </tr>
+
+                                        ))}
+                                    </tbody>
+
+
+
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <a href='/viewRegDetails'><button className='btn btn-dark'>View Details</button></a>
                         </div>
                     </div>
                 </div>
