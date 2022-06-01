@@ -11,6 +11,7 @@ const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/ma
 // const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser , StaffLogin} = require('../Controller/staffController')
 const { getHistoryMsgByName , postHistoryMesage , getHistoryMsgBySennder} = require('../Controller/msgHistoryController')
 const { getStudentDetails} = require('../Controller/studentMsgController')
+const { postTypnigMesage , getTypingStatus , updateByTypnigMsg , getAllobjects} = require('../Controller/MessageTypngConroller')
 
 
 
@@ -45,6 +46,12 @@ router.post("/msgHistory/getStudent",getStudentDetails);
 router.post("/msgHistory/getUsersBySeen",getUsersBySeenStatus);
 
 
+/* Message typnig */
+
+router.post("/msgTyping/post",postTypnigMesage);
+router.post("/msgTyping/get",getTypingStatus);
+router.post("/msgTyping/update",updateByTypnigMsg);
+router.get("/msgTyping/",getAllobjects);
 
 
 

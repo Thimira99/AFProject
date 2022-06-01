@@ -7,12 +7,21 @@ import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
 import '../Staff/StaffHome/Home.module.css';
 import ScrollableFeed from 'react-scrollable-feed'
+import Typings from '../Staff/staffMsg.module.css';
 
+
+const Typing = () => (
+    <div className={Typings.Typing}>
+        <div className={Typings.typing__dot}></div>
+        <div className={Typings.typing__dot}></div>
+        <div className={Typings.typing__dot}></div>
+    </div>
+)
 
 
 class studentmsg extends Component {
 
-    
+
     constructor(props) {
         super(props)
 
@@ -29,7 +38,9 @@ class studentmsg extends Component {
             staffId: '',
             selectStafftName: '',
             allStaff: '',
-            unseenUsers: ''
+            unseenUsers: '',
+            typing: false,
+            typingUser: ""
 
         }
 
@@ -45,13 +56,74 @@ class studentmsg extends Component {
         this.getByUnseen = this.getByUnseen.bind(this);
         this.unseenCount = this.unseenCount.bind(this);
         this.handleSearchArea = this.handleSearchArea.bind(this);
+        this.changeTypestate = this.changeTypestate.bind(this);
+        this.getMessageTyping = this.getMessageTyping.bind(this);
 
     }
 
     changeMessageHandler = (event) => {
+
+
+        if (event.target.value) {
+
+            this.setState({ typing: true })
+
+            const data = {
+
+                "sennder": this.state.itnum,
+                "reciver": this.state.staffId,
+                "typingStatus": "true"
+
+            }
+
+            const url = 'http://localhost:8000/api/msgTyping/post';
+            axios.post(url, data).then((res) => {
+
+
+                if (res.data.status == "200") {
+
+                    setTimeout(() => {
+                        const data = {
+
+                            "sennder": this.state.itnum,
+                            "reciver": this.state.staffId,
+                            "typingStatus": "false"
+
+                        }
+
+
+                        const url = 'http://localhost:8000/api/msgTyping/update';
+                        axios.post(url, data).then((res) => {
+                            if (res.data.status == '200') {
+
+                            }
+                        })
+                    }, 2000)
+
+                }
+
+            })
+
+
+        } else {
+            console.log("not chanfging", this.state.message)
+        }
+
+
+
+
+
         this.setState({ message: event.target.value }, () => {
-            console.log(this.state.message)
+
         });
+    }
+
+
+    changeTypestate() {
+
+        this.setState({ typing: false })
+
+
     }
 
 
@@ -71,12 +143,10 @@ class studentmsg extends Component {
 
             this.setState({
                 unseenUsers: res.data.data
-            }, () => {
-                console.log("seen 22", this.state.unseenUsers)
             })
 
 
-            console.log("seen", res)
+
         })
 
     }
@@ -90,8 +160,7 @@ class studentmsg extends Component {
             "personOne": this.state.itnum,
             "personTwo": this.state.staffId
 
-            // "personOne" : "it20045326",
-            // "personTwo" : "sf204090"
+
         }
 
         try {
@@ -103,13 +172,9 @@ class studentmsg extends Component {
 
                     const url = ' http://localhost:8000/api/msgHistory/post';
                     axios.post(url, data).then((res) => {
-                        console.log("ch", res)
 
-                        if (res.status == 200) {
 
-                            // this.getMsgListByUserId();
 
-                        }
 
                     })
 
@@ -134,7 +199,7 @@ class studentmsg extends Component {
 
     dateConverter(e) {
 
-        console.log("eeeeeeeeeeeee", e)
+
 
 
 
@@ -143,7 +208,6 @@ class studentmsg extends Component {
         var month = current.getMonth();
         var year = current.getFullYear();
         var my2 = date + "/" + month + "/" + year
-        console.log("sukith", my2)
 
 
         var myDate = new Date(e);
@@ -153,7 +217,7 @@ class studentmsg extends Component {
         var date = myDate.getDate();
         var month = myDate.getMonth();
         var year = myDate.getFullYear();
-        console.log("date", date)
+
         var hour = myDate.getHours();
         var minute = myDate.getMinutes();
         var second = myDate.getSeconds();
@@ -213,29 +277,28 @@ class studentmsg extends Component {
 
     filterData(staff, searchKey) {
         const result = staff.filter(
-          (item) =>
-            item.stfStaffId.toLowerCase().includes(searchKey) || //toLowerCase() helps to filter the data using the lowercase letters.
-            item.stfStaffId.toUpperCase().includes(searchKey) || //toUpperCase() helps to filter the data using the Uppercase letters.
-            item.stfName.toLowerCase().includes(searchKey) ||
-            item.stfName.toUpperCase().includes(searchKey)
+            (item) =>
+                item.stfStaffId.toLowerCase().includes(searchKey) || //toLowerCase() helps to filter the data using the lowercase letters.
+                item.stfStaffId.toUpperCase().includes(searchKey) || //toUpperCase() helps to filter the data using the Uppercase letters.
+                item.stfName.toLowerCase().includes(searchKey) ||
+                item.stfName.toUpperCase().includes(searchKey)
         );
-    
+
         this.setState({ allStaff: result });
-      }
+    }
 
 
-      
-    handleSearchArea = (e) => { 
+
+    handleSearchArea = (e) => {
         const searchKey = e.currentTarget.value;
-        console.log("change 2",searchKey)
 
         axios.get("http://localhost:8000/api/staffRegister/get").then((res) => {
-            console.log("change",res.data.data)
-          if (res.data) {
-            this.filterData(res.data.data, searchKey);
-          }
+
+            if (res.data) {
+                this.filterData(res.data.data, searchKey);
+            }
         });
-      };
+    };
 
 
 
@@ -256,17 +319,15 @@ class studentmsg extends Component {
 
             this.setState({
                 unseenUsers: res.data.data
-            }, () => {
-                console.log("seen 22", this.state.unseenUsers)
             })
 
 
-            console.log("seen", res)
+
         })
 
 
         const data = { 'staffId': this.state.staffId, 'studentId': this.state.itnum }
-        console.log(data);
+
 
         try {
             const url = 'http://localhost:8000/api/message/get';
@@ -276,10 +337,7 @@ class studentmsg extends Component {
                     msgData: res.data.data
                 }, () => {
 
-                    console.log("sukii", this.state.msgData);
-                    // const len = (this.state.msgData.length)-1
 
-                    // const id = (this.state.msgData[len]._id)
 
                     this.state.msgData.map((msgObject) => {
 
@@ -303,22 +361,21 @@ class studentmsg extends Component {
 
                 })
 
-                console.log(res);
+
             }).catch((err) => {
                 console.log(err)
             });
 
-            console.log(res.message);
+
         } catch (error) {
 
         }
 
     }
 
+
+
     getMsgListByUserId(loguser) {
-
-
-
 
 
         const data = {
@@ -345,7 +402,7 @@ class studentmsg extends Component {
 
                     const url = 'http://localhost:8000/api/msgHistory/getStaff'
                     axios.post(url, data).then((res) => {
-                        console.log("index", res)
+
 
                         var nameData = res.data.data[0].stfName + "  " + res.data.data[0].stfStaffId
 
@@ -366,7 +423,7 @@ class studentmsg extends Component {
                 })
 
             })
-            // console.log("ssv",res.data.data)
+
         })
 
     }
@@ -402,9 +459,9 @@ class studentmsg extends Component {
 
     selectedChatUser(obj) {
 
-        console.log("z", obj)
+
         const value = obj.split("  ")
-        console.log("z", value)
+
 
         this.setState({
             staffId: value[1],
@@ -417,7 +474,7 @@ class studentmsg extends Component {
     selectedUser(id, name) {
 
         const names = name + "  " + id
-        console.log("id", id)
+
         this.setState({
             staffId: id,
             selectStafftName: name,
@@ -440,7 +497,7 @@ class studentmsg extends Component {
                 this.setState({
                     allStaff: res.data.data
                 })
-                console.log("allstudents", this.state.allstudents)
+
             }
         })
 
@@ -451,7 +508,7 @@ class studentmsg extends Component {
 
     unseenCount(obj) {
         const data = obj.split('  ')[1]
-        console.log("seen data", data)
+
 
 
         // check the number of unseen messages
@@ -461,7 +518,7 @@ class studentmsg extends Component {
         function checknumbermsg(msgNumber) {
             return msgNumber.sennder == data
         }
-        console.log("seen value", val)
+
 
         return val == 0 ? "" : val
 
@@ -471,7 +528,7 @@ class studentmsg extends Component {
     getByUnseen(obj) {
 
         const data = obj.split('  ')[1]
-        console.log("seen data", data)
+
 
 
 
@@ -483,7 +540,6 @@ class studentmsg extends Component {
             if (uniqueTags.indexOf(object.sennder) === -1) {
                 uniqueTags.push(object.sennder)
             }
-            console.log("seen 10", uniqueTags)
 
         })
 
@@ -496,7 +552,7 @@ class studentmsg extends Component {
         }
 
         var value = checkAvailability(uniqueTags, data);
-        console.log("seen xoxo", value)
+
 
 
         return value
@@ -504,11 +560,40 @@ class studentmsg extends Component {
 
 
     }
-   
 
-    
+
+    getMessageTyping() {
+
+        const data = {
+            "sennder": this.state.staffId,
+            "reciver": this.state.itnum
+        }
+
+        const url = 'http://localhost:8000/api/msgTyping/get'
+
+        axios.post(url, data).then((res) => {
+
+            if (res.data) {
+
+                this.setState({
+                    typingUser: res.data.data.typingStatus
+                }, () => {
+
+                })
+            } else {
+                console.log("typing  xxxxxxxxxxxx user")
+            }
+
+        }
+
+        )
+
+    }
+
+
+
     componentDidMount() {
-        
+
 
         this.getAllStaffMemebers();
         const itnum = localStorage.getItem('studentId');
@@ -521,7 +606,11 @@ class studentmsg extends Component {
 
         this.interval = setInterval(() => {
             this.getMessages()
-        }, 5000);
+        }, 4000);
+
+        this.interval = setInterval(() => {
+            this.getMessageTyping()
+        }, 1000);
 
         this.getUserBySeen()
     }
@@ -578,9 +667,9 @@ class studentmsg extends Component {
                                             </Col>
 
                                             <Col></Col>
-                                            
+
                                             <Col>
-                                            {this.state.selectAllStatus && <div>
+                                                {this.state.selectAllStatus && <div>
                                                     <input
                                                         className="form-control"
                                                         type="search"
@@ -597,7 +686,7 @@ class studentmsg extends Component {
                                                         }}
                                                     ></input>
                                                 </div>}
-                                                </Col>
+                                            </Col>
 
                                         </Row>
 
@@ -613,22 +702,7 @@ class studentmsg extends Component {
 
                                                 this.state.msgSennderNames.map(obj =>
 
-                                                    // this.state.unseenUsers.map(unseenObj =>
 
-                                                    //     console.log("seen x",unseenObj.sennder),
-
-
-
-
-
-
-
-                                                    //       if((unseenUsers.sennder[0]).indexOf(data[1]) === -1)
-                                                    //   {
-
-                                                    //      msgSennderNames.push(nameData)
-
-                                                    //    }
                                                     this.getByUnseen(obj) ? <p style={{ "backgroundColor": "rgb(184 202 228)", "padding": "inherit", "fontWeight": "700", "WebkitTextStroke": "thin" }} onClick={() => this.selectedChatUser(obj)}>
 
                                                         {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{
@@ -681,31 +755,33 @@ class studentmsg extends Component {
 
                                     <div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "890px", "position": "absolute", "marginLeft": "400px", "height": "40px" }}><span style={{ "fontWeight": "bolder", "WebkitTextStroke": "thin" }} >{this.state.selectStafftName}{" "}&nbsp;{" "}{this.state.staffId}</span></div>
 
-                                    <div style={{ "minHeight": "20vh", "width": "880px", 'height': '485px',  'display': 'block', "marginLeft": "399px", "backgroundColor": "rgb(255 255 255)", "marginTop": "50px" }} className="container " >
-                                    <ScrollableFeed>
-                                        {
-                                            this.state.msgData &&
+                                    <div style={{ "minHeight": "20vh", "width": "880px", 'height': '485px', 'display': 'block', "marginLeft": "399px", "backgroundColor": "rgb(255 255 255)", "marginTop": "50px" }} className="container " >
+                                        <ScrollableFeed>
+                                            {
+                                                this.state.msgData &&
 
-                                            this.state.msgData.map(muBobject => (
-
-                                                console.log("vbb", muBobject),
-
-
-                                                <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "5px" }}>{muBobject.sennder == this.state.itnum && <span
-                                                    style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.itnum && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
-                                                    <span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.itnum ? muBobject.msg : ""}
-                                                    </span>
-                                                </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px" ,"marginRight":"10px" }}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.itnum && <BsCheck />}</div><h5
-                                                    style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}>{muBobject.sennder != this.state.itnum && <span
-                                                        style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5","marginRight":"10px" }}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
-                                                        <span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right" , "marginRight":"10px" }} >{muBobject.sennder != this.state.itnum && muBobject.msg}</span></span>}</h5><div ref={this.messagesEndRef} /></>
-                                                        
-                                            ))
+                                                this.state.msgData.map(muBobject => (
 
 
 
-                                        }
-                                     </ScrollableFeed>
+
+                                                    <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "5px" }}>{muBobject.sennder == this.state.itnum && <span
+                                                        style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.itnum && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
+                                                        <span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.itnum ? muBobject.msg : ""}
+                                                        </span>
+                                                    </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px", "marginRight": "10px" }}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.itnum && <BsCheck />}</div><h5
+                                                        style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}>{muBobject.sennder != this.state.itnum && <span
+                                                            style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5", "marginRight": "10px" }}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
+                                                            <span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right", "marginRight": "10px" }} >{muBobject.sennder != this.state.itnum && muBobject.msg}</span></span>}</h5><div ref={this.messagesEndRef} /></>
+
+                                                ))
+
+
+
+                                            }
+                                        </ScrollableFeed>
+                                        {this.state.typingUser == "true" && <div><span style={{ "float": "left", "fontWeight": "600", "WebkitTextStroke": "thin" }}>{this.state.selectStafftName}</span><div style={{ "float": "left", "marginLeft": "25px", "marginTop": "8px" }}><Typing /></div></div>}
+
 
                                     </div>
 
