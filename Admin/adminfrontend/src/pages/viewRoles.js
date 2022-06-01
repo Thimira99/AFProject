@@ -102,7 +102,7 @@ export default class viewRoles extends Component {
 
               }}
             >
-              All Roles
+              All Staff Members
             </h4>
      
 

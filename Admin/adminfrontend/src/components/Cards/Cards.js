@@ -19,17 +19,16 @@ function Cards() {
           <ul className='cards__items'>
             <CardItem 
               src={user}
-              text='Students & Staff Members'
-              label='User Management'
+              text='Staff Management'
+              label='Staff Management'
               path='/viewRoles'
             />
             <CardItem
-              src={sub}
-              text='Create Submission Types'
-              label='Submission Types'
-              path='/viewSubmissions'
+              src={student}
+              text='Student Management'
+              label='Student Management'
+              path='/getStudentGroups'
             />
-
             <CardItem
               src={panel}
               text='Allocate panel members to student groups'
@@ -37,13 +36,19 @@ function Cards() {
               path='/viewPanels'
             />
             <CardItem
-              src={research}
-              text='Research Topics'
-              label='Research Topics'
-              path='/getTopics'
+              src={sub}
+              text='Create Submission Types'
+              label='Submission Types'
+              path='/viewSubmissions'
             />
           </ul>
           <ul className='cards__items'>
+            <CardItem
+                src={research}
+                text='Research Topics'
+                label='Research Topics'
+                path='/getTopics'
+              />
             <CardItem
               src={marking}
               text='Create Marking Schemes'
@@ -61,12 +66,6 @@ function Cards() {
               text='View Roles'
               label='View Roles'
               path='/listRoles'
-            />
-            <CardItem
-              src={student}
-              text='Student Management'
-              label='Student Management'
-              path='/getStudentGroups'
             />
           </ul>
         </div>

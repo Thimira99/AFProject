@@ -39,7 +39,7 @@ const ViewSingleRole = props => {
         //     <h2>{stfJobRole}</h2>
         //     <h2>{stfPanellMember}</h2>  
         // </div>
-        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
+        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center bg-secondary">
             <div className="card p-4">
                 <div class=" image d-flex flex-column justify-content-center align-items-center">
                     <button className="btn btn-secondary">
@@ -87,7 +87,7 @@ const ViewSingleRole = props => {
                     </div>
                     <div class=" d-flex mt-2">
                     <Link to="/listRoles">
-                        <button class="btn1 btn-info">Back to List
+                        <button class="btn1 btn-primary">Back to List
                         </button>
                         </Link>
                         
