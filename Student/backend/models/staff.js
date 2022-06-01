@@ -40,7 +40,7 @@ const staffSchema = new schema({
         trim: true
 
     },
-    
+
     stfResField: {
         type: String,
         required: true,
@@ -72,10 +72,10 @@ const staffSchema = new schema({
 
     },
 
-   
-    
-},{timestamps:true})
 
-const staffRegistration = mongoose.model('Staff',staffSchema);
+
+}, { timestamps: true })
+
+const staffRegistration = mongoose.model('Staff', staffSchema);
 
 module.exports = staffRegistration;

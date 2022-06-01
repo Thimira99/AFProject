@@ -1,13 +1,14 @@
-const express= require('express')
+'use strict';
+
+const express = require('express')
 const postSubmission = require('../Controller/addSubmissions')
-const { getSubmission, getASpecificSubmission} = require('../Controller/submissions')
+const { fileUpload, getfileUpload } = require('../Controller/submissions')
+const { upload } = require("../helpers/fileHelper");
 const router = express.Router()
 
+router.get("/submissions/get", getfileUpload)
 
-router.get("/student/submissions",getSubmission)
-router.get("/student/submissions/:id",getASpecificSubmission)
-
-router.post("/student/submissions/add",postSubmission)
+router.post("/submissions/add", upload.single('file'), fileUpload);
 
 
-module.exports=router
+module.exports = router
