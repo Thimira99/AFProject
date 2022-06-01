@@ -9,24 +9,27 @@ import Footer from '../components/Footer/Footer';
 
 
 toast.configure()
-function ViewMarkings() {
+function MarkCatA() {
     const [markings, setMarkings] = useState([])
 
     const notifyDel = () =>{
         toast.success('Marking Scheme is deleted !', {position: toast.POSITION.TOP_CENTER})
     };
 
-
+   
     useEffect(() =>{
-        axios.get('http://localhost:8000/api/admin/marking/get')
+        
+        axios.get('http://localhost:8000/api/admin/marking/getcategoryA')
             .then(res => {
-                console.log(res)  
+                console.log("Ishani", res)  
                 setMarkings(res.data.existingMarkings) 
-            })
+            }
+            )
             .catch(err =>{
                 console.log(err)
             })
     }, [])
+
 
     //Delete Marking Scheme by ID
       const deleteMarking = id => {
@@ -54,41 +57,13 @@ function ViewMarkings() {
                                 <br></br>
                                 <h1> Marking Schemes</h1>
                                 <br></br>
-                                   <ul>
+                                     
                                     <Link to="/createMarking" 
                                      >
                                          <button className="buttonAdd"> 
                                         Create New Marking Scheme
                                         </button>
                                     </Link>
-                                    </ul>
-                                    <ul>
-                                    <Link to="/markingCatA" 
-                                     >
-                                         <button className="buttonAdd"> 
-                                          A 
-                                        </button>
-                                    </Link>
-                                    <Link to="/createMarking" 
-                                     >
-                                         <button className="buttonAdd"> 
-                                          B 
-                                        </button>
-                                    </Link>
-                                    <Link to="/createMarking" 
-                                     >
-                                         <button className="buttonAdd"> 
-                                          C
-                                        </button>
-                                    </Link>
-                                    <Link to="/createMarking" 
-                                     >
-                                         <button className="buttonAdd"> 
-                                          D 
-                                        </button>
-                                    </Link>
-
-                                    </ul>
                                      
                                 </div>
                                  
@@ -141,6 +116,6 @@ function ViewMarkings() {
 } 
 
 
-export default ViewMarkings;
+export default MarkCatA;
 
  
