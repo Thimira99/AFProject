@@ -87,7 +87,7 @@ export default class ListRoles extends Component {
 
               }}
             >
-            View Roles List
+            Roles List
             </h4>
      
 
@@ -153,7 +153,7 @@ export default class ListRoles extends Component {
                                 <td>
                                    <button className='btn btn-success'>
                                        <a href={`/view/roles/${roles._id}`} style={{color:'white',textDecoration:'none'}}>
-                                      VIEW
+                                      VIEW STAFF PROFILE
                                        </a>
 
                                    </button>
