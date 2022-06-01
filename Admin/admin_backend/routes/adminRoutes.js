@@ -8,7 +8,7 @@ const { postSubmissions, getSubmission, getASpecificSubmission, updateSubmission
 
 const { getRoles, createPanel, getPanels, updatePanel, getASpecificPanel, deletePanel, getASpecificRole, updateRole, deleteRole } = require('../controller/panelController')
 
-const { postSubmissions, getSubmission, getASpecificSubmission, updateSubmission, deleteSubmission, postResearchTopics, getTopics, updateTopics, deleteTopic, getASpecificTopic } = require('../controller/submissionsController')
+
 
 
 
