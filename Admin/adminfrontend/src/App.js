@@ -26,7 +26,9 @@ import assignGroups from "./pages/addGroups";
 import ListRoles from "./pages/ListRoles";
 import ViewSingleRole from "./pages/ViewSingleRole";
 import MarkCatA from "./pages/MarkCatA";
-
+import MarkCatB from "./pages/MarkCatB";
+import MarkCatC from "./pages/MarkCatC";
+import MarkCatD from "./pages/MarkCatD";
 
 function App() {
   
@@ -64,6 +66,9 @@ function App() {
           <Route path='/view/roles/:id' exact component = {ViewSingleRole}/>
 
           <Route path='/markingCatA' exact component = {MarkCatA}/>
+          <Route path='/markingCatB' exact component = {MarkCatB}/>
+          <Route path='/markingCatC' exact component = {MarkCatC}/>
+          <Route path='/markingCatD' exact component = {MarkCatD}/>
           <Redirect to='/login'/>
         </Switch>
 
