@@ -90,19 +90,39 @@ const StaffLogin = async (req, res) => {
 
     const { email, password } = req.body;
     staffRegistration.findOne({ stfStaffId: email }, (err, user) => {
-        if (user) {
-            if (password === user.stfUserPassword && email === user.stfStaffId) {
 
-                return res.status(200).json({ message: "Login successful!", data: user })
+        try{
+
+            if (user) {
+
+                if(user.stfUserActive == "Y"){
+                    if (password === user.stfUserPassword && email === user.stfStaffId) {
+    
+                        return res.status(200).json({ message: "Login successful!", data: user })
+                    } else {
+                        return res.status(200).json({ message: "Invalid email or password!" })
+                    }
+                }else{
+    
+                    return res.status(200).json({ message: "Your Account is inactive please contact your administartor !" })
+                }
+             
             } else {
-                return res.status(400).json({ error: "Invalid email or password!" })
+                return res.status(200).json({ message: "Not registered!" })
             }
-        } else {
-            return res.status(400).json({ error: "Not registered!" })
+
+        }catch (error){
+
+            console.error(error);
+            res.status(500).json({ message: "Server Error" });
         }
+
+        
     })
 
 }
+
+
 
 const getAllSupervisors = async (req, res) => {
     const stfJobRole = "Supervisor";
@@ -119,6 +139,25 @@ const getAllSupervisors = async (req, res) => {
 }
 
 
+/* get one staff details */
+const getStaffDetails = async (req, res) => {
+    const { stfStaffId } = req.body;
+
+    staffRegistration.find({ stfStaffId : stfStaffId}, (err, data) => {
+
+        if (data) {
+
+            return res.status(200).json({ message: "staff Data fetch", data: data })
+
+        } else {
+            return res.status(400).json({ error: "No Data" })
+        }
+    })
+}
+
+
+
+
 
 module.exports = {
     postStaffRegistration,
@@ -127,5 +166,6 @@ module.exports = {
     getOneStaffUser,
     deleteStaffUser,
     StaffLogin,
-    getAllSupervisors
+    getAllSupervisors,
+    getStaffDetails
 }

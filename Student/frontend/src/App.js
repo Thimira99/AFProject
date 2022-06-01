@@ -60,8 +60,6 @@ function App() {
 
 
 
-          <Route exact path='/mainLogin' component={MainLogin} />
-
 
 
 

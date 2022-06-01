@@ -15,13 +15,21 @@ import viewPanels from "./pages/viewPanels";
 import createResearchTopics from "./pages/addResearchTopics";
 import viewResearchTopics from "./pages/viewResearchTopics";
 import editTopics from "./pages/editResearchTopics";
-
+import editRoles from "./pages/editRoles";
 import ViewMarkings from "./pages/ViewMarkings";
-import AddMarking from "./pages/AddMarking";
+import CreateMarking from "./pages/CreateMarking";
 import EditMarking from "./pages/EditMarking";
+import editPanel from "./pages/editPanels";
+import updatePanels from './pages/updatePanels'
+import assignStudentGroups from "./pages/assignStudentGroups";
+import assignGroups from "./pages/addGroups";
+import ListRoles from "./pages/ListRoles";
+import ViewSingleRole from "./pages/ViewSingleRole";
+import MarkCatA from "./pages/MarkCatA";
+
 
 function App() {
-
+  
   return (
     <div>
       <Router>
@@ -32,11 +40,12 @@ function App() {
           <Route path='/viewSubmissions' exact component = {viewSubmissions}/>
           <Route path='/edit/submissions/:id' exact component = {editSubmissions}/>
 
-
-          
           <Route path='/viewRoles' exact component = {viewRoles}/>
+          <Route path='/edit/roles/:id' exact component = {editRoles}/>
           <Route path='/createPanels' exact component = {createPanel}/>
           <Route path='/viewPanels' exact component = {viewPanels}/>
+          <Route path='/edit/panels/:id' exact component = {editPanel}/>
+          <Route path='/update/panel/:id' exact component={updatePanels}/>
 
           <Route path='/createTopics' exact component = {createResearchTopics}/>
           <Route path='/getTopics' exact component = {viewResearchTopics}/>
@@ -44,9 +53,17 @@ function App() {
 
 
           <Route path='/viewMarkings' exact component = {ViewMarkings}/>
-          <Route path='/addMarking' exact component = {AddMarking}/>
+          <Route path='/createMarking' exact component = {CreateMarking}/>
           <Route path='/edit/markings/:id' exact component = {EditMarking}/>
 
+
+          <Route path='/getStudentGroups' exact component = {assignStudentGroups}/>
+          <Route path='/assign/StudentGroups' exact component = {assignGroups}/>
+
+          <Route path='/listRoles' exact component = {ListRoles}/>
+          <Route path='/view/roles/:id' exact component = {ViewSingleRole}/>
+
+          <Route path='/markingCatA' exact component = {MarkCatA}/>
           <Redirect to='/login'/>
         </Switch>
 

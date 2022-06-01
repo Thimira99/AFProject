@@ -3,20 +3,16 @@ import axios from 'axios';
 import AdminNavbar from '../components/AdminNavbar/adminNavbar';
 import Footer from '../components/Footer/Footer';
 
-export default class createResearchTopics extends Component {
+export default class assignGroups extends Component {
 
   constructor(props){
     super(props);
     this.state={
-        
-        topic:"",
-        researchField:"",
-        
-       
+        groupId:"",
+      
          /** */
         errors:{},
-        errorLong:{},
-        
+       
 
     }
   }
@@ -31,31 +27,28 @@ export default class createResearchTopics extends Component {
 
 /** */
 formValidation = () =>{
-  const{topic,researchField}=this.state;
+  const{groupId}=this.state;
   let isValid = true;
   const errors ={};
-  const errorLong={};
+  
 
-
-
-  if(!topic){
-      errors["topicInput"] = "topic Field is EMPTY!";
+  if(groupId.trim().length<2){
+      errors["groupIdLength"] = "Submission code must be in length 2 or higher";
       isValid=false;
   }
 
-  if(!topic.match(/^[a-z A-Z]*$/)){
-      errors["topicInputPattern"] = "topic must contain characters only!";
+  if(!groupId.match(/^[A-Z]{1,}[0-9]{3,}$/)){
+      errors["groupIdPattern"]="Code should include at least 1 uppercase letters and at least 3 numbers";
       isValid=false;
   }
 
+  if(!groupId){
+      errors["groupIdInput"] = "Submission code Field is EMPTY!";
+      isValid=false;
+  }
 
-  if(!researchField){
-    errorLong["researchFieldInput"] = "researchField Field is EMPTY!";
-    isValid=false;
-}
-
-
-  this.setState({errors:errors,errorLong:errorLong});
+  
+  this.setState({errors:errors});
   return isValid;
 }
 /** */
@@ -68,25 +61,22 @@ formValidation = () =>{
     if(isValid){
 
 
-    const{topic,researchField}= this.state;
+    const{groupId}= this.state;
 
     const data={
-        
-        topic:topic,
-        researchField:researchField
+        groupId:groupId, 
        
     }
         
     console.log(data);
 
-    axios.post("http://localhost:8000/api/admin/topics/create",data).then((res)=>{
+    axios.post("http://localhost:8000/api/admin/create/studentGroup",data).then((res)=>{
       if(res.data.success){
-        alert("Topic created Successfully!");
-        window.location.href='/getTopics';
+        alert("Group assigned Successfully!")
         this.setState(
           {
-            topic:"",
-            researchField:""
+            groupId:"",
+            
           }
         )
       }
@@ -94,11 +84,11 @@ formValidation = () =>{
 }
 }
 
-  
-  render() {
 
+
+  render() {
     const{errors}=this.state;
-    const{errorLong}=this.state;
+   
 
     return (
         <>
@@ -108,41 +98,34 @@ formValidation = () =>{
       <div className='col-md-8 mt-4 mx-auto'>
       <br/>
       <button className="btn btn-danger" style={{width:'160px'}}>
-        <a href="/getTopics" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>
-          View Topics
+        <a href="/viewSubmissions" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>
+          View Submissions
         </a></button><br/><br/>
 
-        <h1 className='h3 mb-3 font-weight-normal' style={{color:'black'}}> ADD A TOPIC </h1>
+        <h1 className='h3 mb-3 font-weight-normal' style={{color:'black'}}> ASSIGN THE GROUP</h1>
         <form className='needs-validation' noValidate onSubmit={this.onSubmit}>
-         
           <div className='form-group' style={{marginBottom:'15px'}}>
-            <label style={{marginBottom:'5px'}}>TOPIC</label>
-            <input 
-              type="text"
-              className="form-control"
-              name="topic"
-              placeholder="Enter topic"
-              value={this.state.topic}
-              onChange={this.handleInputChange}
-            />
-             {Object.keys(errors).map((key)=>{
-              return <div style={{color:'red'}} key={key}>{errors[key]}</div> })}
+            <label style={{marginBottom:'5px'}}>GROUP NAME:</label>
+           
+            
+
           </div>
 
           <div className='form-group' style={{marginBottom:'15px'}}>
-            <label style={{marginBottom:'5px'}}>RESEARCH FIELD</label>
+            <label style={{marginBottom:'5px'}}>GROUP ID</label>
             <input 
               type="text"
               className="form-control"
-              name="researchField"
-              placeholder="Enter research field"
-              value={this.state.researchField}
+              name="groupId"
+              placeholder="Enter group id"
+              value={this.state.groupId}
               onChange={this.handleInputChange}
             />
-            {Object.keys(errorLong).map((key)=>{
-              return <div style={{color:'red'}} key={key}>{errorLong[key]}</div> })}
+            {Object.keys(errors).map((key)=>{
+             return <div style={{color:'red'}} key={key}>{errors[key]}</div> })}
           </div>
-          
+
+
           <button className="btn btn-success" type="submit" style={{marginTop:'15px',marginBottom:'150px'}} onClick={this.onSubmit}>
             <i className="far fa-check-square"></i>
              &nbsp;Save

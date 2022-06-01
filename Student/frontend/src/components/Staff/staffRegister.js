@@ -61,6 +61,7 @@ function staffRegister() {
     const history = useHistory();
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value })
+      
     }
 
     const handleChangeLogin = ({ currentTarget: input }) => {
@@ -80,7 +81,7 @@ function staffRegister() {
                 axios.post(url, data).then((res) => {
                     if (res.status == "200") {
                         alert(res.data.message);
-                        history.push('/Staffdashboard');
+                        history.push('/mainLogin');
                     } else {
                         alert(res.data.message);
                     }
@@ -109,18 +110,20 @@ function staffRegister() {
         try {
             const url = 'http://localhost:8000/api/mainstaffRegister/login';
             axios.post(url, loginData).then((res) => {
+                console.log(res)
                 if (res.status == "200") {
-                    console.log(res)
+                    
                     settLoginStatus(true);
                     alert(res.data.message);
                     setData({ ...data, ['stfStaffId']: res.data.data.MainStaffId })
 
 
-                } else {
+                } else if(res.status == "404"){
+                    console.log("else",res)
                     alert(res.data.message);
                 }
             }).catch((err) => {
-                console.log(err)
+                console.log("ww",err)
             });
 
             console.log(res.message);
@@ -260,10 +263,12 @@ function staffRegister() {
                         : <form className={loginStyles.form_container_login} onSubmit={handleSubmitLogin}>
                             <h1>Login with Staff Id Number</h1>
                             <input
+                            
+                             
                                 type='text'
-                                placeholder='Staff Id'
+                                placeholder='Staff Id eg: ST*******'
                                 name='MainStaffId'
-                                value={data.MainStaffId}
+                                value={(data.MainStaffId)}
                                 onChange={handleChangeLogin}
                                 required
                                 className={loginStyles.input}

@@ -4,7 +4,7 @@ import Footer from '../components/Footer/Footer';
 import axios from 'axios'
 import { Button, Dropdown } from 'react-bootstrap';
 
-export default class viewRoles extends Component {
+export default class ListRoles extends Component {
 
     constructor(props){
         super(props);
@@ -33,21 +33,6 @@ export default class viewRoles extends Component {
         });
     }
 
-
-    onClickDisabled = (data,id) =>{
-      if (data=='N' || data=='n'){
-       
-          if (window.confirm("Do you want to remove this Role?")) {
-              axios.delete(`http://localhost:8000/api/admin/role/delete/${id}`).then((res) => {
-              alert("Role removed Successfully!");
-              this.retrieveRoles();
-            });
-          
-        };
-            
-      }
-      console.log(data)
-    }
 
        //Search bar
   filterData(roles, searchKey) {
@@ -102,7 +87,7 @@ export default class viewRoles extends Component {
 
               }}
             >
-              All Staff Members
+            Roles List
             </h4>
      
 
@@ -137,13 +122,13 @@ export default class viewRoles extends Component {
                 }}>
                     <thead>
                         <tr>
-                            <th scope='col'>#</th>
+                            <th scope='col'>NO</th>
                             <th scope='col'>STAFF ID</th>
                             <th scope='col'>STAFF JOB ROLE</th>
                             <th scope='col'>RESEARCH FIELD</th>
 
                             <th scope='col'>NAME</th>
-                            <th scope='col'>ACTIVE/INACTIVE STATUS</th>
+                            
                             <th scope='col'>EMAIL</th>
 
                             <th scope='col'>ACTION</th>
@@ -163,15 +148,13 @@ export default class viewRoles extends Component {
                                 <td>{roles.stfResField}</td>
                                 <td>{roles.stfName}</td>
                                 
-                                <td>
-                               {roles.stfUserActive}
-                                </td>
                                 <td>{roles.stfEmail}</td>
                                 
                                 <td>
-                                   <button className='btn btn-warning'><a href={`/edit/roles/${roles._id}`} style={{color:'white',textDecoration:'none'}}>
-                                      EDIT
-                                   </a>
+                                   <button className='btn btn-primary'>
+                                       <a href={`/view/roles/${roles._id}`} style={{color:'white',textDecoration:'none'}}>
+                                      VIEW STAFF PROFILE
+                                       </a>
 
                                    </button>
                                 
