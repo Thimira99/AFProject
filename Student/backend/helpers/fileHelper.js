@@ -1,23 +1,17 @@
-'use strict';
 
 const multer = require('multer');
+const path = require('path');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads');
-    }, filename: (req, file, cb) => {
-        cb(null, file.originalname)
+
+module.exports = multer({
+    storage: multer.diskStorage({}),
+    fileFilter: (req, file, cb) => {
+        let ext = path.extname(file.originalname);
+        if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
+            cb(null, true)
+        } else {
+            cb(null, false)
+        }
     }
 })
 
-const fileFilter = (req, file, cb) => {
-    if (!(file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg')) {
-        cb(null, true)
-    } else {
-        cb(null, false)
-    }
-}
-
-const upload = multer({ storage: storage, fileFilter: fileFilter });
-
-module.exports = { upload };

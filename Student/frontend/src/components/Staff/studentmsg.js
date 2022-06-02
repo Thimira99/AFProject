@@ -6,8 +6,10 @@ import { IoMdSend } from "react-icons/io";
 import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
 import '../Staff/StaffHome/Home.module.css';
+
 import ScrollableFeed from 'react-scrollable-feed'
 import Typings from '../Staff/staffMsg.module.css';
+
 
 
 const Typing = () => (
@@ -289,10 +291,12 @@ class studentmsg extends Component {
 
 
 
+
     handleSearchArea = (e) => {
         const searchKey = e.currentTarget.value;
 
         axios.get("http://localhost:8000/api/staffRegister/get").then((res) => {
+
 
             if (res.data) {
                 this.filterData(res.data.data, searchKey);
@@ -562,6 +566,7 @@ class studentmsg extends Component {
     }
 
 
+
     getMessageTyping() {
 
         const data = {
@@ -589,6 +594,7 @@ class studentmsg extends Component {
         )
 
     }
+
 
 
 
@@ -765,6 +771,7 @@ class studentmsg extends Component {
 
 
 
+
                                                     <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "5px" }}>{muBobject.sennder == this.state.itnum && <span
                                                         style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.itnum && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
                                                         <span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.itnum ? muBobject.msg : ""}
@@ -778,9 +785,14 @@ class studentmsg extends Component {
 
 
 
+
                                             }
                                         </ScrollableFeed>
                                         {this.state.typingUser == "true" && <div><span style={{ "float": "left", "fontWeight": "600", "WebkitTextStroke": "thin" }}>{this.state.selectStafftName}</span><div style={{ "float": "left", "marginLeft": "25px", "marginTop": "8px" }}><Typing /></div></div>}
+
+
+                                            }
+                                        </ScrollableFeed>
 
 
                                     </div>
