@@ -47,7 +47,7 @@ const [logStatus, setLoginStatus] = useState(false);
          <div className='navbar-container'>
             
          <Link to="/home" className="navbar-logo" onClick = {closeMobileMenu}>
-            <img  style={{width:60}} class="" src={logo} alt="" />  ADMIN PANEL</Link>
+            <img  style={{width:50}} class="" src={logo} alt=""/>  ADMIN PANEL</Link>
 
             
               
@@ -55,7 +55,7 @@ const [logStatus, setLoginStatus] = useState(false);
             </div>
 
             <ul className ={click ? 'nav-menu active' : 'nav-menu'}>
-
+{/* 
              
             <li className='nav-item'>
                 <Link to='/' className='nav-links' onClick={closeMobileMenu}>
@@ -66,7 +66,7 @@ const [logStatus, setLoginStatus] = useState(false);
                 <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                 My profile
                 </Link>
-            </li>
+            </li> */}
 
             {/* {logStatus ?
                                 <><li className='nav-item'><p  className='nav-links' style={{ "color": "#0d6efd" }}>{loguser}</p></li>

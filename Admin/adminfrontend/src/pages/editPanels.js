@@ -13,7 +13,7 @@ export default function editPanel() {
     const [name2,setName2] = useState('');
     const [name3,setName3] = useState('');
     const [name4,setName4] = useState('');
-
+     const [staffId,setSatffId] = useState([]);
     //const [memberName,setMemberrName]=useState('')
     const [panelId, setPanelId] = useState('');
     const [panel, setPanel] = useState({});
@@ -53,10 +53,21 @@ export default function editPanel() {
                 }).catch(err => {
                     alert(err.message);
                 })
-
                 
         }
+        function getSinglePanel(){
+            axios
+            .get("http://localhost:8000/api/admin/roles/get")
+            .then((res) => {
+                setName1(res.data.existingRoles),
+                console.log("res",res.data.existingRoles)
+            })
+            .catch((err) => {
+                alert(err.message);
+            });
+        }
         getPanel();
+        getSinglePanel()
 
     }, [id])
 
@@ -106,7 +117,15 @@ export default function editPanel() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label className='formLabel'>MEMBER NAME(s)</Form.Label>
+            <Form.Label className='formLabel'>MEMBER NAME(s)</Form.Label>
+            <select id="name1"  name="name1" onChange={(e)=>setName1(e.target.value)} value={name1}
+                    className="btn btn-secondary dropdown-toggle">
+                    <option selected> Choose...</option>
+                    {staffId.map(obj=>
+                      <option>{obj.stfStaffId}</option>
+                    )}
+            </select>
+                
                 
                 <Form.Control type="text" value={name1} placeholder="Enter name"
                     onChange={(e) => {

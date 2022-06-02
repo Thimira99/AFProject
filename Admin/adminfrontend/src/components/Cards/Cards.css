@@ -16,7 +16,7 @@
     max-width: 1120px;
     width: 90%;
     margin: 0 auto;
-    background-color: rgb(97, 197, 228);
+    background-color: rgba(170, 174, 175, 0.5);
   }
   
   .cards__wrapper {
