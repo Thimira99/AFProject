@@ -29,6 +29,9 @@ import MarkCatA from "./pages/MarkCatA";
 import MarkCatB from "./pages/MarkCatB";
 import MarkCatC from "./pages/MarkCatC";
 import MarkCatD from "./pages/MarkCatD";
+import Template from "./pages/Template";
+import AddUser from "./pages/AddUser";
+import EditUser from "./pages/EditUser";
 
 function App() {
   
@@ -69,6 +72,11 @@ function App() {
           <Route path='/markingCatB' exact component = {MarkCatB}/>
           <Route path='/markingCatC' exact component = {MarkCatC}/>
           <Route path='/markingCatD' exact component = {MarkCatD}/>
+
+          <Route path="/homeUser" exact component={Template} />
+          <Route path="/add" exact component={AddUser} />
+          <Route path="/edit/:id" exact component={EditUser} />
+
           <Redirect to='/login'/>
         </Switch>
 
