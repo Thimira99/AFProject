@@ -34,26 +34,27 @@ function staffRegister() {
     const [loginStatus, settLoginStatus] = useState(false)
 
 
-    const [reserchFields, setreserchfields] = useState(['Artificial Intelligence',
-        ' Computational & Synthetic Biology',
-        'Computer Architecture',
-        'Computer Graphics, Vision, Animation, and Game Science',
-        'Computing for Development',
-        'Data Science',
-        'Data Management and Visualization',
-        'Human Computer Interaction',
-        'Machine Learning',
-        'Molecular Information Systems',
-        'Natural Language Processing',
-        'Programming Languages and Software Engineering',
-        'Robotics',
-        'Security and Privacy',
-        'Systems and Networking',
-        'Theory of Computation',
-        'Ubiquitous Computing',
-        ' Wireless and Sensor Systems',
-        'Cloud Computing']);
+    const [reserchFields, setreserchfields] = useState(['IT','CSNE','CS','SE']);
 
+        // const [reserchFields, setreserchfields] = useState(['Artificial Intelligence',
+        // ' Computational & Synthetic Biology',
+        // 'Computer Architecture',
+        // 'Computer Graphics, Vision, Animation, and Game Science',
+        // 'Computing for Development',
+        // 'Data Science',
+        // 'Data Management and Visualization',
+        // 'Human Computer Interaction',
+        // 'Machine Learning',
+        // 'Molecular Information Systems',
+        // 'Natural Language Processing',
+        // 'Programming Languages and Software Engineering',
+        // 'Robotics',
+        // 'Security and Privacy',
+        // 'Systems and Networking',
+        // 'Theory of Computation',
+        // 'Ubiquitous Computing',
+        // ' Wireless and Sensor Systems',
+        // 'Cloud Computing']);
 
 
     console.log(loginData)
@@ -196,8 +197,8 @@ function staffRegister() {
                             />
                             <select id="jobRole" name='stfJobRole' className={loginStyles.input} value={data.stfJobRole} onChange={handleChange}>
                                 <option selected="selected">Job Role</option>
-                                <option value="Superviosr">Superviosr </option>
-                                <option value="Co-Superviosr">Co-Superviosr</option>
+                                <option value="Superviosr">Supervisor </option>
+                                <option value="Co-Superviosr">Co-Supervisor</option>
 
                             </select>
 
