@@ -25,7 +25,7 @@ const EditTemplate = ({ match }) => {
       formData.append("image", data.image);
       formData.append("name", data.name);
 
-      const res = await fetch(`http://localhost:5000/template/${match.params.id}`, {
+      const res = await fetch(`http://localhost:8000/template/${match.params.id}`, {
         method: "PUT",
         body: formData,
       });
