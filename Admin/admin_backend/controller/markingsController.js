@@ -32,6 +32,66 @@ const getMarking =  async(req,res)=>{
     });
 }
 
+//Get marking category A
+const getMarkingcategoryA =  async(req,res)=>{
+    marking.find({ "category": "A" }).exec((err,markings)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingMarkings:markings
+        });
+    });
+}
+
+//Get marking category B
+const getMarkingcategoryB =  async(req,res)=>{
+    marking.find({ "category": "B" }).exec((err,markings)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingMarkings:markings
+        });
+    });
+}
+
+//Get marking category C
+const getMarkingcategoryC =  async(req,res)=>{
+    marking.find({ "category": "C" }).exec((err,markings)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingMarkings:markings
+        });
+    });
+}
+
+//Get marking category D
+const getMarkingcategoryD =  async(req,res)=>{
+    marking.find({ "category": "D" }).exec((err,markings)=>{
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
+        return res.status(200).json({
+            success:true,
+            existingMarkings:markings
+        });
+    });
+}
+
 //get a specific marking by id
 const getAMarking=async(req,res)=>{
     let markingId = req.params.id;
@@ -47,6 +107,7 @@ const getAMarking=async(req,res)=>{
     });
 
 }
+
 
 //update marking details
 const updateMarking = async(req,res)=>{
@@ -85,7 +146,12 @@ const deleteMarking = async(req,res)=>{
 module.exports = {
     postMarkings,
     getMarking,
+    getMarkingcategoryA,
+    getMarkingcategoryB,
+    getMarkingcategoryC,
+    getMarkingcategoryD,
     getAMarking,
     updateMarking,
     deleteMarking
+    // getMarkingCatA
 }

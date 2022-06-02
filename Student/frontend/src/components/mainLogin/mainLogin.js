@@ -1,4 +1,4 @@
-import React, { Component,useEffect } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom'
 import login from './mainlogin.module.css';
 import axios from 'axios';
@@ -28,7 +28,7 @@ function MainLogin() {
         e.preventDefault();
 
 
-// Login if a user is Staff
+        // Login if a user is Staff
         var itnumber = (data.email).substring(0, 2);
         if (itnumber == 'ST') {
 
@@ -36,51 +36,51 @@ function MainLogin() {
                 const url = 'http://localhost:8000/api/staffRegister/login';
                 axios.post(url, data).then((res) => {
 
-                   console.log('xxxxx',res)
+                    console.log('xxxxx', res)
 
-                   if(res.data.message === "Your Account is inactive please contact your administartor !"){
-                    alert(res.data.message)
-                    return -1
-                   }
-                  
+                    if (res.data.message === "Your Account is inactive please contact your administartor !") {
+                        alert(res.data.message)
+                        return -1
+                    }
+
                     if (res.data.message === "Not registered!") {
-                       
-                         alert(res.data.message)
-                    
-                    } else if(res.data.message === "Invalid email or password!") {
+
                         alert(res.data.message)
 
-                    }else{
+                    } else if (res.data.message === "Invalid email or password!") {
+                        alert(res.data.message)
 
-                        sessionStorage.setItem('LogUserId',res.data.data.stfStaffId);
-                        sessionStorage.setItem('LogUserName',res.data.data.stfName);
+                    } else {
+
+                        sessionStorage.setItem('LogUserId', res.data.data.stfStaffId);
+                        sessionStorage.setItem('LogUserName', res.data.data.stfName);
                         const logType = 'st'
-                        sessionStorage.setItem('LogUserType',logType);
-                         window.location = ('/Staffdashboard');
+                        sessionStorage.setItem('LogUserType', logType);
+                        window.location = ('/Staffdashboard');
 
                     }
 
                 }).catch((error) => {
-                   
+
                     alert("Staff Number is not valide")
 
-                    
-                    console.log("er",error);
+
+                    console.log("er", error);
                 });
-    
+
             } catch (error) {
-    
+
             }
 
-        }else{
+        } else {
 
             try {
                 const url = 'http://localhost:8000/api/auth/post';
                 axios.post(url, data).then((res) => {
-    
+
                     if (res.data.message === "Logged in successfully") {
-    
-                        window.location = ('/dashboard');
+
+                        window.location = ('/home');
                     } else if (res.data.message === "Invalid Password") {
                         alert(res.data.message)
                     } else if (res.data.message === "Invalid Email") {
@@ -93,31 +93,31 @@ function MainLogin() {
                     localStorage.setItem("studentId", res.data.student.studentId);
                     localStorage.setItem("email", res.data.student.email);
                     localStorage.setItem("gender", res.data.student.gender);
-    
+
                 }).catch((error) => {
                     console.log(error);
                 });
-    
+
             } catch (error) {
-    
+
             }
 
         }
 
-     
+
 
     }
 
 
     console.log("ID" + studentid)
 
-    
+
     useEffect(() => {
 
-        sessionStorage.setItem('LogUserId',"null");
-        sessionStorage.setItem('LogUserName',"null");
-        
-        sessionStorage.setItem('LogUserType',"null");
+        sessionStorage.setItem('LogUserId', "null");
+        sessionStorage.setItem('LogUserName', "null");
+
+        sessionStorage.setItem('LogUserType', "null");
 
 
     });

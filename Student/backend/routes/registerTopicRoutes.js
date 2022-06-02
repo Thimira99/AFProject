@@ -3,6 +3,7 @@ const registerTopic = require("../models/registerResearchTopic");
 
 router.route("/registerTopic").post((req, res) => {
     const { groupName, researchField, researchTopic, supervisor } = req.body;
+    let nnName = '';
 
     const newTopicReg = new registerTopic({
         groupName,
@@ -11,11 +12,22 @@ router.route("/registerTopic").post((req, res) => {
         supervisor
     });
 
-    newTopicReg.save().then(() => {
-        res.status(200).send({ status: "Student Group Updated", topicReg: newTopicReg });
-    }).catch((error) => {
-        console.log(error);
+    registerTopic.findOne({ groupName: groupName }).then((group) => {
+        if (!(group)) {
+            newTopicReg.save().then(() => {
+                res.status(200).send({ status: "Student Group Updated", topicReg: newTopicReg });
+            }).catch((error) => {
+                console.log(error);
+            })
+        } else {
+            res.send({ status: "Student Group Already exist" });
+        }
+    }).catch((err) => {
+        console.log(err);
     })
+
+
+
 })
 
 
@@ -30,13 +42,23 @@ router.route("/registerTopic").post((req, res) => {
 //     })
 // })
 
-// router.route("/registerTopic").get((req, res) => {
-//     registerTopic.find().then((group) => {
-//         res.json(group)
-//     }).catch((error) => {
-//         console.log(error)
-//     })
-// })
+router.route("/registerTopic/:id").get((req, res) => {
+    let id = req.params.id;
+    registerTopic.findById(id).then((group) => {
+        res.json(group)
+    }).catch((error) => {
+        console.log(error)
+    })
+})
+
+
+router.route("/registerTopic").get((req, res) => {
+    registerTopic.find().then((group) => {
+        res.json(group)
+    }).catch((error) => {
+        console.log(error)
+    })
+})
 
 
 // router.route("/update/:id").put((req, res) => {

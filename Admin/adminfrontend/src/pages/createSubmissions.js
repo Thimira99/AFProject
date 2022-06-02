@@ -203,7 +203,7 @@ if(!type){
 
           <div className='form-group' style={{marginBottom:'15px'}}>
             <label style={{marginBottom:'5px'}}>DUE DATE</label>
-            <input type="text" className="form-control" name="dueDate" placeholder="Enter due date" value={this.state.dueDate} onChange={this.handleInputChange}/>
+            <input type="date"  className="form-control" name="dueDate" placeholder="Enter due date" value={this.state.dueDate} onChange={this.handleInputChange}/>
             {Object.keys(errors1).map((key)=>{
               return <div style={{color:'red'}} key={key}>{errors1[key]}</div> })}
           </div>
@@ -211,7 +211,7 @@ if(!type){
           <div className='form-group' style={{marginBottom:'15px'}}>
             <label style={{marginBottom:'5px'}}>DUE TIME</label>
             <input 
-              type="text"
+            type="time"
               className="form-control"
               name="dueTime"
               placeholder="Enter Due time"

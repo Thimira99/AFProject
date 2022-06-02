@@ -3,6 +3,7 @@ import AdminNavbar from '../components/AdminNavbar/adminNavbar';
 import Footer from '../components/Footer/Footer';
 import axios from 'axios'
 import { Button, Dropdown } from 'react-bootstrap';
+import "./ToggleSwitch.css"; 
 
 export default class viewRoles extends Component {
 
@@ -10,15 +11,22 @@ export default class viewRoles extends Component {
         super(props);
 
         this.state={
-            roles:[]
+            roles:[],
+            isToggled:true
         };
+        this.onToggle = this.onToggle.bind(this)
     }
 
     componentDidMount(){
         this.retrieveRoles();
     }
 
-
+    onToggle=(data)=>{
+      console.log("toogle1",data)
+      const value=this.state.data ? false: true
+      this.setState({isToggled:value})
+      console.log("toggle",this.state.isToggled)
+    }
 
     retrieveRoles(){
         axios.get("http://localhost:8000/api/admin/roles/get").then(res=>{
@@ -48,6 +56,8 @@ export default class viewRoles extends Component {
       }
       console.log(data)
     }
+
+    
 
        //Search bar
   filterData(roles, searchKey) {
@@ -102,7 +112,7 @@ export default class viewRoles extends Component {
 
               }}
             >
-              All Roles
+              All Staff Members
             </h4>
      
 
@@ -164,7 +174,13 @@ export default class viewRoles extends Component {
                                 <td>{roles.stfName}</td>
                                 
                                 <td>
-                               {roles.stfUserActive}
+                               {/* {roles.stfUserActive} */}
+                                <label className="toggle-switch"> 
+                                  <input type="checkbox" checked={this.state.isToggled} onChange={()=>this.onToggle(roles.stfUserActive)} /> 
+                                  <span className="switch" /> </label>
+                              
+                                
+
                                 </td>
                                 <td>{roles.stfEmail}</td>
                                 

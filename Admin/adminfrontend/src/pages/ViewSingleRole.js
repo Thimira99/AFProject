@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import {Link } from "react-router-dom";
 
 const ViewSingleRole = props => {
     const [stfStaffId, setStaffId] = useState('')
@@ -38,39 +39,57 @@ const ViewSingleRole = props => {
         //     <h2>{stfJobRole}</h2>
         //     <h2>{stfPanellMember}</h2>  
         // </div>
-        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center">
+        <div className="container mt-4 mb-4 p-3 d-flex justify-content-center bg-secondary">
             <div className="card p-4">
                 <div class=" image d-flex flex-column justify-content-center align-items-center">
                     <button className="btn btn-secondary">
-                        <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+                        <img src="https://i.imgur.com/wvxPV9S.png" height="150" width="150" />
                     </button>
-                    <span class="name mt-3">Eleanor Pena
+                    <span class="name mt-3">{stfStaffId}
                     </span>
-                    <span class="idd">@eleanorpena
+                    <span class="idd">{stfName}
                     </span>
                     <div class="d-flex flex-row justify-content-center align-items-center gap-2">
-                        <span class="idd1">Oxc4c16a645_b21a
+                        <span class="idd1">{stfEmail}
                         </span>
                         <span>
                             <i class="fa fa-copy">
                             </i>
                         </span>
                     </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-2">
+                        <span class="idd1">{stfPhonenNmber}
+                        </span>
+                        <span>
+                            <i class="fa fa-copy">
+                            </i>
+                        </span>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-2">
+                        <span class="idd1">{stfJobRole}
+                        </span>
+                        <span>
+                            <i class="fa fa-copy">
+                            </i>
+                        </span>
+                    </div>
+                    
                     <div class="d-flex flex-row justify-content-center align-items-center mt-3">
-                        <span class="number">1069
-                            <span class="follow">Followers
+                        <span class="number">Panel Member :
                             </span>
+                            <span class="follow">: {stfPanellMember}
                         </span>
                     </div>
                     <div class=" d-flex mt-2">
-                        <button class="btn1 btn-dark">My Profile
+                        <button class="btn1 btn-dark">Staff Profile
                         </button>
                          
                     </div>
                     <div class=" d-flex mt-2">
-                         
-                        <button class="btn1 btn-info">Back to List
+                    <Link to="/listRoles">
+                        <button class="btn1 btn-primary">Back to List
                         </button>
+                        </Link>
                         
                     </div>
                 </div>
