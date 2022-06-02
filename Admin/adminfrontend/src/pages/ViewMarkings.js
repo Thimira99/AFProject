@@ -52,7 +52,7 @@ function ViewMarkings() {
                                   
                                 <div className='markings__container'> 
                                 <br></br>
-                                <h1> Marking Schemes</h1>
+                                <h1> MARKING SCHEMES</h1>
                                 <br></br>
                                    <ul>
                                     <Link to="/createMarking" 
@@ -97,7 +97,7 @@ function ViewMarkings() {
                     markings.map((marking, key) => 
                     
                         <div className='containerA' key={key}> 
-                            <h2><b>Marking Scheme:</b>  {marking.title}</h2>
+                            <h3><b>MARKING SCHEME:</b>  {marking.title}</h3>
                             <h5>CATEGORY: {marking.category}</h5>
                             <div className='containerB'>
                             <p>{marking.description}</p>
