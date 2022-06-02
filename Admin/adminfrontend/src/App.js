@@ -25,7 +25,13 @@ import assignStudentGroups from "./pages/assignStudentGroups";
 import assignGroups from "./pages/addGroups";
 import ListRoles from "./pages/ListRoles";
 import ViewSingleRole from "./pages/ViewSingleRole";
-
+import MarkCatA from "./pages/MarkCatA";
+import MarkCatB from "./pages/MarkCatB";
+import MarkCatC from "./pages/MarkCatC";
+import MarkCatD from "./pages/MarkCatD";
+import Template from "./pages/Template";
+import AddTemplate from "./pages/AddTemplate";
+import EditTemplate from "./pages/EditTemplate";
 
 function App() {
   
@@ -61,6 +67,16 @@ function App() {
 
           <Route path='/listRoles' exact component = {ListRoles}/>
           <Route path='/view/roles/:id' exact component = {ViewSingleRole}/>
+
+          <Route path='/markingCatA' exact component = {MarkCatA}/>
+          <Route path='/markingCatB' exact component = {MarkCatB}/>
+          <Route path='/markingCatC' exact component = {MarkCatC}/>
+          <Route path='/markingCatD' exact component = {MarkCatD}/>
+
+          <Route path="/viewTemplates" exact component={Template} />
+          <Route path="/template/add" exact component={AddTemplate} />
+          <Route path="/template/edit/:id" exact component={EditTemplate} />
+
           <Redirect to='/login'/>
         </Switch>
 

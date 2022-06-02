@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react';
 import {useHistory } from 'react-router-dom';
 import  "./login.css"
-import logo from "../Images/logo1.png"
+import logo from "../Images/logo11.png"
 
 const Login = () =>{
     const history = useHistory();
@@ -48,7 +48,8 @@ return (
         <div className="container">
             <div className="card"
                 style={{
-            backgroundImage: `url(${logo})`,
+            // backgroundImage: `url(${logo})`,
+            backgroundColor: "teal",
             backgroundAttachment: "fixed",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
@@ -60,7 +61,18 @@ return (
                         <br/>
                         <h1 className='h1'>Login To Your Account</h1>
                     </div>
-                    <br /><br />
+                    <div className="cardE"
+                            style={{
+                        backgroundImage: `url(${logo})`,
+                        // backgroundColor: "black",
+                        backgroundAttachment: "fixed",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center",
+                        backgroundSize: "300px 100px",
+                        color: "#fff",
+                    }}>
+                    </div>
+                    <br></br>   
                     <div>
                         <form method="POST" action="/home" autoComplete="off" className='login-wrapper'>
                             {/* <div class="flex flex-col mb-2">*/}

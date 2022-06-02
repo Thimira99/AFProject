@@ -52,15 +52,43 @@ function ViewMarkings() {
                                   
                                 <div className='markings__container'> 
                                 <br></br>
-                                <h1> Marking Schemes</h1>
+                                <h1> MARKING SCHEMES</h1>
                                 <br></br>
-                                     
+                                   <ul>
                                     <Link to="/createMarking" 
                                      >
                                          <button className="buttonAdd"> 
                                         Create New Marking Scheme
                                         </button>
                                     </Link>
+                                    </ul>
+                                    <ul>
+                                    <Link to="/markingCatA" 
+                                     >
+                                         <button className="buttonAdd"> 
+                                          A 
+                                        </button>
+                                    </Link>
+                                    <Link to="/markingCatB" 
+                                     >
+                                         <button className="buttonAdd"> 
+                                          B 
+                                        </button>
+                                    </Link>
+                                    <Link to="/markingCatC" 
+                                     >
+                                         <button className="buttonAdd"> 
+                                          C
+                                        </button>
+                                    </Link>
+                                    <Link to="/markingCatD" 
+                                     >
+                                         <button className="buttonAdd"> 
+                                          D 
+                                        </button>
+                                    </Link>
+
+                                    </ul>
                                      
                                 </div>
                                  
@@ -69,7 +97,7 @@ function ViewMarkings() {
                     markings.map((marking, key) => 
                     
                         <div className='containerA' key={key}> 
-                            <h2><b>Marking Scheme:</b>  {marking.title}</h2>
+                            <h3><b>MARKING SCHEME:</b>  {marking.title}</h3>
                             <h5>CATEGORY: {marking.category}</h5>
                             <div className='containerB'>
                             <p>{marking.description}</p>

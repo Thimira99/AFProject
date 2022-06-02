@@ -6,8 +6,9 @@ import { IoMdSend } from "react-icons/io";
 import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
 import '../Staff/StaffHome/Home.module.css';
+import ScrollableFeed from 'react-scrollable-feed';
 import Typings from '../Staff/staffMsg.module.css';
-import ScrollableFeed from 'react-scrollable-feed'
+
 
 
 
@@ -799,9 +800,18 @@ class staffMsg extends Component {
 
 
                                                     </>
+
+                                                ))
+
+
+
+
+
+
                                                 )
 
                                                 )
+
 
 
 

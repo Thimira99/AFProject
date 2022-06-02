@@ -10,6 +10,18 @@
     padding-right: 2%;
 }
 
+.containerTemp {
+  display: flex;
+  flex-flow: column;
+  /* align-items: center; */
+  max-width: 1120px;
+  width: 70%;
+  margin: 0 auto;
+  /* background-color: rgb(108, 144, 190); */
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
 .dateBox {
     /* content: attr(data-category); */
     /* position: absolute; */
@@ -39,7 +51,7 @@
     max-width: 1120px;
     width: 90%;
     margin: 0 auto;
-    background-color: rgb(90, 47, 95);
+    background-color: #1f4d92;
   }
 
   h1 {
