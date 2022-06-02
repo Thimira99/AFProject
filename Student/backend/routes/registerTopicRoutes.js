@@ -3,6 +3,7 @@ const registerTopic = require("../models/registerResearchTopic");
 
 router.route("/registerTopic").post((req, res) => {
     const { groupName, researchField, researchTopic, supervisor } = req.body;
+    let nnName = '';
 
     const newTopicReg = new registerTopic({
         groupName,
@@ -11,17 +12,20 @@ router.route("/registerTopic").post((req, res) => {
         supervisor
     });
 
-    const name = registerTopic.findOne({ groupName: groupName }) ? "true" : "false";
-    console.log("Name" + name + groupName)
-    if (!name) {
-        newTopicReg.save().then(() => {
-            res.status(200).send({ status: "Student Group Updated", topicReg: newTopicReg });
-        }).catch((error) => {
-            console.log(error);
-        })
-    } else {
-        res.send({ status: "Student Group Already exist" });
-    }
+    registerTopic.findOne({ groupName: groupName }).then((group) => {
+        if (!(group)) {
+            newTopicReg.save().then(() => {
+                res.status(200).send({ status: "Student Group Updated", topicReg: newTopicReg });
+            }).catch((error) => {
+                console.log(error);
+            })
+        } else {
+            res.send({ status: "Student Group Already exist" });
+        }
+    }).catch((err) => {
+        console.log(err);
+    })
+
 
 
 })

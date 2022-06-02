@@ -6,7 +6,7 @@ import { IoMdSend } from "react-icons/io";
 import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
 import '../Staff/StaffHome/Home.module.css';
-import ScrollableFeed from 'react-scrollable-feed'
+import ScrollableFeed from 'react-scrollable-feed';
 
 
 
@@ -762,18 +762,18 @@ class staffMsg extends Component {
                                                     <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "5px" }}>{muBobject.sennder == this.state.logUserId && <span
                                                         style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.logUserId && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div><span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.logUserId ? muBobject.msg : ""}
                                                         </span>
-                                                    </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px","marginRight":"10px" }}>{muBobject.sennder == this.state.logUserId && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.logUserId && <BsCheck />}</div><h5
-                                                        style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto","marginRight":"10px" }}>{muBobject.sennder != this.state.logUserId && <span
-                                                            style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5","marginRight":"10px" }}>{muBobject.sennder != this.state.logUserId && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div><span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right" }} >{muBobject.sennder != this.state.logUserId && muBobject.msg}</span></span>}</h5>
-                                                            
-                                                            
-                                                            </>
+                                                    </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px", "marginRight": "10px" }}>{muBobject.sennder == this.state.logUserId && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.logUserId && <BsCheck />}</div><h5
+                                                        style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto", "marginRight": "10px" }}>{muBobject.sennder != this.state.logUserId && <span
+                                                            style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5", "marginRight": "10px" }}>{muBobject.sennder != this.state.logUserId && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.logUserId && this.dateConverter(muBobject.createdAt)}</div><span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right" }} >{muBobject.sennder != this.state.logUserId && muBobject.msg}</span></span>}</h5>
+
+
+                                                    </>
                                                 ))
 
-                                               
 
 
-                                                  
+
+
                                             }
                                             <><h1>cccccccc</h1></>
                                         </ScrollableFeed>

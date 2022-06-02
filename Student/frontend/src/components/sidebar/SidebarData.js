@@ -32,11 +32,11 @@ export const SidebarData = [
     //     icon: <BsStickiesFill />,
     //     Link: "/topic"
     // },
-    {
-        title: "Supervisor/Co-supervisor",
-        icon: <BsPersonLinesFill />,
-        Link: "/sCo"
-    },
+    // {
+    //     title: "Supervisor/Co-supervisor",
+    //     icon: <BsPersonLinesFill />,
+    //     Link: "/sCo"
+    // },
     {
         title: "Templates",
         icon: <BsArrowDownCircleFill />,

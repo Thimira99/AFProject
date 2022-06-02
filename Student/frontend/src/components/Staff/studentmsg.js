@@ -6,13 +6,13 @@ import { IoMdSend } from "react-icons/io";
 import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
 import '../Staff/StaffHome/Home.module.css';
-import ScrollableFeed from 'react-scrollable-feed'
+import ScrollableFeed from 'react-scrollable-feed';
 
 
 
 class studentmsg extends Component {
 
-    
+
     constructor(props) {
         super(props)
 
@@ -213,29 +213,29 @@ class studentmsg extends Component {
 
     filterData(staff, searchKey) {
         const result = staff.filter(
-          (item) =>
-            item.stfStaffId.toLowerCase().includes(searchKey) || //toLowerCase() helps to filter the data using the lowercase letters.
-            item.stfStaffId.toUpperCase().includes(searchKey) || //toUpperCase() helps to filter the data using the Uppercase letters.
-            item.stfName.toLowerCase().includes(searchKey) ||
-            item.stfName.toUpperCase().includes(searchKey)
+            (item) =>
+                item.stfStaffId.toLowerCase().includes(searchKey) || //toLowerCase() helps to filter the data using the lowercase letters.
+                item.stfStaffId.toUpperCase().includes(searchKey) || //toUpperCase() helps to filter the data using the Uppercase letters.
+                item.stfName.toLowerCase().includes(searchKey) ||
+                item.stfName.toUpperCase().includes(searchKey)
         );
-    
+
         this.setState({ allStaff: result });
-      }
+    }
 
 
-      
-    handleSearchArea = (e) => { 
+
+    handleSearchArea = (e) => {
         const searchKey = e.currentTarget.value;
-        console.log("change 2",searchKey)
+        console.log("change 2", searchKey)
 
         axios.get("http://localhost:8000/api/staffRegister/get").then((res) => {
-            console.log("change",res.data.data)
-          if (res.data) {
-            this.filterData(res.data.data, searchKey);
-          }
+            console.log("change", res.data.data)
+            if (res.data) {
+                this.filterData(res.data.data, searchKey);
+            }
         });
-      };
+    };
 
 
 
@@ -504,11 +504,11 @@ class studentmsg extends Component {
 
 
     }
-   
 
-    
+
+
     componentDidMount() {
-        
+
 
         this.getAllStaffMemebers();
         const itnum = localStorage.getItem('studentId');
@@ -578,9 +578,9 @@ class studentmsg extends Component {
                                             </Col>
 
                                             <Col></Col>
-                                            
+
                                             <Col>
-                                            {this.state.selectAllStatus && <div>
+                                                {this.state.selectAllStatus && <div>
                                                     <input
                                                         className="form-control"
                                                         type="search"
@@ -597,7 +597,7 @@ class studentmsg extends Component {
                                                         }}
                                                     ></input>
                                                 </div>}
-                                                </Col>
+                                            </Col>
 
                                         </Row>
 
@@ -681,31 +681,31 @@ class studentmsg extends Component {
 
                                     <div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "890px", "position": "absolute", "marginLeft": "400px", "height": "40px" }}><span style={{ "fontWeight": "bolder", "WebkitTextStroke": "thin" }} >{this.state.selectStafftName}{" "}&nbsp;{" "}{this.state.staffId}</span></div>
 
-                                    <div style={{ "minHeight": "20vh", "width": "880px", 'height': '485px',  'display': 'block', "marginLeft": "399px", "backgroundColor": "rgb(255 255 255)", "marginTop": "50px" }} className="container " >
-                                    <ScrollableFeed>
-                                        {
-                                            this.state.msgData &&
+                                    <div style={{ "minHeight": "20vh", "width": "880px", 'height': '485px', 'display': 'block', "marginLeft": "399px", "backgroundColor": "rgb(255 255 255)", "marginTop": "50px" }} className="container " >
+                                        <ScrollableFeed>
+                                            {
+                                                this.state.msgData &&
 
-                                            this.state.msgData.map(muBobject => (
+                                                this.state.msgData.map(muBobject => (
 
-                                                console.log("vbb", muBobject),
-
-
-                                                <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "5px" }}>{muBobject.sennder == this.state.itnum && <span
-                                                    style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.itnum && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
-                                                    <span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.itnum ? muBobject.msg : ""}
-                                                    </span>
-                                                </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px" ,"marginRight":"10px" }}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.itnum && <BsCheck />}</div><h5
-                                                    style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}>{muBobject.sennder != this.state.itnum && <span
-                                                        style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5","marginRight":"10px" }}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
-                                                        <span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right" , "marginRight":"10px" }} >{muBobject.sennder != this.state.itnum && muBobject.msg}</span></span>}</h5><div ref={this.messagesEndRef} /></>
-                                                        
-                                            ))
+                                                    console.log("vbb", muBobject),
 
 
+                                                    <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "5px" }}>{muBobject.sennder == this.state.itnum && <span
+                                                        style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.itnum && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
+                                                        <span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.itnum ? muBobject.msg : ""}
+                                                        </span>
+                                                    </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px", "marginRight": "10px" }}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.itnum && <BsCheck />}</div><h5
+                                                        style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}>{muBobject.sennder != this.state.itnum && <span
+                                                            style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5", "marginRight": "10px" }}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
+                                                            <span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right", "marginRight": "10px" }} >{muBobject.sennder != this.state.itnum && muBobject.msg}</span></span>}</h5><div ref={this.messagesEndRef} /></>
 
-                                        }
-                                     </ScrollableFeed>
+                                                ))
+
+
+
+                                            }
+                                        </ScrollableFeed>
 
                                     </div>
 

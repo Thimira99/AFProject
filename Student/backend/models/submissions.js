@@ -1,18 +1,17 @@
 const mongoose = require('mongoose')
 
 const submissionSchema = new mongoose.Schema({
-
-    fileName: {
+    groupName: {
         type: String,
         required: true,
         trim: true
     },
-    fileType: {
+    avatar: {
         type: String,
         required: true,
         trim: true
     },
-    fileSize: {
+    cloudinary_id: {
         type: String,
         required: true,
         trim: true
