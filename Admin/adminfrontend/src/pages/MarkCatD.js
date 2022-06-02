@@ -9,13 +9,13 @@ import Footer from '../components/Footer/Footer';
 
 
 toast.configure()
-function MarkCatA() {
+function MarkCatD() {
     const [markings, setMarkings] = useState([])
 
 
     useEffect(() =>{
         
-        axios.get('http://localhost:8000/api/admin/marking/getcategoryA')
+        axios.get('http://localhost:8000/api/admin/marking/getcategoryD')
             .then(res => {
                 console.log("Ishani", res)  
                 setMarkings(res.data.existingMarkings) 
@@ -88,6 +88,6 @@ function MarkCatA() {
 } 
 
 
-export default MarkCatA;
+export default MarkCatD;
 
  

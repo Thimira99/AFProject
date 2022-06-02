@@ -15,6 +15,8 @@ app.use(cors());
 //app.use("/api/auth",auth);
 app.use("/api/admin", admin);
 
+// Template Route
+app.use("/template", require("./routes/template"));
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
@@ -25,4 +27,6 @@ app.listen(port, () => {
 // const port = process.env.PORT || 8001;
 // app.listen(port, () => {
 //     console.log(`Listening on port ${port}`)
+
 // });
+

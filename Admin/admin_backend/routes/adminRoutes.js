@@ -12,6 +12,7 @@ const { getRoles, createPanel, getPanels, updatePanel, getASpecificPanel, delete
 
 
 
+
 const { postMarkings, getMarking, getMarkingcategoryA, getMarkingcategoryB, getMarkingcategoryC, getMarkingcategoryD, getAMarking, updateMarking, deleteMarking } = require('../controller/markingsController')
 const { getGroups, postGroups, getAssignedGroup, getASpecificGroup } = require('../controller/studentController')
 

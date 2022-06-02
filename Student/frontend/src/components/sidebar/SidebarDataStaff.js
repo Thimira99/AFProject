@@ -7,49 +7,49 @@ import { BsStickiesFill } from "react-icons/bs";
 import { BsPersonLinesFill } from "react-icons/bs";
 import { BsArrowDownCircleFill } from "react-icons/bs";
 import { BsFileEarmarkArrowUpFill } from "react-icons/bs";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsPersonCircle ,BsMessenger } from "react-icons/bs";
 
 
 
 export const SidebarDataStaff = [
     {
-        title: "Homeaa",
+        title: "Dashboard",
         icon: <BsHouseFill />,
-        Link: "/home"
+        Link: "/staffDashBoard"
     },
     {
-        title: "Create Group",
+        title: "Student Groups",
         icon: <BsPeopleFill />,
-        Link: "/group"
+        Link: "/studentGroup"
     },
     {
         title: "Research Topic",
         icon: <BsStickiesFill />,
         Link: "/topic"
     },
+    // {
+    //     title: "Supervisor/Co-supervisor",
+    //     icon: <BsPersonLinesFill />,
+    //     Link: "/sCo"
+    // },
+    // {
+    //     title: "Templates",
+    //     icon: <BsArrowDownCircleFill />,
+    //     Link: "/template"
+    // },
     {
-        title: "Supervisor/Co-supervisor",
-        icon: <BsPersonLinesFill />,
-        Link: "/sCo"
-    },
-    {
-        title: "Templates",
-        icon: <BsArrowDownCircleFill />,
-        Link: "/template"
-    },
-    {
-        title: "Submittion",
+        title: "Panel Member",
         icon: <BsFileEarmarkArrowUpFill />,
-        Link: "/submit"
+        Link: "/staffPanel"
     },
     {
-        title: "My Profile",
-        icon: <BsPersonCircle />,
+        title: "Chat",
+        icon: <BsMessenger />,
         Link: "/staffMsg"
     },
     {
-        title: "student",
+        title: "Profile",
         icon: <BsPersonCircle />,
-        Link: "/student"
+        Link: "/staffProfile"
     }
 ]

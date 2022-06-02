@@ -69,19 +69,19 @@ function ViewMarkings() {
                                           A 
                                         </button>
                                     </Link>
-                                    <Link to="/createMarking" 
+                                    <Link to="/markingCatB" 
                                      >
                                          <button className="buttonAdd"> 
                                           B 
                                         </button>
                                     </Link>
-                                    <Link to="/createMarking" 
+                                    <Link to="/markingCatC" 
                                      >
                                          <button className="buttonAdd"> 
                                           C
                                         </button>
                                     </Link>
-                                    <Link to="/createMarking" 
+                                    <Link to="/markingCatD" 
                                      >
                                          <button className="buttonAdd"> 
                                           D 

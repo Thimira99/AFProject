@@ -23,7 +23,14 @@ import staffHome from "./components/Staff/StaffHome/staffHome";
 import staffMsg from "./components/Staff/staffMsg";
 import studentmsg from "./components/Staff/studentmsg";
 import ResearchTopic from "./components/ResearchTopic/researchTopic";
+
 import UploadSubmittion from "./components/UploadFile/editUpload";
+
+
+import staffProfile from "./components/Staff/profile/staffProfile";
+import staffPanel from "./components/Staff/staffPanelMember/staffPanel";
+import studentsGroups from "./components/Staff/studentGroups/studentsGroups";
+import staffDashboard from "./components/Staff/staffDashboard/staffDashboard";
 
 
 
@@ -56,7 +63,10 @@ function App() {
           <Route exact path='/Staffdashboard' component={staffHome} />
           <Route exact path='/loginRegister' component={staffRegister} />
           <Route exact path='/staffMsg' component={staffMsg} />
-          <Route exact path='/student' component={studentmsg} />
+          <Route exact path='/staffProfile' component={staffProfile} />
+          <Route exact path='/staffPanel' component={staffPanel} />
+          <Route exact path='/studentGroup' component={studentsGroups} />
+          <Route exact path='/staffDashBoard' component={staffDashboard} />
 
 
 
