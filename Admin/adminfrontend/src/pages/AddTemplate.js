@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from 'react';
+// import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
 
-const EditUser = ({ match }) => {
-  console.log(match);
+const AddTemplate = () => {
   const history = useHistory();
   const [data, setData] = useState({
     name: "",
     image: "",
   });
-  useEffect(() => {
-    fetch(`http://localhost:8000/template/${match.params.id}`)
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
-
   const handleChange = (name) => (e) => {
     const value = name === "image" ? e.target.files[0] : e.target.value;
     setData({ ...data, [name]: value });
   };
-
   const handleSubmit = async () => {
     try {
       let formData = new FormData();
       formData.append("image", data.image);
       formData.append("name", data.name);
 
-      const res = await fetch(`http://localhost:5000/template/${match.params.id}`, {
-        method: "PUT",
+      const res = await fetch(`http://localhost:8000/template`, {
+        method: "POST",
         body: formData,
       });
       if (res.ok) {
@@ -43,6 +36,7 @@ const EditUser = ({ match }) => {
       <div className="mb-3">
         <input
           className="form-control"
+          placeholder="Enter name"
           type="text"
           name="name"
           value={data.name}
@@ -60,11 +54,11 @@ const EditUser = ({ match }) => {
       </div>
       <div className="text-center">
         <button className="btn btn-primary" onClick={handleSubmit}>
-          Update
+          Submit
         </button>
       </div>
     </div>
   );
 };
 
-export default EditUser;
+export default AddTemplate;

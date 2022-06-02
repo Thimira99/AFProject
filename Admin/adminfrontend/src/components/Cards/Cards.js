@@ -59,7 +59,7 @@ function Cards() {
               src={doc}
               text='Upload document/presentation templates'
               label='Document/Presentation Templates'
-              path='/'
+              path='/viewTemplates'
             />
             <CardItem
               src={roles}

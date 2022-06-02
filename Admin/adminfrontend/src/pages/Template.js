@@ -27,6 +27,13 @@ const Template = () => {
     }
   };
   return (
+    <div> 
+    <Link to="/template/add" 
+    >
+        <button className="buttonAdd"> 
+         Upload Templates 
+       </button>
+   </Link>
     <div className="row">
       {templates?.map((template) => (
         <div className="col-md-3 card me-3 mt-2 p-0" key={template._id}>
@@ -34,7 +41,7 @@ const Template = () => {
           <div className="p-2">
             <h3>{template.name}</h3>
             <div className="d-flex justify-content-between align-items-center">
-              <Link to={`/edit/${template._id}`} style={{ textDecoration: "none" }}>
+              <Link to={`/template/edit/${template._id}`} style={{ textDecoration: "none" }}>
                 Edit
               </Link>
               <button
@@ -48,6 +55,7 @@ const Template = () => {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };
