@@ -18,6 +18,9 @@ router.route("/registerTopic").post((req, res) => {
     })
 })
 
+
+
+
 // router.route("/registerTopic/:id").get((req, res) => {
 //     let id = req.params.id;
 //     registerTopic.findById(id).then((group) => {
@@ -69,4 +72,5 @@ router.route("/registerTopic").post((req, res) => {
 //         console.log(error);
 //     })
 // })
+
 module.exports = router;

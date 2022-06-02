@@ -11,6 +11,7 @@ const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/ma
 const { getHistoryMsgByName , postHistoryMesage , getHistoryMsgBySennder} = require('../Controller/msgHistoryController')
 const { getStudentDetails} = require('../Controller/studentMsgController')
 const { postTypnigMesage , getTypingStatus , updateByTypnigMsg , getAllobjects} = require('../Controller/MessageTypngConroller')
+const { getOnereserchbySupervisors , getOnereserchbySupervisorsPending} = require('../Controller/reserchTopicsController')
 
 
 
@@ -50,6 +51,11 @@ router.post("/msgTyping/post",postTypnigMesage);
 router.post("/msgTyping/get",getTypingStatus);
 router.post("/msgTyping/update",updateByTypnigMsg);
 router.get("/msgTyping/",getAllobjects);
+
+
+/* reserch topics */
+router.post("/reserchTpoic/getbySup",getOnereserchbySupervisors);
+// router.post("/reserchTpoic/getbySup/name",getOnereserchbySupervisorsPending);
 
 
 module.exports = router;

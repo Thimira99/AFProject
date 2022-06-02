@@ -45,6 +45,7 @@ function App() {
           <Route exact path='/profile' component={Profile} />
           <Route exact path='/viewGroups' component={ViewGroup} />
           <Route exact path='/update' component={UpdateStudent} />
+          <Route exact path='/studentmsg' component={studentmsg} />
 
 
 
