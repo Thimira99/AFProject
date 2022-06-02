@@ -104,15 +104,16 @@ formValidation = () =>{
         <>
         <AdminNavbar/>
       <div className='container'>
-      <div style={{width:'100%',borderRadius:'0px',backgroundColor:'rgba(54, 110, 184,0.3)'}}>
+      <div className = 'card' style={{marginLeft:'120px', background: "#D3D3D3",height:'auto',width:'600px',marginRight:'100px'}}>
       <div className='col-md-8 mt-4 mx-auto'>
       <br/>
-      <button className="btn btn-danger" style={{width:'160px'}}>
-        <a href="/getTopics" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>
+      
+
+        <h1 className='h3 mb-3 font-weight-normal' style={{color: 'rgba(6, 21, 117)'}}> ADD A TOPIC </h1>
+        <button className="btn btn-danger" style={{width:'160px',backgroundColor:'rgb(9, 38, 68 )'}}>
+        <a href="/getTopics" style={{textDecoration:'none',color:'white',fontWeight:'bold',}}>
           View Topics
         </a></button><br/><br/>
-
-        <h1 className='h3 mb-3 font-weight-normal' style={{color:'black'}}> ADD A TOPIC </h1>
         <form className='needs-validation' noValidate onSubmit={this.onSubmit}>
          
           <div className='form-group' style={{marginBottom:'15px'}}>

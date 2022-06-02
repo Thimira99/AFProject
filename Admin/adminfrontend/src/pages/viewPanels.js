@@ -75,17 +75,17 @@ export default class viewPanels extends Component {
                     // marginLeft: "0px",
                     width: "100%",
                     borderRadius: "0px",
-                    marginTop: "-20px",
+                    marginTop: "0px",
                     background: "#D3D3D3",
                     }}>
                
-            <br />
+  
             <div className='card'
                 style={{
-                    marginTop:'250px',
+                    //marginTop:'250px',
                     height:'auto'
                 }}
-            ><br/>
+            >
             <h4
               style={{
                 color: 'rgba(6, 21, 117)',
@@ -93,16 +93,17 @@ export default class viewPanels extends Component {
                 fontWeight: "bold",
                 textAlign: "center",
                 marginLeft:'100px',
-                marginTop:'-200px'
+                marginTop:'20px',
+                height:'auto'
               }}
             >
-              All Panels
-            </h4>
-     
+              ALL PANELS
+            </h4><br/>
+              &nbsp;&nbsp;&nbsp;
             <button
-              style={{width:'200px',marginLeft:'20px'}}
+              style={{width:'200px',marginLeft:'500px',marginBottom:'-20px',backgroundColor:'rgba(35, 84, 137 , 1)'}}
               className='btn btn-success'
-            ><a href="/createPanels" style={{textDecoration:'none',color:'white'}}>ADD PANEL</a></button>
+            ><a href="/createPanels" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>ADD PANEL</a></button>
           <div>
             <input
               className="form-control"
@@ -113,16 +114,13 @@ export default class viewPanels extends Component {
               style={{
                 width: "350px",
                 marginLeft: "10px",
-                marginTop: "10px",
+                marginTop: "-20px",
                 borderColor: "rgba(6, 21, 117,0.5)",
               }}
             ></input>
           </div>
-          <br />
-
-          
-              <br/><br/><br/>
-              
+          <br/><br/>
+          <div className='table-responsive'>
                 <table className="table table-hover"
                 style={{
                     marginLeft:'0px',
@@ -132,13 +130,13 @@ export default class viewPanels extends Component {
                    
                     //border: "none",
                 }}>
-                    <thead>
+                    <thead style={{backgroundColor:'rgba(1, 11, 67 )',color:'white'}}>
                         <tr>
-                            <th scope='col'>#</th>
-                            <th scope='col'>PANEL ID</th>
-                            <th scope='col'>NAME OF THE MEMBERS</th>
-                            <th scope='col'>GROUP ID</th>
-                       
+                            <th scope="row">#</th>
+                            <th scope="row">PANEL ID</th>
+                            <th scope="row">NAME OF THE MEMBERS</th>
+                            <th scope="row">GROUP ID</th>
+                            <th scope="row">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -180,7 +178,7 @@ export default class viewPanels extends Component {
                     </tbody>
 
                 </table>
-                   
+               </div>    
            
         </div>
         <br/></div>

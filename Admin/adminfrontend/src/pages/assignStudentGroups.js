@@ -69,7 +69,7 @@ export default class assignStudentGroups extends Component {
                     // marginLeft: "0px",
                     width: "100%",
                     borderRadius: "0px",
-                   
+                    height:'auto',
                     background: "#D3D3D3",
                     }}>
 
@@ -84,11 +84,10 @@ export default class assignStudentGroups extends Component {
                 textAlign: "center",
                 marginLeft:'100px',
                 marginTop:'0px',
-                
-
+                height:'auto'
               }}
             >
-              All Student Groups
+              ALL STUDENT GROUPS
             </h4>
      
 
@@ -109,10 +108,8 @@ export default class assignStudentGroups extends Component {
           </div>
           <br />
           
-
-          
-              <br/><br/>
-                <table className="table table-hover"
+          <div className='table-responsive'>
+                <table className="table table-hover" 
                 style={{
                     marginLeft:'0px',
                     backgroundColor: "#ffff",
@@ -121,14 +118,14 @@ export default class assignStudentGroups extends Component {
                     
                     //border: "none",
                 }}>
-                    <thead>
+                    <thead style={{backgroundColor:'rgba(1, 11, 67 )',color:'white'}}>
                         <tr>
-                            <th scope='col'>#</th>
-                            <th scope='col'>GROUP NAME</th>
-                            <th scope='col'>LEADER'S STUDENT ID</th>
-                            <th scope='col'>2ND TEAM MEMBER'S STUDENT ID</th>
-                            <th scope='col'>3RD TEAM MEMBER'S STUDENT ID</th>
-                            <th scope='col'>4TH TEAM MEMBER'S STUDENT ID</th>
+                            <th scope="row">#</th>
+                            <th scope="row">GROUP NAME</th>
+                            <th scope="row">LEADER'S STUDENT ID</th>
+                            <th scope="row">2ND TEAM MEMBER'S STUDENT ID</th>
+                            <th scope="row">3RD TEAM MEMBER'S STUDENT ID</th>
+                            <th scope="row">4TH TEAM MEMBER'S STUDENT ID</th>
                             {/* <th scope='col'>ACTION</th> */}
                         </tr>
                     </thead>
@@ -147,7 +144,7 @@ export default class assignStudentGroups extends Component {
                     </tbody>
 
                 </table>
-                   
+             </div>      
            
         </div>
         </div>
