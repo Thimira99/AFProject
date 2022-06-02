@@ -12,7 +12,7 @@ import research from "../../Images/research.jpg"
 
 function Cards() {
   return (
-    <div className='cards'>
+    <div data-testid="cards" className='cards'>
       <h1>DASHBOARD</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
