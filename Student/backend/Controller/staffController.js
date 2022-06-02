@@ -58,15 +58,33 @@ const updateStaff = async (req, res) => {
 
 const getOneStaffUser = async (req, res) => {
 
-    try {
+    const { staffUser } = req.body;
+   
 
-        const user = await staffRegistration.findById(req.params.id);
-        return res.status(200).json({ data: user })
+       staffRegistration.findOne({ stfStaffId:staffUser }, (err,user) =>{
+        try {
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server Error" });
-    }
+            if(user){
+
+                return res.status(200).json({ message: "staff Data fetch", data: user })
+
+            }else{
+
+                return res.status(400).json({ error: "No Data" , data:user })
+            }
+
+
+
+
+        } catch (error) {
+            console.error(error);
+           return res.status(500).json({ message: "Server Error" });
+        }
+    
+
+        
+       });
+       
 
 }
 

@@ -24,7 +24,7 @@ router.post("/mainstaffRegister/login", mainStaffLogin);
 router.post("/staffRegister/post", postStaffRegistration);
 router.get("/staffRegister/get", getAllStaff);
 router.put("/staffRegister/update/:id", updateStaff);
-router.get("/staffRegister/get/:id", getOneStaffUser);
+router.post("/staffRegister/getuser", getOneStaffUser);
 router.delete("/staffRegister/delete/:id", deleteStaffUser);
 router.post("/staffRegister/login", StaffLogin);
 router.get("/staffRegister/supervisor", getAllSupervisors);
