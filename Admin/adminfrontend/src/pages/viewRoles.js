@@ -3,7 +3,8 @@ import AdminNavbar from '../components/AdminNavbar/adminNavbar';
 import Footer from '../components/Footer/Footer';
 import axios from 'axios'
 import { Button, Dropdown } from 'react-bootstrap';
-import "./ToggleSwitch.css"; 
+//import "./ToggleSwitch.css"; 
+//import Switch from 'react-toggle-switch'
 
 export default class viewRoles extends Component {
 
@@ -12,21 +13,23 @@ export default class viewRoles extends Component {
 
         this.state={
             roles:[],
-            isToggled:true
+            //isToggled:true
+            //switched: false
+            agreement: false
         };
-        this.onToggle = this.onToggle.bind(this)
+        //this.onToggle = this.onToggle.bind(this)
     }
 
     componentDidMount(){
         this.retrieveRoles();
     }
 
-    onToggle=(data)=>{
-      console.log("toogle1",data)
-      const value=this.state.data ? false: true
-      this.setState({isToggled:value})
-      console.log("toggle",this.state.isToggled)
-    }
+    // onToggle=(data)=>{
+    //   console.log("toogle1",data)
+    //   const value=this.state.data ? false: true
+    //   this.setState({isToggled:value})
+    //   console.log("toggle",this.state.isToggled)
+    // }
 
     retrieveRoles(){
         axios.get("http://localhost:8000/api/admin/roles/get").then(res=>{
@@ -82,6 +85,19 @@ export default class viewRoles extends Component {
     });
   };
 
+  handleChange = e => this.setState({ agreement: e.target.checked });
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(`checked: ${this.state.agreement}`);
+  };
+  // toggleSwitch = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       switched: !prevState.switched
+  //     };
+  //   });
+  // };
+
   render() {
     return (
         <div>
@@ -93,7 +109,7 @@ export default class viewRoles extends Component {
                     // marginLeft: "0px",
                     width: "100%",
                     borderRadius: "0px",
-                   
+                    height:'auto',
                     background: "#D3D3D3",
                     }}>
 
@@ -108,11 +124,10 @@ export default class viewRoles extends Component {
                 textAlign: "center",
                 marginLeft:'100px',
                 marginTop:'0px',
-                
-
+                height:'auto'
               }}
             >
-              All Staff Members
+              ALL STAFF MEMBERS
             </h4>
      
 
@@ -133,30 +148,28 @@ export default class viewRoles extends Component {
           </div>
           <br />
           
-
-          
-              <br/><br/>
-                <table className="table table-hover"
+              <div className='table-responsive'>
+                <table className="table table-hover" onSubmit={this.handleSubmit}
                 style={{
-                    marginLeft:'0px',
+                    //marginLeft:'0px',
                     backgroundColor: "#ffff",
                     borderRadius: "5px",
-                    width: "100%",
-                    
+                    width: "auto",
+                    height:'auto'
                     //border: "none",
                 }}>
-                    <thead>
+                    <thead style={{backgroundColor:'rgba(1, 11, 67 )',color:'white'}}>
                         <tr>
-                            <th scope='col'>#</th>
-                            <th scope='col'>STAFF ID</th>
-                            <th scope='col'>STAFF JOB ROLE</th>
-                            <th scope='col'>RESEARCH FIELD</th>
+                            <th scope="row">#</th>
+                            <th scope="row">STAFF ID</th>
+                            <th scope="row">STAFF JOB ROLE</th>
+                            <th scope="row">RESEARCH FIELD</th>
 
-                            <th scope='col'>NAME</th>
-                            <th scope='col'>ACTIVE/INACTIVE STATUS</th>
-                            <th scope='col'>EMAIL</th>
+                            <th scope="row">NAME</th>
+                            <th scope="row">ACTIVE/INACTIVE STATUS</th>
+                            <th scope="row">EMAIL</th>
 
-                            <th scope='col'>ACTION</th>
+                            <th scope="row">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -174,13 +187,28 @@ export default class viewRoles extends Component {
                                 <td>{roles.stfName}</td>
                                 
                                 <td>
-                               {/* {roles.stfUserActive} */}
-                                <label className="toggle-switch"> 
+                               {roles.stfUserActive}
+                                {/* <label className="toggle-switch"> 
                                   <input type="checkbox" checked={this.state.isToggled} onChange={()=>this.onToggle(roles.stfUserActive)} /> 
-                                  <span className="switch" /> </label>
-                              
-                                
+                                  <span className="switch" /> </label> */}
+                                  {/* <div>
+                                    {/* Basic Switch */}
+                                    {/* <Switch onClick={this.toggleSwitch} on={this.state.switched}/> */}
 
+                                    {/* With children */}
+                                    {/* <Switch onClick={this.toggleSwitch} on={this.state.switched}> */}
+                                      {/* <i class="some-icon"/> */}
+                                    {/* </Switch> */}
+
+                                    {/* Disabled */}
+                                    {/* <Switch onClick={this.toggleSwitch} on={this.state.switched} enabled={false}/> */}
+
+                                    {/* Custom classnames 
+                                    <Switch onClick={this.toggleSwitch} on={this.state.switched} className='other-class'/>
+                                  </div>
+                                 */}
+
+                                 
                                 </td>
                                 <td>{roles.stfEmail}</td>
                                 
@@ -199,7 +227,7 @@ export default class viewRoles extends Component {
                     </tbody>
 
                 </table>
-                   
+                </div>    
            
         </div>
         </div>

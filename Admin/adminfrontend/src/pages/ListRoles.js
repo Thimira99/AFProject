@@ -109,18 +109,17 @@ export default class ListRoles extends Component {
           <br />
           
 
-          
-              <br/><br/>
+              <div className='table-responsive'>
                 <table className="table table-hover"
                 style={{
                     marginLeft:'0px',
                     backgroundColor: "#ffff",
                     borderRadius: "5px",
                     width: "100%",
-                    
+                    height:'auto'
                     //border: "none",
                 }}>
-                    <thead>
+                    <thead style={{backgroundColor:'rgba(1, 11, 67 )',color:'white'}}>
                         <tr>
                             <th scope='col'>NO</th>
                             <th scope='col'>STAFF ID</th>
@@ -166,7 +165,7 @@ export default class ListRoles extends Component {
                     </tbody>
 
                 </table>
-                   
+              </div>     
            
         </div>
         </div>

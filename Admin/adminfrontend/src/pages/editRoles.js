@@ -11,8 +11,11 @@ export default class editRoles extends Component {
             stfStaffId:"",
             stfJobRole:"",
             stfResField:"",
-            stfUserActive:""
+            stfUserActive:"",
+            //agreement: false,
+            //isToggled:true
         }
+        //this.onToggle = this.onToggle.bind(this)
     }
 
     handleInputChange=(e)=>{
@@ -23,6 +26,17 @@ export default class editRoles extends Component {
             [name]:value
         })
     }
+
+    // handleChange =(e)=>{
+    //     console.log("meesgaeeee",e.target.value)
+    // }
+            
+    // onToggle=(data)=>{
+    //   console.log("toogle1",data)
+    //   const value=this.state.data ? false: true
+    //   this.setState({isToggled:value})
+    //   console.log("toggle",this.state.isToggled)
+    // }
 
     onSubmit=(e)=> {
         e.preventDefault();
@@ -116,7 +130,19 @@ export default class editRoles extends Component {
                     <input type="text" className="form-control" name="stfUserActive" placeholder="Enter stfUserActive" value={this.state.stfUserActive} onChange={this.handleInputChange}/>
                     
                 </div> }
+                
+                            {/* <label>
+                                  <input type="checkbox" 
+                                    checked={this.state.agreement} 
+                                    onChange={this.handleChange} />
+                                  <span></span>
+                            </label> */}
+                     {/* <label className="toggle-switch"> 
+                        <input type="checkbox" checked={this.state.isToggled} onChange={()=>this.onToggle(this.state.stfUserActive)} /> 
+                        <span className="switch" /> 
+                    </label> */}
 
+               
                
 
                 <button className="btn btn-success" type="submit" style={{marginTop:'15px'}} onClick={this.onSubmit}>

@@ -71,12 +71,14 @@ export default class editTopics extends Component {
         <div className='container'>
         <div style={{width:'100%',margin:'40px',borderRadius:'0px',backgroundColor: '#D3D3D3',marginTop:'-30px',marginLeft:'0px'}}>
         <div className="col-md-8 mt-4 mx-auto"><br/><br/><br/>
-        <button className="btn btn-danger" style={{width:'160px'}}>
+        
+
+    <h1 className="h3 mb-3 font-weight-normal" style={{color: 'rgba(6, 21, 117)',fontWeight:'bolder'}}>EDIT THE TOPIC DETAILS</h1>
+    <button className="btn btn-danger" style={{width:'160px',backgroundColor:'rgb(9, 38, 68 )'}}>
         <a href="/getTopics" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>
           View Topics
         </a></button><br/><br/>
-
-    <h1 className="h3 mb-3 font-weight-normal" style={{color:'#B91717',fontWeight:'bolder'}}>Edit the Topic details</h1>
+            
             <form className="needs-validation" noValidate>
                
                 <div className="form-group" style={{marginBottom:'15px'}}>
