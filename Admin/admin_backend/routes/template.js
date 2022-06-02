@@ -8,13 +8,13 @@ router.post("/", upload.single("image"), async (req, res) => {
     // Upload image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
 
-    // Create new user
+    // Create new Template
     let template = new Template({
       name: req.body.name,
       avatar: result.secure_url,
       cloudinary_id: result.public_id,
     });
-    // Save user
+    // Save template
     await template.save();
     res.json(template);
   } catch (err) {
@@ -33,11 +33,11 @@ router.get("/", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    // Find user by id
+    // Find template by id
     let template = await Template.findById(req.params.id);
     // Delete image from cloudinary
     await cloudinary.uploader.destroy(template.cloudinary_id);
-    // Delete user from db
+    // Delete template from db
     await template.remove();
     res.json(template);
   } catch (err) {
@@ -69,7 +69,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    // Find user by id
+    // Find template by id
     let template = await Template.findById(req.params.id);
     res.json(template);
   } catch (err) {
