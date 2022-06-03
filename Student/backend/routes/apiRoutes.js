@@ -12,7 +12,8 @@ const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/ma
 const { getHistoryMsgByName , postHistoryMesage , getHistoryMsgBySennder} = require('../Controller/msgHistoryController')
 const { getStudentDetails} = require('../Controller/studentMsgController')
 const { postTypnigMesage , getTypingStatus , updateByTypnigMsg , getAllobjects} = require('../Controller/MessageTypngConroller')
-const { getOnereserchbySupervisors , getOnereserchbySupervisorsPending} = require('../Controller/reserchTopicsController')
+const { getOnereserchbySupervisors , updateReserchbyPending} = require('../Controller/reserchTopicsController')
+const { getGroupDetailsByName } = require('../Controller/groupcontoleller')
 
 
 
@@ -60,6 +61,8 @@ router.get("/msgTyping/",getAllobjects);
 router.post("/reserchTpoic/getbySup",getOnereserchbySupervisors);
 // router.post("/reserchTpoic/getbySup/name",getOnereserchbySupervisorsPending);
 
-
+/* group details */
+router.post("/groupDetails/get",getGroupDetailsByName);
+router.put("/groupDetails/update/:id", updateReserchbyPending);
 
 module.exports = router;
