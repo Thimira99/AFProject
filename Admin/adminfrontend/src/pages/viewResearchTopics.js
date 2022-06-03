@@ -143,12 +143,14 @@ export default class viewResearchTopics extends Component {
                                 <td>{topics.researchField}</td>
                                 
                                 <td>
-                                    <a className='btn btn-warning' href={`/topics/edit/${topics._id}`} style={{color:'black'}}>
+                                <button  className='btn btn-warning' style={{backgroundColor:'rgb(17, 100, 6)'}}>
+                                    <a href={`/topics/edit/${topics._id}`} style={{color:'white', textDecoration:'none', fontWeight:'bold'}}>
                                         <i className='fas fa-edit'></i>
                                         &nbsp;EDIT
                                     </a>
+                                    </button>
                                     &nbsp;
-                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(topics._id)} style={{ textDecoration: "none", color: "white" }}
+                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(topics._id)} style={{backgroundColor:'rgb(158, 7, 7)', textDecoration: "none", color: "white" }}
                                         >
                                         <i className='fas fa-trash-alt'></i>
                                         &nbsp;REMOVE

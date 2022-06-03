@@ -1,13 +1,13 @@
 import React from 'react';
 import './Cards.css';
 import CardItem from './CardItem';
-import user from "../../Images/user.png"
+import user from "../../Images/staff.jpg"
 import sub from "../../Images/submi.jpg"
 import panel from "../../Images/panel.jpg"
 import marking from "../../Images/marking.jpg"
 import doc from "../../Images/doc.jpg"
 import roles from "../../Images/roles.jpg"
-import student from "../../Images/student.jpg"
+import student from "../../Images/stud.jpg"
 import research from "../../Images/research.jpg"
 
 function Cards() {
