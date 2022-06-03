@@ -14,7 +14,7 @@ export default class viewSubmissions extends Component {
     }
 
     componentDidMount(){
-        this.retrieveSubmissions();
+        this.retrieveSubmissions();   
     }
 
     retrieveSubmissions(){
@@ -27,6 +27,8 @@ export default class viewSubmissions extends Component {
             }
         });
     }
+
+   
 
     onDelete = (id) => {
         if (window.confirm("Do you want to remove this submission?")) {
@@ -137,7 +139,8 @@ export default class viewSubmissions extends Component {
                             <th scope="row">DUE DATE</th>
                             <th scope="row">DUE TIME</th>
                             <th scope="row">TYPE</th>
-                            <th scope="row">ACTION</th>
+                            <th scope="row">MARKING CATEGORY</th>
+                            <th scope="row" style={{width:'auto'}}>ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -154,14 +157,15 @@ export default class viewSubmissions extends Component {
                                 <td>{submissions.dueDate}</td>
                                 <td>{submissions.dueTime}</td>
                                 <td>{submissions.type}</td>
+                                <td>{submissions.category}</td>
                                 <td>
                                    <button  className='btn btn-warning' style={{backgroundColor:'rgb(17, 100, 6)'}}><a href={`/edit/submissions/${submissions._id}`} style={{color:'white',textDecoration:'none', fontWeight:'bold'}}>
                                         <i className='fas fa-edit'></i>
                                         &nbsp;EDIT
                                     </a>
-                                    </button> 
-                                    &nbsp;
-                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(submissions._id)} style={{ backgroundColor:'rgb(158, 7, 7)', textDecoration: "none", color: "white" }}
+                                    </button><br/>
+                                   
+                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(submissions._id)} style={{ backgroundColor:'rgb(158, 7, 7)', textDecoration: "none", color: "white" ,marginTop:'5px'}}
                                         >
                                         <i className='fas fa-trash-alt'></i>
                                         &nbsp;REMOVE

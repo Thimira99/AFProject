@@ -110,7 +110,7 @@ formValidation = () =>{
       
 
         <h1 className='h3 mb-3 font-weight-normal' style={{color: 'rgba(6, 21, 117)'}}> ADD A TOPIC </h1>
-        <button className="btn btn-danger" style={{width:'160px',backgroundColor:'rgb(9, 38, 68 )'}}>
+        <button className="btn btn-danger" style={{width:'250px',backgroundColor:'rgb(9, 38, 68 )'}}>
         <a href="/getTopics" style={{textDecoration:'none',color:'white',fontWeight:'bold',}}>
           View Topics
         </a></button><br/><br/>
