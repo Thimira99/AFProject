@@ -3,7 +3,7 @@ import AdminNavbar from '../components/AdminNavbar/adminNavbar';
 import Footer from '../components/Footer/Footer';
 import axios from 'axios'
 import { Button, Dropdown } from 'react-bootstrap';
-//import "./ToggleSwitch.css"; 
+import "./ToggleSwitch.css"; 
 //import Switch from 'react-toggle-switch'
 
 export default class viewRoles extends Component {
@@ -13,23 +13,23 @@ export default class viewRoles extends Component {
 
         this.state={
             roles:[],
-            //isToggled:true
-            //switched: false
+            isToggled:true,
+            //switched: false,
             agreement: false
         };
-        //this.onToggle = this.onToggle.bind(this)
+        this.onToggle = this.onToggle.bind(this)
     }
 
     componentDidMount(){
         this.retrieveRoles();
     }
 
-    // onToggle=(data)=>{
-    //   console.log("toogle1",data)
-    //   const value=this.state.data ? false: true
-    //   this.setState({isToggled:value})
-    //   console.log("toggle",this.state.isToggled)
-    // }
+    onToggle=(data)=>{
+      console.log("toogle1",data)
+      const value=this.state.data ? false: true
+      this.setState({isToggled:value})
+      console.log("toggle",this.state.isToggled)
+    }
 
     retrieveRoles(){
         axios.get("http://localhost:8000/api/admin/roles/get").then(res=>{
@@ -39,7 +39,7 @@ export default class viewRoles extends Component {
 
                     
                 });
-                console.log(this.state.roles)
+                console.log("roles",this.state.roles)
             }
         });
     }
@@ -187,27 +187,15 @@ export default class viewRoles extends Component {
                                 <td>{roles.stfName}</td>
                                 
                                 <td>
-                               {roles.stfUserActive}
+                                <label className="toggle-switch"> 
+                                    <input type="checkbox" checked={roles.stfUserActive=='Y'? true : false}/> 
+                                    <span className="switch" /> 
+                                </label>
+                                    
                                 {/* <label className="toggle-switch"> 
-                                  <input type="checkbox" checked={this.state.isToggled} onChange={()=>this.onToggle(roles.stfUserActive)} /> 
-                                  <span className="switch" /> </label> */}
-                                  {/* <div>
-                                    {/* Basic Switch */}
-                                    {/* <Switch onClick={this.toggleSwitch} on={this.state.switched}/> */}
-
-                                    {/* With children */}
-                                    {/* <Switch onClick={this.toggleSwitch} on={this.state.switched}> */}
-                                      {/* <i class="some-icon"/> */}
-                                    {/* </Switch> */}
-
-                                    {/* Disabled */}
-                                    {/* <Switch onClick={this.toggleSwitch} on={this.state.switched} enabled={false}/> */}
-
-                                    {/* Custom classnames 
-                                    <Switch onClick={this.toggleSwitch} on={this.state.switched} className='other-class'/>
-                                  </div>
-                                 */}
-
+                                <input type="checkbox" checked={isToggled} onChange={onToggle} /> 
+                                <span className="switch" /> 
+                                </label>  */}
                                  
                                 </td>
                                 <td>{roles.stfEmail}</td>
