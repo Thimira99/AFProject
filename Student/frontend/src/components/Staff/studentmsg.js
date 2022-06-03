@@ -638,126 +638,126 @@ class studentmsg extends Component {
                         <div className='app-sidebar'>
                             <Sidebar />
                         </div>
-                        <div className='app-content' style={{ "backgroundColor": "hsl(0deg 0% 97%)" }}>
+                      {/* <div className='app-contents' style={{ "backgroundColor": "hsl(0deg 0% 97%)" }}> */}
 
-                            <div className='homeMain'>
+                            {/* <div className='homeMains'> */}
 
-                                <div style={{ "minHeight": "50vh", "width": "1300px", "backgroundColor": "hsl(0deg 0% 97%)", "boxShadow": "0px 3px 3px -2px rgb(0 0 0/20%), 0px 3px 4px 0px rgb(0 0 0/14%), 0px 1px 8px 0px rgb(0 0 0/12%)" }} className="container ">
+                            <div style={{ "height":"669px", "width": "1290px", "backgroundColor": "hsl(0deg 0% 97%)","marginTop":"10px", "boxShadow": "0px 3px 3px -2px rgb(0 0 0/20%), 0px 3px 4px 0px rgb(0 0 0/14%), 0px 1px 8px 0px rgb(0 0 0/12%)" ,"marginLeft":"10px"}} className="container ">
 
-                                    <div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "400px", "position": "absolute" }}>
-                                        <Row style={{ "height": "55px" }}>
+<div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "400px", "position": "absolute" }}>
+    <Row style={{ "height": "55px" , "marginTop":"10px"}}>
 
-                                            <Col>
-                                                {this.state.selectAllStatus ? <Button style={{ "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
-                                                    <BsChatLeftTextFill style={{ "siz": "10px", }} />
+        <Col>
+            {this.state.selectAllStatus ? <Button style={{ "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
+                <BsChatLeftTextFill style={{ "siz": "10px", }} />
 
-                                                </Button> : <Button style={{ "backgroundColor": "#afcdf9" }} className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
-                                                    <BsChatLeftTextFill style={{ "siz": "10px", }} />
+            </Button> : <Button style={{ "backgroundColor": "#afcdf9" }} className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
+                <BsChatLeftTextFill style={{ "siz": "10px", }} />
 
-                                                </Button>}
+            </Button>}
 
-                                                <p>Chat</p>
+            <p>Chat</p>
 
-                                            </Col>
+        </Col>
 
-                                            <Col>
-                                                {this.state.selectChatStatus ? <Button style={{ "marginBottom": "5px", "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
-                                                    <BsPersonSquare style={{ "siz": "10px" }} />
-                                                </Button> : <Button style={{ "marginBottom": "5px", "backgroundColor": "#afcdf9" }} className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
-                                                    <BsPersonSquare style={{ "siz": "10px" }} />
-                                                </Button>}
-
-                                                <p>All</p>
+        <Col>
+            {this.state.selectChatStatus ? <Button style={{ "marginBottom": "1px", "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
+                <BsPersonSquare style={{ "siz": "10px" }} />
+            </Button> : <Button style={{ "marginBottom": "1px", "backgroundColor": "#afcdf9" }} className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
+                <BsPersonSquare style={{ "siz": "10px" }} />
+            </Button>}
 
 
-                                            </Col>
-
-                                            <Col></Col>
-
-                                            <Col>
-                                                {this.state.selectAllStatus && <div>
-                                                    <input
-                                                        className="form-control"
-                                                        type="search"
-                                                        placeholder="Search"
-                                                        name="searchQuery"
-                                                        onChange={this.handleSearchArea}
-                                                        style={{
-                                                            width: "180px",
-
-                                                            marginRight: "18px",
-
-                                                            borderColor: "rgba(6, 21, 117,0.5)",
-                                                            float: "right"
-                                                        }}
-                                                    ></input>
-                                                </div>}
-                                            </Col>
-
-                                        </Row>
-
-                                    </div>
+            <p>All</p>
 
 
+        </Col>
 
-                                    {this.state.selectChatStatus &&
+        <Col></Col>
 
-                                        <><div className='container' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px", 'height': '600px', 'overflow': 'auto', 'display': 'block' }}>
+        <Col>
+            {this.state.selectAllStatus && <div>
+                <input
+                    className="form-control"
+                    type="search"
+                    placeholder="Search"
+                    name="searchQuery"
+                    onChange={this.handleSearchArea}
+                    style={{
+                        width: "180px",
 
-                                            {this.state.msgSennderNames &&
+                        marginRight: "18px",
 
-                                                this.state.msgSennderNames.map(obj =>
+                        borderColor: "rgba(6, 21, 117,0.5)",
+                        float: "right"
+                    }}
+                ></input>
+            </div>}
+        </Col>
 
+    </Row>
 
-                                                    this.getByUnseen(obj) ? <p style={{ "backgroundColor": "rgb(184 202 228)", "padding": "inherit", "fontWeight": "700", "WebkitTextStroke": "thin" }} onClick={() => this.selectedChatUser(obj)}>
-
-                                                        {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{
-                                                            "color": "rgb(255 255 255)", "marginRight": "10px", "padding": "5px", "float": "right",
-                                                            "paddingLeft": "inherit", "paddingRight": "inherit", "backgroundColor": "#2e4d7a",
-                                                            "borderRadius": "100px", "fontSize": "12px"
-                                                        }}>{this.unseenCount(obj)}</span> : ""}</p> : this.state.selectChat == obj ? <p style={{ "backgroundColor": "rgb(109 140 186)", "padding": "inherit", "fontWeight": "400", "WebkitTextStroke": "thin" }} onClick={() => this.selectedChatUser(obj)}>
-
-                                                            {obj}{" "}{this.getByUnseen(obj)}{"  "}</p> : <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit", "fontWeight": "400", "WebkitTextStroke": "thin" }} onClick={() => this.selectedChatUser(obj)}>
-
-                                                        {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.state.selectChat == obj ? <span style={{
-                                                            "color": "rgb(255 255 255)", "float": "right", "padding": "5px",
-                                                            "paddingLeft": "inherit", "paddingRight": "inherit", "backgroundColor": "#2e4d7a",
-                                                            "borderRadius": "100px", "fontSize": "12px"
-                                                        }}>"xoxaaaa"</span> : ""}</p>
+</div>
 
 
 
+{this.state.selectChatStatus &&
+
+    <><div className='containera' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px", 'height': '590px', 'display': 'block' }}>
+
+        {this.state.msgSennderNames &&
+
+            this.state.msgSennderNames.map(obj =>
+
+
+                this.getByUnseen(obj) ? <p style={{ "backgroundColor": "rgb(184 202 228)", "padding": "10", "fontWeight": "700", "WebkitTextStroke": "thin" ,"marginLeft":"5px","marginBottom":"7px"}} onClick={() => this.selectedChatUser(obj)}>
+
+                    {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{
+                        "color": "rgb(255 255 255)", "marginRight": "10px", "padding": "5px", "float": "right",
+                        "paddingLeft": "inherit", "paddingRight": "inherit", "backgroundColor": "#2e4d7a",
+                        "borderRadius": "100px", "fontSize": "12px"
+                    }}>{this.unseenCount(obj)}</span> : ""}</p> : this.state.selectChat == obj ? <p style={{ "backgroundColor": "rgb(109 140 186)", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin" ,"marginBottom":"7px"}} onClick={() => this.selectedChatUser(obj)}>
+
+                        {obj}{" "}{this.getByUnseen(obj)}{"  "}</p> : <p style={{ "backgroundColor": "#b8cae4", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin","marginBottom":"7px" }} onClick={() => this.selectedChatUser(obj)}>
+
+                    {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.state.selectChat == obj ? <span style={{
+                        "color": "rgb(255 255 255)", "float": "right", "padding": "5px",
+                        "paddingLeft": "inherit", "paddingRight": "inherit", "backgroundColor": "#2e4d7a",
+                        "borderRadius": "100px", "fontSize": "12px"
+                    }}>"xoxaaaa"</span> : ""}</p>
 
 
 
 
 
-                                                )}
-
-                                        </div></>
-
-                                    }
-
-
-                                    {/*   this is for all students */}
-
-
-                                    {this.state.selectAllStatus && <div className='container' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px", 'height': '600px', 'overflow': 'auto', 'display': 'block' }}>
-
-                                        {
-                                            this.state.allStaff &&
-
-                                            this.state.allStaff.map(obj => (
-
-                                                console.log("inside all", obj),
 
 
 
-                                                <p style={{ "backgroundColor": "#b8cae4", "padding": "inherit", "fontWeight": "400", "WebkitTextStroke": "thin" }} onClick={() => this.selectedUser(obj.stfStaffId, obj.stfName)} >{obj.stfName}{" "}{obj.stfStaffId}</p>
+            )}
+
+    </div></>
+
+}
 
 
-                                            ))}
-                                    </div>}
+{/*   this is for all students */}
+
+
+{this.state.selectAllStatus && <div className='containerA' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px", 'height': '560px', 'overflow': 'auto', 'display': 'block' }}>
+
+    {
+        this.state.allStaff &&
+
+        this.state.allStaff.map(obj => (
+
+
+
+
+            <p style={{ "backgroundColor": "#b8cae4", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin","marginBottom":"7px"  }} onClick={() => this.selectedUser(obj.stfStaffId, obj.stfName)} >{obj.stfName}{" "}{obj.stfStaffId}</p>
+
+
+        ))}
+</div>}
 
                                     <div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "890px", "position": "absolute", "marginLeft": "400px", "height": "40px" }}><span style={{ "fontWeight": "bolder", "WebkitTextStroke": "thin" }} >{this.state.selectStafftName}{" "}&nbsp;{" "}{this.state.staffId}</span></div>
 
@@ -791,18 +791,17 @@ class studentmsg extends Component {
                                         {this.state.typingUser == "true" && <div><span style={{ "float": "left", "fontWeight": "600", "WebkitTextStroke": "thin" }}>{this.state.selectStafftName}</span><div style={{ "float": "left", "marginLeft": "25px", "marginTop": "8px" }}><Typing /></div></div>}
 
 
-                                            }
-                                        </ScrollableFeed>
+                                      
 
 
                                     </div>
 
                                     <div style={{ "minHeight": "10vh", "marginLeft": "400px", "width": "880px", "backgroundColor": "rgb(255 255 255)" }} className="container" >
-                                        <Form style={{ "marginTop": "20px" }}>
+                                        <Form >
 
                                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                                                 <Form.Label></Form.Label>
-                                                <Form.Control onChange={this.changeMessageHandler} value={this.state.message} as="textarea" rows={2} />
+                                                <Form.Control onChange={this.changeMessageHandler} value={this.state.message} as="textarea" rows={2} style={{"marginTop":"14px"}}/>
                                             </Form.Group>
 
                                             <Button style={{ "marginBottom": "10px", "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.addMessage}>
@@ -820,9 +819,9 @@ class studentmsg extends Component {
 
                         </div>
                     </div>
-                </div>
+            //     </div>
 
-            </div>
+            // </div>
         );
     }
 }

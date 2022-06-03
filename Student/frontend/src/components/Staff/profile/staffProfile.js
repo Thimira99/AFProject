@@ -311,7 +311,7 @@ class staffProfile extends Component {
                         <div className='app-content'>
                             
 
-                            <div className='container' style={{ "backgroundColor": "rgb(210 220 228)", "minWidth": "800px", "position": "absolute", "marginLeft": "10px", "height": "550px", "float": "left", "minHeight": "80vh", "borderRadius": "10px" }}>
+                            <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "minWidth": "800px", "position": "absolute", "marginLeft": "10px", "height": "550px", "float": "left", "minHeight": "80vh", "borderRadius": "10px" }}>
 
 
                                 <div class="register_content" style={{"marginTop":"20px"}}>
@@ -567,7 +567,7 @@ class staffProfile extends Component {
 
 
 
-                            <div className='container' style={{ "backgroundColor": "rgb(210 220 228)", "minWidth": "450px", "position": "absolute", "marginLeft": "830px", "height": "550px", "float": "right", "minHeight": "80vh", "borderRadius": "10px" }}></div>
+                            <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "minWidth": "450px", "position": "absolute", "marginLeft": "830px", "height": "550px", "float": "right", "minHeight": "80vh", "borderRadius": "10px" }}></div>
                         </div>
                     </div>
                 </div>
