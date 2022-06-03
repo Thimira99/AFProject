@@ -16,7 +16,10 @@ function ViewMarkings() {
         toast.success('Marking Scheme is deleted !', {position: toast.POSITION.TOP_CENTER})
     };
 
-
+    const notify2 = () =>{
+        toast.error('Template is not added !', {position: toast.POSITION.TOP_CENTER})
+       };
+       
     useEffect(() =>{
         axios.get('http://localhost:8000/api/admin/marking/get')
             .then(res => {
@@ -58,7 +61,7 @@ function ViewMarkings() {
                                     <Link to="/createMarking" 
                                      >
                                          <button className="buttonAdd"> 
-                                        Create New Marking Scheme
+                                        Create Marking Scheme
                                         </button>
                                     </Link>
                                     </ul>
@@ -100,7 +103,12 @@ function ViewMarkings() {
                             <h3><b>MARKING SCHEME:</b>  {marking.title}</h3>
                             <h5>CATEGORY: {marking.category}</h5>
                             <div className='containerB'>
-                            <p>{marking.description}</p>
+                            <style>
+                             {`#p-wrap {
+                              white-space: pre-line;
+                             }`}
+                            </style>
+                            <p id="p-wrap">{marking.description}</p>
                             </div>
                             <br></br>
                             <div  className='dateBox'>
@@ -108,15 +116,15 @@ function ViewMarkings() {
                             </div>
 
                             <div className="row my-5">
-                                <div className="col-sm-2"> 
+                                 
                                     <Link to={`/edit/markings/${marking._id}`} 
-                                    className="btn btn-success">
-                                        Update Marking Scheme
+                                    className="btn btn-success" style={{height: '60px', width : '140px',backgroundColor:'rgb(17, 100, 6)', color:'white',textDecoration:'none', fontWeight:'bold'}}>
+                                        Edit Marking Scheme
                                     </Link>
-                                </div>
+                                 
 
                                 <div className="col-sm-2"> 
-                                    <button onClick={() => deleteMarking(marking._id)} className="btn btn-danger">
+                                    <button onClick={() => deleteMarking(marking._id)} className="btn btn-danger" style={{height: '60px', width : '170px',backgroundColor:'rgb(158, 7, 7)', color:'white',textDecoration:'none', fontWeight:'bold'}}>
                                         Delete Marking Scheme
                                     </button>
                                 </div>

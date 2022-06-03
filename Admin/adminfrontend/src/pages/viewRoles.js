@@ -213,7 +213,7 @@ export default class viewRoles extends Component {
                                 <td>{roles.stfEmail}</td>
                                 
                                 <td>
-                                   <button className='btn btn-warning'><a href={`/edit/roles/${roles._id}`} style={{color:'white',textDecoration:'none'}}>
+                                   <button className='btn btn-warning'  style={{backgroundColor:'rgb(17, 100, 6)'}}><a href={`/edit/roles/${roles._id}`} style={{color:'white',textDecoration:'none', fontWeight:'bold'}}>
                                       EDIT
                                    </a>
 

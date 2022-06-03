@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {toast} from 'react-toastify';
 import AdminNavbar from '../components/AdminNavbar/adminNavbar';
 import Footer from '../components/Footer/Footer';
+import {Link } from "react-router-dom";
 
 toast.configure()
 const EditMarking = props =>{
@@ -113,6 +114,11 @@ const EditMarking = props =>{
 
 
     return (
+      <div>
+        <div>
+             <AdminNavbar/> 
+             </div>
+             <br></br>
         <div className='containerA'> 
         <h2>Update Marking Scheme</h2>
         <form onSubmit={changeOnClick} encType="multipart/form-data">
@@ -165,9 +171,25 @@ const EditMarking = props =>{
     onChange={e => setUpdatedDate(e.target.value)} 
     placeholder="Enter updated date"/>
   </div>
-   
-  <button type="submit" className="btn btn-primary">Submit</button>
+   <ul>
+  <button type="submit" className="buttonAdd">Submit</button>
+  <Link to="/viewMarkings" 
+  >
+  <button className="buttonAdd" >
+    BACK TO LIST
+  </button>
+  </Link>
+
+</ul>
 </form>
+             
+</div>
+<div>
+              <br></br>
+              <br></br>
+              <br></br>
+             <Footer/> 
+             </div>
 </div>
     )
 };

@@ -97,7 +97,7 @@ export default class viewSubmissions extends Component {
             </h4>
      
             
-          <button className='btn btn-success' style={{width:'200px',marginLeft:'500px',marginTop:"46px",backgroundColor:'rgba(35, 84, 137 , 1)',height:'auto'}}><a href='/createSubmission' style={{textDecoration:'none',color:'white'}}>
+          <button className='btn btn-success' style={{width:'200px',marginLeft:'500px',marginTop:"46px",backgroundColor:'rgba(35, 84, 137 , 1)',height:'auto'}}><a href='/createSubmission' style={{textDecoration:'none',color:'white', fontWeight:'bold'}}>
                         ADD A SUBMISSION
           </a></button>
           <div>
@@ -155,12 +155,13 @@ export default class viewSubmissions extends Component {
                                 <td>{submissions.dueTime}</td>
                                 <td>{submissions.type}</td>
                                 <td>
-                                    <a className='btn btn-warning' href={`/edit/submissions/${submissions._id}`} style={{color:'black'}}>
+                                   <button  className='btn btn-warning' style={{backgroundColor:'rgb(17, 100, 6)'}}><a href={`/edit/submissions/${submissions._id}`} style={{color:'white',textDecoration:'none', fontWeight:'bold'}}>
                                         <i className='fas fa-edit'></i>
                                         &nbsp;EDIT
                                     </a>
+                                    </button> 
                                     &nbsp;
-                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(submissions._id)} style={{ textDecoration: "none", color: "white" }}
+                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(submissions._id)} style={{ backgroundColor:'rgb(158, 7, 7)', textDecoration: "none", color: "white" }}
                                         >
                                         <i className='fas fa-trash-alt'></i>
                                         &nbsp;REMOVE

@@ -110,13 +110,13 @@ export default class editSubmissions extends Component {
 
                 <div className="form-group" style={{marginBottom:'15px'}}>
                     <label style={{marginBottom:'5px',fontWeight:'bold',color:'black',fontSize:'20px'}}>DUE DATE</label>
-                    <input type="text" className="form-control" name="dueDate" placeholder="Enter dueDate" value={this.state.dueDate} onChange={this.handleInputChange}/>
+                    <input type="date" className="form-control" name="dueDate" placeholder="Enter dueDate" value={this.state.dueDate} onChange={this.handleInputChange}/>
                     
                 </div>
 
                 <div className="form-group" style={{marginBottom:'15px'}}>
                     <label style={{marginBottom:'5px',fontWeight:'bold',color:'black',fontSize:'20px'}}>DUE TIME</label>
-                    <input type="text" className="form-control" name="dueTime" placeholder="Enter dueTime" value={this.state.dueTime} onChange={this.handleInputChange}/>
+                    <input type="time" className="form-control" name="dueTime" placeholder="Enter dueTime" value={this.state.dueTime} onChange={this.handleInputChange}/>
                     
                 </div>
 

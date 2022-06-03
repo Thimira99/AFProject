@@ -42,7 +42,7 @@ function MarkCatC() {
                                   
                                 <div className='markings__container'> 
                                 <br></br>
-                                <h1> Marking Schemes</h1>
+                                <h1> MARKING CATEGORY : C</h1>
                                 <br></br>
                                      
                                     <Link to="/viewMarkings" 
@@ -62,7 +62,12 @@ function MarkCatC() {
                             <h2><b>Marking Scheme:</b>  {marking.title}</h2>
                             <h5>CATEGORY: {marking.category}</h5>
                             <div className='containerB'>
-                            <p>{marking.description}</p>
+                            <style>
+                             {`#p-wrap {
+                              white-space: pre-line;
+                             }`}
+                            </style>
+                            <p id="p-wrap">{marking.description}</p>
                             </div>
                             <br></br>
                             <div  className='dateBox'>
