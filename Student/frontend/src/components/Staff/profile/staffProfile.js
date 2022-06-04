@@ -299,7 +299,7 @@ class staffProfile extends Component {
 
     render() {
         return (
-            <div className='main-wrapper'>
+            <div data-testid="profile" className='main-wrapper'>
                 <div className='app-header'>
                     <Header />
                 </div>
