@@ -123,7 +123,7 @@ function ResearchTopic() {
     }
 
     return (
-        <div className='main-wrapper'>
+        <div data-testid="topic" className='main-wrapper'>
             <div className='app-header'>
                 <Header />
             </div>

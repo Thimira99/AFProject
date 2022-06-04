@@ -9,6 +9,18 @@
   padding-right: 2%;
 }
 
+.containerTemp {
+  display: flex;
+  flex-flow: column;
+  /* align-items: center; */
+  max-width: 1120px;
+  width: 70%;
+  margin: 0 auto;
+  /* background-color: rgb(108, 144, 190); */
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
 .dateBox {
   margin-left: 4px;
   padding: 6px 8px;
@@ -62,6 +74,7 @@ h5 {
   color: #fff;
 }
 
+
 .containerB {
   display: flex;
   flex-flow: column;
@@ -71,3 +84,17 @@ h5 {
   padding-left: 1%;
   padding-right: 1%;
 }
+
+.template__container {
+  display: flex;
+  flex-flow: column;
+  /* align-items: flex-start; */
+  text-align: center;
+  align-items: center;
+  max-width: 1120px;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #5a6575;
+}
+
+

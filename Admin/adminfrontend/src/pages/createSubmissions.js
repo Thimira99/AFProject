@@ -13,6 +13,8 @@ export default class createSubmissions extends Component {
         dueTime:"",
         description:"",
         type:"",
+        category:"",
+        markings:[],
        
          /** */
         errors:{},
@@ -33,6 +35,11 @@ export default class createSubmissions extends Component {
       })
   }
 
+  handleInputSelect=(e)=>{
+    this.setState({category:e.target.value})
+    console.log("category",e.target.value)
+}
+
 /** */
 formValidation = () =>{
   const{submissionId,topic,description,dueDate,dueTime,type}=this.state;
@@ -43,7 +50,7 @@ formValidation = () =>{
   const errorsN = {};
   const errorLong={};
   const errorT={};
-
+  
   if(submissionId.trim().length<3){
       error["submissionCodeLength"] = "Submission code must be in length 3 or higher";
       isValid=false;
@@ -104,7 +111,7 @@ if(!type){
     if(isValid){
 
 
-    const{submissionId,topic,description,dueDate,dueTime,type}= this.state;
+    const{submissionId,topic,description,dueDate,dueTime,type,category}= this.state;
 
     const data={
         submissionId:submissionId,
@@ -112,8 +119,8 @@ if(!type){
         description:description,
         dueDate:dueDate,
         dueTime:dueTime,
-        type:type
-       
+        type:type,
+        category:category
     }
         
     console.log(data);
@@ -121,6 +128,7 @@ if(!type){
     axios.post("http://localhost:8000/api/admin/submission/create",data).then((res)=>{
       if(res.data.success){
         alert("Submission created Successfully!")
+        window.location.href ='/viewSubmissions';
         this.setState(
           {
             submissionId:"",
@@ -129,6 +137,7 @@ if(!type){
             dueDate:"",
             dueTime:"",
             type:"",
+            category:""
           }
         )
       }
@@ -136,8 +145,26 @@ if(!type){
 }
 }
 
+componentDidMount(){
+  this.retrieveMarkings(); 
+}
+
+retrieveMarkings(){
+  axios.get("http://localhost:8000/api/admin/marking/get").then(res=>{
+        if(res.data.success){
+            this.setState({
+                markings:res.data.existingMarkings
+            });
+            console.log(this.state.markings)
+        }
+    });
+}
+
+
+
   
   render() {
+    console.log("meesgaaae",this.state.markings)
     const{errors}=this.state;
     const{errors1}=this.state;
     const{error}=this.state;
@@ -146,18 +173,21 @@ if(!type){
     const{errorT}=this.state;
 
     return (
+     
         <>
         <AdminNavbar/>
       <div className='container'>
-      <div style={{width:'100%',borderRadius:'0px',backgroundColor:'rgba(54, 110, 184,0.3)'}}>
+      
+      <div className='card' style={{marginLeft:'120px', background: "#D3D3D3",height:'auto',width:'600px',marginRight:'100px'}}>
       <div className='col-md-8 mt-4 mx-auto'>
       <br/>
-      <button className="btn btn-danger" style={{width:'160px'}}>
+     
+
+        <h1 className='h3 mb-3 font-weight-normal' style={{color: 'rgba(6, 21, 117)'}}> CREATE A SUBMISSION</h1>
+        <button className="btn btn-danger" style={{width:'200px',backgroundColor:'rgb(9, 38, 68 )'}}>
         <a href="/viewSubmissions" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>
           View Submissions
         </a></button><br/><br/>
-
-        <h1 className='h3 mb-3 font-weight-normal' style={{color:'black'}}> CREATE A SUBMISSION</h1>
         <form className='needs-validation' noValidate onSubmit={this.onSubmit}>
           <div className='form-group' style={{marginBottom:'15px'}}>
             <label style={{marginBottom:'5px'}}>SUBMISSION ID</label>
@@ -236,7 +266,17 @@ if(!type){
               return <div style={{color:'red'}} key={key}>{errorT[key]}</div> })}
           </div>
 
-
+              <div className='form-group' style={{marginBottom:'15px'}}>
+              <label style={{marginBottom:'5px'}}>MARKING CATEGORY</label><br/>
+                  <select id="category" onChange={this.handleInputSelect} value={this.state.category} className="btn btn-secondary dropdown-toggle">
+                    <option selected> Choose...</option>
+                      {
+                        this.state.markings.map((obj)=>(
+                          <option>{obj.category}</option>
+                        ))
+                      }
+                  </select>
+              </div>
           <button className="btn btn-success" type="submit" style={{marginTop:'15px',marginBottom:'150px'}} onClick={this.onSubmit}>
             <i className="far fa-check-square"></i>
              &nbsp;Save

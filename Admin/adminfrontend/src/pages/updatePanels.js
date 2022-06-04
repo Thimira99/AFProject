@@ -15,7 +15,8 @@ export default class abc extends Component {
             memberName1:"",
             memberName2:"",
             memberName3:"",
-            memberName4:""
+            memberName4:"",
+            data1:[]
         }
     }
 
@@ -121,30 +122,36 @@ export default class abc extends Component {
                         console.log("member name",res.data.panel.memberName[1].memberName)
 
                     });
-                            // const mmName=res.data.panel.memberName
-                            // let {memberName} = this.state
-                            // if(memberName.indexOf(mmName) === -1)
-                            // {
-                            //     memberName.push(mmName)
-                            // }
-
-                            //  this.setState({memberName})
-                            // console.log("Meassage",res.data.panel.memberName)          
                 }
             });
-        }
+            this.retrieveRoles();
+    }
 
+    retrieveRoles(){
+        axios.get("http://localhost:8000/api/admin/roles/get").then(res=>{
+            if(res.data.success){
+                this.setState({
+                    data1 : res.data.existingRoles
+                    
+
+                    
+                });
+                console.log("roles",this.state.data1)
+            }
+        });
+    }
   render() {
+   console.log("dropdown",this.state.data1)
     return (
         <div className='container'>
         <div style={{width:'100%',margin:'40px',borderRadius:'0px',backgroundColor: '#D3D3D3',marginTop:'-30px',marginLeft:'0px'}}>
         <div className="col-md-8 mt-4 mx-auto"><br/><br/><br/>
-        <button className="btn btn-danger" style={{width:'160px'}}>
-        <a href="/viewPanels" style={{textDecoration:'none',color:'white',fontWeight:'bold'}}>
+        
+    <h1 className="h3 mb-3 font-weight-normal" style={{color: 'rgba(6, 21, 117)',fontWeight:'bolder'}}>EDIT THE ROLE DETAILS</h1>
+    <button className="btn btn-danger" style={{width:'160px',backgroundColor:'rgb(9, 38, 68 )'}}>
+        <a href="/viewPanels" style={{textDecoration:'none',color:'white',fontWeight:'bold',fontWeight:'bold'}}>
           View Panels
         </a></button><br/><br/>
-
-    <h1 className="h3 mb-3 font-weight-normal" style={{color:'#B91717',fontWeight:'bolder'}}>Edit the Role details</h1>
             <form className="needs-validation" noValidate>
                
                 <div className="form-group" style={{marginBottom:'15px'}}>
@@ -164,27 +171,64 @@ export default class abc extends Component {
                 <div className="form-group" style={{marginBottom:'15px'}}>
 
                     <label style={{marginBottom:'5px',fontWeight:'bold',color:'black',fontSize:'20px'}}>MEMBER NAMES(S)</label>
-                    
+                    <br/>
            {/* {this.state.memberName[0] && this.state.memberName[1] && this.state.memberName[2] && this.state.memberName[3] && */}
-                <Row>
+                <br/><Row>
                
-                    <Col><input 
-                        type="text" className="form-control" name="memberName1" placeholder="Enter memberName" value={this.state.memberName1} onChange={this.handleMemberChange}/>
+                    {/* <Col><input 
+                        type="text" className="form-control" name="memberName1" placeholder="Enter memberName" value={this.state.memberName1} onChange={this.handleMemberChange}/> */}
+                    <Col xs={4}>
+                    <select id="memberName1" name="memberName1" onChange={this.handleMemberChange}
+                            className="btn btn-secondary dropdown-toggle" style={{backgroundColor:'rgba(143, 145, 148 ,1)'}}>
+                            <option selected> {this.state.memberName1}</option>
+                            {this.state.data1.map(obj=> 
+                                <option>{obj.stfStaffId}</option>
+                            )}    
+                    </select>
                     </Col>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Col xs={4}>
+                    {/* <input 
+                        type="text" className="form-control" name="memberName2" placeholder="Enter memberName" value={this.state.memberName2} onChange={this.handleMemberChange}/> */}
                     
-
-                    <Col><input 
-                        type="text" className="form-control" name="memberName2" placeholder="Enter memberName" value={this.state.memberName2} onChange={this.handleMemberChange}/>
+                    <select id="memberName2" name="memberName2" onChange={this.handleMemberChange}
+                        className="btn btn-secondary dropdown-toggle" style={{backgroundColor:'rgba(143, 145, 148 ,1)'}}>
+                            <option selected> {this.state.memberName2}</option>
+                            {this.state.data1.map(obj=> 
+                                <option>{obj.stfStaffId}</option>
+                            )}    
+                    </select>
                     </Col>
                    
-
-                    <Col><input 
+                </Row>
+                <br/>
+                <Row>
+                    <Col xs={4}>
+                    {/* <input 
                         type="text" className="form-control" name="memberName3" placeholder="Enter memberName" value={this.state.memberName3} onChange={this.handleMemberChange}/>
+                     */}
+                     <select id="memberName3" name="memberName3" onChange={this.handleMemberChange}
+                        className="btn btn-secondary dropdown-toggle" style={{backgroundColor:'rgba(143, 145, 148 ,1)'}}>
+                            <option selected> {this.state.memberName3}</option>
+                            {this.state.data1.map(obj=> 
+                                <option>{obj.stfStaffId}</option>
+                            )}    
+                    </select>
                     </Col>
                    
-                  
-                    <Col><input 
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Col xs={4}>
+                    {/* <input 
                         type="text" className="form-control" name="memberName4" placeholder="Enter memberName" value={this.state.memberName4}  onChange={this.handleMemberChange}/>
+                     */}
+
+                     <select id="memberName4" name="memberName4" onChange={this.handleMemberChange}
+                        className="btn btn-secondary dropdown-toggle" style={{backgroundColor:'rgba(143, 145, 148 ,1)'}}>
+                            <option selected> {this.state.memberName4}</option>
+                            {this.state.data1.map(obj=> 
+                                <option>{obj.stfStaffId}</option>
+                            )}    
+                    </select>
                     </Col>
                     
                 </Row>

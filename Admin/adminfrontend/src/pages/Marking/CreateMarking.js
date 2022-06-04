@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './Markings.css';
+import './../Markings.css';
 import axios from "axios"
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from 'react-toastify';
-import AdminNavbar from '../components/AdminNavbar/adminNavbar';
-import Footer from '../components/Footer/Footer';
-
+import AdminNavbar from '../../components/AdminNavbar/adminNavbar';
+import Footer from '../../components/Footer/Footer';
+import {Link } from "react-router-dom";
 
 toast.configure()
 const CreateMarking =() =>{
@@ -115,7 +115,7 @@ const CreateMarking =() =>{
     
 
     return (
-      <div>
+      <div data-testid="marking">
         <div>
              <AdminNavbar/> 
              </div>
@@ -145,7 +145,7 @@ const CreateMarking =() =>{
         placeholder="Enter the title"/>
   </div>
 
-  <div className="form-group">
+  {/* <div className="form-group">
     <label htmlFor="category">Category</label>
     <input 
     type="text" 
@@ -153,7 +153,18 @@ const CreateMarking =() =>{
     onChange={e => setCategory(e.target.value)}
     className="form-control" 
     placeholder="Enter the category"/>
-  </div>
+  </div> */}
+<div className="form-group">
+<label htmlFor="category">Category</label>
+<select class="form-select" aria-label="Default select example" value={category}
+    onChange={e => setCategory(e.target.value)}>
+  <option selected>Select Category</option>
+  <option >A</option>
+  <option >B</option>
+  <option >C</option>
+  <option >D</option>
+</select>
+</div>
 
   <div className="form-group">
     <label htmlFor="description">Marking Scheme</label>
@@ -173,8 +184,17 @@ const CreateMarking =() =>{
     onChange={e => setUpdatedDate(e.target.value)} 
     placeholder="Enter the relevant updated date"/>
   </div>
-   
-  <button type="submit" className="btn btn-primary" >Create</button>
+  <ul>
+  <button type="submit" className="buttonAdd" >CREATE</button>
+
+  <Link to="/viewMarkings" 
+  >
+  <button className="buttonAdd" >
+    BACK TO LIST
+  </button>
+  </Link>
+
+</ul>
 </form>
 </div>
             <div>

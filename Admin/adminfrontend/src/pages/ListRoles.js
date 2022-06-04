@@ -87,7 +87,7 @@ export default class ListRoles extends Component {
 
               }}
             >
-            Roles List
+            ROLES LIST
             </h4>
      
 
@@ -109,18 +109,17 @@ export default class ListRoles extends Component {
           <br />
           
 
-          
-              <br/><br/>
+              <div className='table-responsive'>
                 <table className="table table-hover"
                 style={{
                     marginLeft:'0px',
                     backgroundColor: "#ffff",
                     borderRadius: "5px",
                     width: "100%",
-                    
+                    height:'auto'
                     //border: "none",
                 }}>
-                    <thead>
+                    <thead style={{backgroundColor:'rgba(1, 11, 67 )',color:'white'}}>
                         <tr>
                             <th scope='col'>NO</th>
                             <th scope='col'>STAFF ID</th>
@@ -151,9 +150,9 @@ export default class ListRoles extends Component {
                                 <td>{roles.stfEmail}</td>
                                 
                                 <td>
-                                   <button className='btn btn-primary'>
-                                       <a href={`/view/roles/${roles._id}`} style={{color:'white',textDecoration:'none'}}>
-                                      VIEW STAFF PROFILE
+                                   <button className='btn btn-primary' style={{backgroundColor:'rgba(35, 84, 137 , 1'}}>
+                                       <a href={`/view/roles/${roles._id}`} style={{color:'white',textDecoration:'none', fontWeight:'bold'}}>
+                                      VIEW PROFILE
                                        </a>
 
                                    </button>
@@ -166,7 +165,7 @@ export default class ListRoles extends Component {
                     </tbody>
 
                 </table>
-                   
+              </div>     
            
         </div>
         </div>

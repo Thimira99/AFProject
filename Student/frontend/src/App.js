@@ -55,6 +55,7 @@ function App() {
           <Route exact path='/viewRegDetails' component={viewTopicDetails} />
           <Route exact path='/editSubmission/:id' component={UploadSubmittion} />
           <Route exact path='/update' component={UpdateStudent} />
+          <Route exact path='/studentmsg' component={studentmsg} />
 
 
           {/* Template */}

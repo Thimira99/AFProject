@@ -78,7 +78,7 @@ export default class viewResearchTopics extends Component {
             <br />
             <div className='card'
                 style={{
-                    marginTop:'400px',
+                    marginTop:'100px',
                     height:'auto'
                 }}
             ><br/>
@@ -89,12 +89,15 @@ export default class viewResearchTopics extends Component {
                 fontWeight: "bold",
                 textAlign: "center",
                 marginLeft:'100px',
-                marginTop:'-400px'
+                marginTop:'20px',
+                height:'auto'
               }}
             >
-              All Topics
-            </h4>
-     
+              ALL TOPICS
+            </h4><br/>&nbsp;&nbsp;&nbsp;
+            <button className='btn btn-success' style={{width:'250px',marginLeft:'350px',marginTop:'20px',backgroundColor:'rgba(35, 84, 137 , 1)'}}><a href='/createTopics' style={{textDecoration:'none',color:'white'}}>
+                        ADD RESEARCH TOPICS
+          </a></button>
 
           <div>
             <input
@@ -106,19 +109,13 @@ export default class viewResearchTopics extends Component {
               style={{
                 width: "250px",
                 marginLeft: "10px",
-                marginTop: "30px",
+                marginTop: "-40px",
                 borderColor: "rgba(6, 21, 117,0.5)",
               }}
             ></input>
           </div>
-          <br />
-         
-          <button className='btn btn-success' style={{width:'200px',marginLeft:'350px',marginTop:'-65px'}}><a href='/createTopics' style={{textDecoration:'none',color:'white'}}>
-                        Add Research topics
-          </a></button>
-
-          
-              <br/><br/>
+          <br /><br />
+              <div className='table-responsive'>
                 <table className="table table-hover"
                 style={{
                     marginLeft:'0px',
@@ -128,13 +125,13 @@ export default class viewResearchTopics extends Component {
                     
                     //border: "none",
                 }}>
-                    <thead>
+                    <thead style={{backgroundColor:'rgba(1, 11, 67 )',color:'white'}}>
                         <tr>
-                            <th scope='col'>#</th>
+                            <th scope="row">#</th>
                        
-                            <th scope='col'>TOPIC</th>
-                            <th scope='col'>RESEARCH FIELD</th>
-                            
+                            <th scope="row">TOPIC</th>
+                            <th scope="row">RESEARCH FIELD</th>
+                            <th scope="row">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -146,12 +143,14 @@ export default class viewResearchTopics extends Component {
                                 <td>{topics.researchField}</td>
                                 
                                 <td>
-                                    <a className='btn btn-warning' href={`/topics/edit/${topics._id}`} style={{color:'black'}}>
+                                <button  className='btn btn-warning' style={{backgroundColor:'rgb(17, 100, 6)'}}>
+                                    <a href={`/topics/edit/${topics._id}`} style={{color:'white', textDecoration:'none', fontWeight:'bold'}}>
                                         <i className='fas fa-edit'></i>
                                         &nbsp;EDIT
                                     </a>
+                                    </button>
                                     &nbsp;
-                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(topics._id)} style={{ textDecoration: "none", color: "white" }}
+                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(topics._id)} style={{backgroundColor:'rgb(158, 7, 7)', textDecoration: "none", color: "white" }}
                                         >
                                         <i className='fas fa-trash-alt'></i>
                                         &nbsp;REMOVE
@@ -162,7 +161,7 @@ export default class viewResearchTopics extends Component {
                     </tbody>
 
                 </table>
-                   
+                </div>     
            
         </div>
         <br/></div>

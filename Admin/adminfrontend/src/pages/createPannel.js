@@ -83,11 +83,11 @@ function checkLength(){
         studentGroup,
         
       }
-
+      console.log("memberrrrname",memberName)
       axios.post("http://localhost:8000/api/admin/panels/create", newPanel).then(() => {
           
           alert("Panel added successfully");
-          window.location.href='/viewPanels';
+          //window.location.href='/viewPanels';
       }).catch((err) => {
           alert("Unable to add" + err);
       })
@@ -112,7 +112,7 @@ function checkLength(){
                 <div>
                
                   <select id="memberName"  name="memberName" onChange={(e)=>handleMemberChange(e,index)} value={singleMember.memberName}
-                    className="btn btn-secondary dropdown-toggle">
+                    className="btn btn-secondary dropdown-toggle" style={{backgroundColor:'rgba(143, 145, 148 ,1)'}}>
                     <option selected> Choose...</option>
                     {staffId.map(obj=>
                       <option>{obj.stfStaffId}</option>
@@ -174,7 +174,7 @@ function checkLength(){
         
         <br/>
             <select id="studentGroup" onChange={(e) =>{setStudentGroup(e.target.value)}}
-              className="btn btn-secondary dropdown-toggle">
+              className="btn btn-secondary dropdown-toggle" style={{backgroundColor:'rgba(143, 145, 148 ,1)'}}>
               <option selected> Choose...</option>
               {grpName.map(obj=>
                 <option>{obj.groupName}</option>
@@ -186,7 +186,7 @@ function checkLength(){
       </div>
         <br/>
       
-      <Button variant="primary" type="submit" id="submitBtn" className='submitBtnForm'>
+      <Button variant="success" type="submit" id="submitBtn" className='submitBtnForm'>
                     ADD PANEL
       </Button>
      
