@@ -87,7 +87,7 @@ export default class ListRoles extends Component {
 
               }}
             >
-            Roles List
+            ROLES LIST
             </h4>
      
 
@@ -150,9 +150,9 @@ export default class ListRoles extends Component {
                                 <td>{roles.stfEmail}</td>
                                 
                                 <td>
-                                   <button className='btn btn-primary'>
-                                       <a href={`/view/roles/${roles._id}`} style={{color:'white',textDecoration:'none'}}>
-                                      VIEW STAFF PROFILE
+                                   <button className='btn btn-primary' style={{backgroundColor:'rgba(35, 84, 137 , 1'}}>
+                                       <a href={`/view/roles/${roles._id}`} style={{color:'white',textDecoration:'none', fontWeight:'bold'}}>
+                                      VIEW PROFILE
                                        </a>
 
                                    </button>

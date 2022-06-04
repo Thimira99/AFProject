@@ -9,6 +9,7 @@ require('./db/dbConnect')
 
 const admin = require('./routes/adminRoutes')
 
+
 //middle wares
 app.use(express.json());
 app.use(cors());
@@ -19,14 +20,12 @@ app.use("/api/admin", admin);
 app.use("/template", require("./routes/template"));
 
 const port = process.env.PORT || 8000;
+var server = 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
 });
 
-//thimira
-// const port = process.env.PORT || 8001;
-// app.listen(port, () => {
-//     console.log(`Listening on port ${port}`)
 
-// });
 
+//Ishani
+module.exports = server

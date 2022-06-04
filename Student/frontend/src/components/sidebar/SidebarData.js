@@ -54,6 +54,7 @@ export const SidebarData = [
     }, {
         title: "Message",
         icon: <BsPersonCircle />,
-        Link: "/studentmsg"
+        Link: "/studentMsg"
+
     }
 ]

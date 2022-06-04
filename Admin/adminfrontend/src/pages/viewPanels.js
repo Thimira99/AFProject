@@ -162,12 +162,13 @@ export default class viewPanels extends Component {
                                 </td>
                                 <td>{panels.studentGroup}</td>
                                 <td>
-                                <a className='btn btn-warning' href={`/update/panel/${panels._id}`} style={{color:'black'}}>
+                               <button className='btn btn-warning ' style={{backgroundColor:'rgb(17, 100, 6)'}}><a  href={`/update/panel/${panels._id}`} style={{color:'white', textDecoration:'none', fontWeight:'bold'}}>
                                         <i className='fas fa-edit'></i>
                                         &nbsp;EDIT
                                     </a>
+                                    </button>
                                     &nbsp;
-                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(panels._id)} style={{ textDecoration: "none", color: "white" }}
+                                    <a className ="btn btn-danger" href="#" onClick={() => this.onDelete(panels._id)} style={{ backgroundColor:'rgb(158, 7, 7)', textDecoration: "none", color: "white", fontWeight:'bold' }}
                                         >
                                         <i className='fas fa-trash-alt'></i>
                                         &nbsp;REMOVE

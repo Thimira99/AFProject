@@ -28,6 +28,7 @@ function viewTopicDetails() {
                         <Sidebar />
                     </div>
                     <div className='app-content'>
+                        <h3>Groups and Topics</h3>
                         <table class="table table-dark">
                             <thead>
                                 <tr>

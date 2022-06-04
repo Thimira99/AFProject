@@ -17,7 +17,7 @@ import viewResearchTopics from "./pages/viewResearchTopics";
 import editTopics from "./pages/editResearchTopics";
 import editRoles from "./pages/editRoles";
 import ViewMarkings from "./pages/ViewMarkings";
-import CreateMarking from "./pages/CreateMarking";
+import CreateMarking from "./pages/Marking/CreateMarking";
 import EditMarking from "./pages/EditMarking";
 import editPanel from "./pages/editPanels";
 import updatePanels from './pages/updatePanels'
@@ -32,6 +32,7 @@ import MarkCatD from "./pages/MarkCatD";
 import Template from "./pages/Template";
 import AddTemplate from "./pages/AddTemplate";
 import EditTemplate from "./pages/EditTemplate";
+import ViewEvaluation from "./pages/ViewEvaluation";
 
 function App() {
   
@@ -76,6 +77,8 @@ function App() {
           <Route path="/viewTemplates" exact component={Template} />
           <Route path="/template/add" exact component={AddTemplate} />
           <Route path="/template/edit/:id" exact component={EditTemplate} />
+
+          <Route path='/viewEvaluation' exact component = {ViewEvaluation}/>
 
           <Redirect to='/login'/>
         </Switch>

@@ -2,21 +2,25 @@ const express = require('express');
 const router = express.Router();
 
 
-const { postStaffRegistration, getAllStaff, updateStaff, getOneStaffUser, deleteStaffUser, StaffLogin, getAllSupervisors , getStaffDetails } = require('../Controller/staffController')
+const { postStaffRegistration, getAllStaff, updateStaff, getOneStaffUser, deleteStaffUser, StaffLogin, getAllSupervisors, getStaffDetails } = require('../Controller/staffController')
+
+const { getSETopics, getITTopics, getCSTopics, getCSNETopics } = require('../Controller/submissionsController');
 
 
-
-const { postMesage , getMsgfillter , getbyDatebySennder ,updateStats , getUsersBySeenStatus } = require('../Controller/messsage')
-const { postMainStaffRegistration , mainStaffLogin } = require('../Controller/mainStaff')
+const { postMesage, getMsgfillter, getbyDatebySennder, updateStats, getUsersBySeenStatus } = require('../Controller/messsage')
+const { postMainStaffRegistration, mainStaffLogin } = require('../Controller/mainStaff')
 // const { postStaffRegistration , getAllStaff ,updateStaff , getOneStaffUser , deleteStaffUser , StaffLogin} = require('../Controller/staffController')
-const { getHistoryMsgByName , postHistoryMesage , getHistoryMsgBySennder} = require('../Controller/msgHistoryController')
-const { getStudentDetails} = require('../Controller/studentMsgController')
-const { postTypnigMesage , getTypingStatus , updateByTypnigMsg , getAllobjects} = require('../Controller/MessageTypngConroller')
-const { getOnereserchbySupervisors , updateReserchbyPending} = require('../Controller/reserchTopicsController')
+
+const { getHistoryMsgByName, postHistoryMesage, getHistoryMsgBySennder } = require('../Controller/msgHistoryController')
+const { getStudentDetails } = require('../Controller/studentMsgController')
+const { postTypnigMesage, getTypingStatus, updateByTypnigMsg, getAllobjects } = require('../Controller/MessageTypngConroller')
+
+const { getOnereserchbySupervisors, updateReserchbyPending } = require('../Controller/reserchTopicsController')
 const { getGroupDetailsByName } = require('../Controller/groupcontoleller')
 const { postMarkings, getMarking, getMarkingcategoryA, getMarkingcategoryB, getMarkingcategoryC, getMarkingcategoryD, getAMarking, updateMarking, deleteMarking } = require('../Controller/markingSchemaConroller')
 const {postEvaluation} = require('../Controller/eveluationConroller')
 const {getPaneletailsByName , getPaneletailsByID} = require('../Controller/panelController')
+
 
 
 
@@ -44,28 +48,32 @@ router.post("/message/get/sennder", getbyDatebySennder);
 router.put("/message/update/:id", updateStats);
 
 
-router.post("/msgHistory/post",postHistoryMesage);
-router.post("/msgHistory/get",getHistoryMsgByName);
-router.post("/msgHistory/getbySennder",getHistoryMsgBySennder);
-router.post("/msgHistory/getStudent",getStudentDetails);
-router.post("/msgHistory/getUsersBySeen",getUsersBySeenStatus);
+router.post("/msgHistory/post", postHistoryMesage);
+router.post("/msgHistory/get", getHistoryMsgByName);
+router.post("/msgHistory/getbySennder", getHistoryMsgBySennder);
+router.post("/msgHistory/getStudent", getStudentDetails);
+router.post("/msgHistory/getUsersBySeen", getUsersBySeenStatus);
 
 
 /* Message typnig */
 
-router.post("/msgTyping/post",postTypnigMesage);
-router.post("/msgTyping/get",getTypingStatus);
-router.post("/msgTyping/update",updateByTypnigMsg);
-router.get("/msgTyping/",getAllobjects);
+router.post("/msgTyping/post", postTypnigMesage);
+router.post("/msgTyping/get", getTypingStatus);
+router.post("/msgTyping/update", updateByTypnigMsg);
+router.get("/msgTyping/", getAllobjects);
 
-
+//research Topics
+router.get("/topics/getSE", getSETopics)
+router.get("/topics/getIT", getITTopics)
+router.get("/topics/getCS", getCSTopics)
+router.get("/topics/getCSNE", getCSNETopics)
 
 /* reserch topics */
-router.post("/reserchTpoic/getbySup",getOnereserchbySupervisors);
+router.post("/reserchTpoic/getbySup", getOnereserchbySupervisors);
 // router.post("/reserchTpoic/getbySup/name",getOnereserchbySupervisorsPending);
 
 /* group details */
-router.post("/groupDetails/get",getGroupDetailsByName);
+router.post("/groupDetails/get", getGroupDetailsByName);
 router.put("/groupDetails/update/:id", updateReserchbyPending);
 
 

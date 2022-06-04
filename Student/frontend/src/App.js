@@ -33,6 +33,8 @@ import studentsGroups from "./components/Staff/studentGroups/studentsGroups";
 import staffDashboard from "./components/Staff/staffDashboard/staffDashboard";
 import Evaluation from "./components/Staff/Evaluation/Evaluation";
 
+import Template from "./components/Template/template";
+
 
 
 
@@ -43,6 +45,7 @@ function App() {
       <Router>
         <Switch>
 
+          {/* Student */}
           <Route exact path='/home' component={Home} />
           <Route exact path='/group' component={Group} />
           <Route exact path='/login' component={Login} />
@@ -56,7 +59,8 @@ function App() {
           <Route exact path='/studentmsg' component={studentmsg} />
 
 
-
+          {/* Template */}
+          <Route exact path='/template' component={Template} />
 
 
 
@@ -68,6 +72,7 @@ function App() {
           <Route exact path='/staffProfile' component={staffProfile} />
           <Route exact path='/staffPanel' component={staffPanel} />
           <Route exact path='/studentGroup' component={studentsGroups} />
+          <Route exact path='/studentMsg' component={studentmsg} />
           <Route exact path='/staffDashBoard' component={staffDashboard} />
           <Route exact path='/Evaluation' component={Evaluation} />
 

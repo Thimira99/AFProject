@@ -49,7 +49,7 @@ function Profile() {
                     </div>
                     <div className='app-content'>
                         <div className={profileCss.main}>
-                            <Card style={{ width: '22rem', marginLeft: "120%", backgroundColor: "wheat" }}>
+                            <Card style={{ width: '22rem', marginLeft: "120%", backgroundColor: "darkgray", boxShadow: '0 1rem 1.4rem rgba(0, 0, 0, 1)' }}>
                                 <Card.Img style={{ marginLeft: '20%' }} variant="top" src={profile} />
                                 <Card.Body>
                                     <Card.Title style={{ textAlign: 'center' }}>Hi {students.studentName}</Card.Title>

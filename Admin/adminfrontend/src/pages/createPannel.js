@@ -83,11 +83,11 @@ function checkLength(){
         studentGroup,
         
       }
-
+      console.log("memberrrrname",memberName)
       axios.post("http://localhost:8000/api/admin/panels/create", newPanel).then(() => {
           
           alert("Panel added successfully");
-          window.location.href='/viewPanels';
+          //window.location.href='/viewPanels';
       }).catch((err) => {
           alert("Unable to add" + err);
       })
@@ -186,7 +186,7 @@ function checkLength(){
       </div>
         <br/>
       
-      <Button variant="primary" type="submit" id="submitBtn" className='submitBtnForm'>
+      <Button variant="success" type="submit" id="submitBtn" className='submitBtnForm'>
                     ADD PANEL
       </Button>
      

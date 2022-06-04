@@ -18,6 +18,16 @@
     flex-direction: column;
     border: 1px solid black;
     padding: 2rem;
+    box-shadow: 0 1rem 1.4rem rgba(0, 0, 0, 1);
+}
+
+.mainForm input {
+    outline: none;
+    border: 1px solid black;    
+    padding: 5px;
+    border-radius: 10px;
+    background-color: silver;
+    font-size: 14px;
 }
 
 .membersDetails {
@@ -32,4 +42,9 @@
 .submitButton {
     margin-top: 1rem;
     text-align: center;
+}
+
+.groups {
+    margin-left: 41%;
+    margin-top: 2rem;
 }

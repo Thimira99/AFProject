@@ -30,6 +30,11 @@ const submissionSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true
+    },
+    category:{
+        type:String,
+        required:true,
+        trim:true
     }
     
 });

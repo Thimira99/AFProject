@@ -8,6 +8,7 @@ exports[`matches snapshot 1`] = `
   <h1>
     DASHBOARD
   </h1>
+  <br />
   <div
     className="cards__container"
   >
@@ -32,7 +33,7 @@ exports[`matches snapshot 1`] = `
               <img
                 alt="Image"
                 className="cards__item__img"
-                src="user.png"
+                src="staff.jpg"
               />
             </figure>
             <div
@@ -61,7 +62,7 @@ exports[`matches snapshot 1`] = `
               <img
                 alt="Image"
                 className="cards__item__img"
-                src="student.jpg"
+                src="stud.jpg"
               />
             </figure>
             <div

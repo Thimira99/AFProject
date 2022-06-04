@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../header/header';
 import Sidebar from '../sidebar/Sidebar';
 
@@ -7,6 +8,7 @@ import topicCss from './researchTopic.module.css';
 
 function ResearchTopic() {
 
+    const history = useHistory();
     const groupLeaderId = localStorage.getItem('leaderId');
 
 
@@ -51,7 +53,7 @@ function ResearchTopic() {
         if (event.target.value === 'IT') {
             setResearchField('IT')
             console.log("IT Field");
-            axios.get("http://localhost:8001/api/admin/topics/getIT").then((res) => {
+            axios.get("http://localhost:8000/api/topics/getIT").then((res) => {
                 setTopics(res.data.existingTopics);
 
             }).catch((error) => {
@@ -60,7 +62,7 @@ function ResearchTopic() {
         } else if (event.target.value === 'SE') {
             setResearchField('SE')
             console.log("SE Field");
-            axios.get("http://localhost:8001/api/admin/topics/getSE").then((res) => {
+            axios.get("http://localhost:8000/api/topics/getSE").then((res) => {
                 setTopics(res.data.existingTopics);
 
             }).catch((error) => {
@@ -69,7 +71,7 @@ function ResearchTopic() {
         } else if (event.target.value === 'CS') {
             setResearchField('CS')
             console.log("CS Field");
-            axios.get("http://localhost:8001/api/admin/topics/getCS").then((res) => {
+            axios.get("http://localhost:8000/api/topics/getCS").then((res) => {
                 setTopics(res.data.existingTopics);
 
             }).catch((error) => {
@@ -78,7 +80,7 @@ function ResearchTopic() {
         } else {
             setResearchField('CSNE')
             console.log("CSNE Field");
-            axios.get("http://localhost:8001/api/admin/topics/getCSNE").then((res) => {
+            axios.get("http://localhost:8000/api/topics/getCSNE").then((res) => {
                 setTopics(res.data.existingTopics);
 
             }).catch((error) => {
@@ -123,7 +125,7 @@ function ResearchTopic() {
     }
 
     return (
-        <div className='main-wrapper'>
+        <div data-testid="topic" className='main-wrapper'>
             <div className='app-header'>
                 <Header />
             </div>
@@ -225,9 +227,16 @@ function ResearchTopic() {
                                 </table>
                             </div>
                         </div>
-                        <div>
-                            <a href='/viewRegDetails'><button className='btn btn-dark'>View Details</button></a>
+                        <div className={topicCss.footer}>
+                            <div>
+                                <a href='/viewRegDetails'><button className='btn btn-dark'>View Details</button></a>
+                            </div>
+                            <div>
+                                <button className='btn btn-light' onClick={() => history.push('/studentMsg')}>Chat With Supervisors</button>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
