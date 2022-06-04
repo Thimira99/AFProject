@@ -98,10 +98,14 @@ export default class viewSubmissions extends Component {
               ALL SUBMISSIONS
             </h4>
      
-            
+          <ul> 
           <button className='btn btn-success' style={{width:'200px',marginLeft:'500px',marginTop:"46px",backgroundColor:'rgba(35, 84, 137 , 1)',height:'auto'}}><a href='/createSubmission' style={{textDecoration:'none',color:'white', fontWeight:'bold'}}>
                         ADD A SUBMISSION
           </a></button>
+          <button className='btn btn-success' style={{width:'200px',marginLeft:'500px',marginTop:"46px",backgroundColor:'rgba(35, 84, 137 , 1)',height:'auto'}}><a href='/viewEvaluation' style={{textDecoration:'none',color:'white', fontWeight:'bold'}}>
+                        EVALUATIONS
+          </a></button>
+          </ul>
           <div>
             <input
               className="form-control"

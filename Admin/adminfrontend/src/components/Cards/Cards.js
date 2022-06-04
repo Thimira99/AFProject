@@ -9,7 +9,6 @@ import doc from "../../Images/doc.jpg"
 import roles from "../../Images/roles.jpg"
 import student from "../../Images/stud.jpg"
 import research from "../../Images/research.jpg"
-import evaluation from "../../Images/eval.png"
 
 function Cards() {
   return (
@@ -37,14 +36,14 @@ function Cards() {
               label='Panel Members Allocation'
               path='/viewPanels'
             />
-          </ul>
-          <ul className='cards__items'>
-          <CardItem
+            <CardItem
               src={sub}
               text='Create Submission Types'
               label='Submission Types'
               path='/viewSubmissions'
             />
+          </ul>
+          <ul className='cards__items'>
             <CardItem
                 src={research}
                 text='Research Topics'
@@ -57,11 +56,9 @@ function Cards() {
               label='Marking schemes'
               path='/viewMarkings'
             />
-            </ul>
-            <ul className='cards__items'> 
             <CardItem
               src={doc}
-              text='Upload doc/presentation templates'
+              text='Upload document/presentation templates'
               label='Document/Presentation Templates'
               path='/viewTemplates'
             />
@@ -70,12 +67,6 @@ function Cards() {
               text='View Roles'
               label='View Roles'
               path='/listRoles'
-            />
-            <CardItem
-              src={evaluation}
-              text='Supervisor Evaluation'
-              label='Supervisor Evaluation'
-              path='/viewEvaluation'
             />
           </ul>
         </div>
