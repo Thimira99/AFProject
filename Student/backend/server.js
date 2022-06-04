@@ -44,6 +44,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api", apiRoutes)
 app.use("/api/student", require('./routes/submissions'));
 
+app.use("/template", require("./routes/template"));
+
 
 /**file upload */
 app.use(fileUpload())

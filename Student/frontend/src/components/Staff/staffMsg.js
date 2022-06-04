@@ -804,23 +804,10 @@ class staffMsg extends Component {
 
                                                     </>
 
-                                                ))
+
+                                                ))}
 
 
-
-
-
-
-                                                        }
-
-                                               
-
-
-
-
-
-
-                                       
 
                                         </ScrollableFeed>
                                         {this.state.typingUser == "true" && <div><span style={{ "float": "left", "fontWeight": "600", "WebkitTextStroke": "thin" }}>{this.state.selectStudentName}</span><div style={{ "float": "left", "marginLeft": "25px", "marginTop": "8px" }}><Typing /></div></div>}

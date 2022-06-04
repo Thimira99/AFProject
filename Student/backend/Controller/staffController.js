@@ -109,33 +109,33 @@ const StaffLogin = async (req, res) => {
     const { email, password } = req.body;
     staffRegistration.findOne({ stfStaffId: email }, (err, user) => {
 
-        try{
+        try {
 
             if (user) {
 
-                if(user.stfUserActive == "Y"){
+                if (user.stfUserActive == "Y") {
                     if (password === user.stfUserPassword && email === user.stfStaffId) {
-    
+
                         return res.status(200).json({ message: "Login successful!", data: user })
                     } else {
                         return res.status(200).json({ message: "Invalid email or password!" })
                     }
-                }else{
-    
+                } else {
+
                     return res.status(200).json({ message: "Your Account is inactive please contact your administartor !" })
                 }
-             
+
             } else {
                 return res.status(200).json({ message: "Not registered!" })
             }
 
-        }catch (error){
+        } catch (error) {
 
             console.error(error);
             res.status(500).json({ message: "Server Error" });
         }
 
-        
+
     })
 
 }
@@ -161,7 +161,7 @@ const getAllSupervisors = async (req, res) => {
 const getStaffDetails = async (req, res) => {
     const { stfStaffId } = req.body;
 
-    staffRegistration.find({ stfStaffId : stfStaffId}, (err, data) => {
+    staffRegistration.find({ stfStaffId: stfStaffId }, (err, data) => {
 
         if (data) {
 
