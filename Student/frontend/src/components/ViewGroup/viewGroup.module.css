@@ -1,6 +1,21 @@
-.mainform {
+.mainform form {
     display: flex;
     flex-direction: column;
+    border: 1px solid black;
+    padding: 3rem;
+}
+
+.mainform {
+    display: flex;
+}
+
+.mainform input {
+    outline: none;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: silver;
+    font-size: 14px;
 }
 
 .groupDetail {
@@ -42,4 +57,8 @@
 
 .cardstats {
     grid-area: stats;
+}
+
+.views {
+    margin-left: 5rem;
 }

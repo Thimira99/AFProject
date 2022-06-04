@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import Header from '../header/header';
 import Sidebar from '../sidebar/Sidebar';
+import profileCss from './updateStudent.module.css';
 
 import { useHistory } from 'react-router-dom'
 
@@ -78,9 +79,9 @@ function UpdateStudent() {
                         <Sidebar />
                     </div>
                     <div className='app-content'>
-                        <div>
+                        <div className={profileCss.main}>
 
-
+                            <h2>Update Profile</h2>
                             <form onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label for="studentName">Student Name</label>

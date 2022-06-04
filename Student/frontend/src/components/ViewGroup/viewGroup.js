@@ -66,33 +66,36 @@ function ViewGroup() {
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </div>
                             </form>
-                            {status ? <>
-                                <div className={viewStyles.card}>
-                                    <div className={viewStyles.cardimage}>
-                                    </div>
-                                    <div className={viewStyles.cardtext}>
-                                        <h1>Group Name:<span>{studentGroup.groupName}</span></h1>
-                                        <h5>Group Leader Name:<span>{studentGroup.groupLeaderName}</span></h5>
-                                        <h5>Group Leader Id:<span>{studentGroup.groupLeaderId}</span></h5>
-                                        <h5>Group Member 01(Name):<span>{studentGroup.memberTwoName}</span></h5>
-                                        <h5>Group Member 01(ID):<span>{studentGroup.memberTwoId}</span></h5>
-                                        <h5>Group Name:<span>{studentGroup.memberThreeName}</span></h5>
-                                        <h5>Group Name:<span>{studentGroup.memberThreeId}</span></h5>
-                                        <h5>Group Name:<span>{studentGroup.memberFourName}</span></h5>
-                                        <h5>Group Name:<span>{studentGroup.memberFourId}</span></h5>
-                                    </div>
-                                    <div className={viewStyles.cardstat}>
-                                        <a href='/topic'><button className='btn btn-primary'>Register A Topic</button></a>
+                            <div className={viewStyles.views}>
+                                {status ? <>
+                                    <div className={viewStyles.card}>
+                                        <div className={viewStyles.cardimage}>
+                                        </div>
+                                        <div className={viewStyles.cardtext}>
+                                            <h1>Group Name:<span>{studentGroup.groupName}</span></h1>
+                                            <h5>Group Leader Name:<span>{studentGroup.groupLeaderName}</span></h5>
+                                            <h5>Group Leader Id:<span>{studentGroup.groupLeaderId}</span></h5>
+                                            <h5>Group Member 01(Name):<span>{studentGroup.memberTwoName}</span></h5>
+                                            <h5>Group Member 01(ID):<span>{studentGroup.memberTwoId}</span></h5>
+                                            <h5>Group Name:<span>{studentGroup.memberThreeName}</span></h5>
+                                            <h5>Group Name:<span>{studentGroup.memberThreeId}</span></h5>
+                                            <h5>Group Name:<span>{studentGroup.memberFourName}</span></h5>
+                                            <h5>Group Name:<span>{studentGroup.memberFourId}</span></h5>
+                                        </div>
+                                        <div className={viewStyles.cardstat}>
+                                            <a href='/topic'><button className='btn btn-primary'>Register A Topic</button></a>
+                                        </div>
+
                                     </div>
 
-                                </div>
+                                </>
+                                    :
+                                    <>
+                                        <div class="alert alert-primary" role="alert">
+                                            Nothing To Display
+                                        </div></>}
+                            </div>
 
-                            </>
-                                :
-                                <>
-                                    <div class="alert alert-primary" role="alert">
-                                        Nothing To Display
-                                    </div></>}
 
 
 

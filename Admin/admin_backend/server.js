@@ -23,10 +23,5 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`)
 });
 
-//thimira
-// const port = process.env.PORT || 8001;
-// app.listen(port, () => {
-//     console.log(`Listening on port ${port}`)
 
-// });
 
