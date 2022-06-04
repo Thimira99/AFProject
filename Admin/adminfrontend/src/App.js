@@ -17,7 +17,7 @@ import viewResearchTopics from "./pages/viewResearchTopics";
 import editTopics from "./pages/editResearchTopics";
 import editRoles from "./pages/editRoles";
 import ViewMarkings from "./pages/ViewMarkings";
-import CreateMarking from "./pages/CreateMarking";
+import CreateMarking from "./pages/Marking/CreateMarking";
 import EditMarking from "./pages/EditMarking";
 import editPanel from "./pages/editPanels";
 import updatePanels from './pages/updatePanels'

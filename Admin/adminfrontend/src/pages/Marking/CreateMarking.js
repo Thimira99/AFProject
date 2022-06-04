@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './Markings.css';
+import './../Markings.css';
 import axios from "axios"
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from 'react-toastify';
-import AdminNavbar from '../components/AdminNavbar/adminNavbar';
-import Footer from '../components/Footer/Footer';
+import AdminNavbar from '../../components/AdminNavbar/adminNavbar';
+import Footer from '../../components/Footer/Footer';
 import {Link } from "react-router-dom";
 
 toast.configure()
@@ -115,7 +115,7 @@ const CreateMarking =() =>{
     
 
     return (
-      <div>
+      <div data-testid="marking">
         <div>
              <AdminNavbar/> 
              </div>
