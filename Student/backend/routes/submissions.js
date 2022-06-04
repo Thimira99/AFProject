@@ -77,4 +77,18 @@ router.get("/submissions/get/:id", async (req, res) => {
 })
 
 
+router.post("/submissions/get/gropupname", async (req, res) => {
+    try {
+        const {groupname } = req.body;
+        let sub = await submission.find({groupName:groupname});
+        res.json(sub);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
+
+
+
 module.exports = router
