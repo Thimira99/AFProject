@@ -145,7 +145,7 @@ const CreateMarking =() =>{
         placeholder="Enter the title"/>
   </div>
 
-  <div className="form-group">
+  {/* <div className="form-group">
     <label htmlFor="category">Category</label>
     <input 
     type="text" 
@@ -153,7 +153,18 @@ const CreateMarking =() =>{
     onChange={e => setCategory(e.target.value)}
     className="form-control" 
     placeholder="Enter the category"/>
-  </div>
+  </div> */}
+<div className="form-group">
+<label htmlFor="category">Category</label>
+<select class="form-select" aria-label="Default select example" value={category}
+    onChange={e => setCategory(e.target.value)}>
+  <option selected>Select Category</option>
+  <option >A</option>
+  <option >B</option>
+  <option >C</option>
+  <option >D</option>
+</select>
+</div>
 
   <div className="form-group">
     <label htmlFor="description">Marking Scheme</label>

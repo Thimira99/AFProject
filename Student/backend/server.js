@@ -52,7 +52,10 @@ app.use(fileUpload())
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const port = process.env.PORT || 8000;
+var server = 
 app.listen(port, () => {
     console.log(`Listning on port ${port}`)
 });
 
+//Ishani
+module.exports = server
