@@ -32,6 +32,7 @@ import MarkCatD from "./pages/MarkCatD";
 import Template from "./pages/Template";
 import AddTemplate from "./pages/AddTemplate";
 import EditTemplate from "./pages/EditTemplate";
+import ViewEvaluation from "./pages/ViewEvaluation";
 
 function App() {
   
@@ -76,6 +77,8 @@ function App() {
           <Route path="/viewTemplates" exact component={Template} />
           <Route path="/template/add" exact component={AddTemplate} />
           <Route path="/template/edit/:id" exact component={EditTemplate} />
+
+          <Route path='/viewEvaluation' exact component = {ViewEvaluation}/>
 
           <Redirect to='/login'/>
         </Switch>

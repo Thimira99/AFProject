@@ -10,11 +10,9 @@ const { getRoles, createPanel, getPanels, updatePanel, getASpecificPanel, delete
 
 
 
-
-
-
 const { postMarkings, getMarking, getMarkingcategoryA, getMarkingcategoryB, getMarkingcategoryC, getMarkingcategoryD, getAMarking, updateMarking, deleteMarking } = require('../controller/markingsController')
 const { getGroups, postGroups, getAssignedGroup, getASpecificGroup } = require('../controller/studentController')
+const { getEveluation } = require('../controller/eveluationConroller')
 
 
 /*Login */
@@ -73,6 +71,9 @@ router.get("/get/studentGroups", getGroups)
 router.post("/create/studentGroup", postGroups)
 router.get("/get/assignedGroup", getAssignedGroup)
 router.get("/studentGroup/get/:id", getASpecificGroup)
+
+/*Supervison Evaluation */
+router.get("/evaluation/get", getEveluation)
 
 module.exports = router
 
