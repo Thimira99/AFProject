@@ -31,6 +31,7 @@ import staffProfile from "./components/Staff/profile/staffProfile";
 import staffPanel from "./components/Staff/staffPanelMember/staffPanel";
 import studentsGroups from "./components/Staff/studentGroups/studentsGroups";
 import staffDashboard from "./components/Staff/staffDashboard/staffDashboard";
+import Evaluation from "./components/Staff/Evaluation/Evaluation";
 
 
 
@@ -68,6 +69,7 @@ function App() {
           <Route exact path='/staffPanel' component={staffPanel} />
           <Route exact path='/studentGroup' component={studentsGroups} />
           <Route exact path='/staffDashBoard' component={staffDashboard} />
+          <Route exact path='/Evaluation' component={Evaluation} />
 
 
 

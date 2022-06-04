@@ -5,7 +5,7 @@ import { Form, Button, Table, Row, Col } from "react-bootstrap";
 import axios from 'axios';
 import ScrollableFeed from 'react-scrollable-feed';
 import "./ToggleSwitch.css";
-import { BsPersonCircle ,BsMessenger } from "react-icons/bs";
+import { BsPersonCircle, BsMessenger } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
 
@@ -27,19 +27,20 @@ class studentsGroups extends Component {
             researchTopic: '',
             isToggled: '',
             mongoid: '',
-            updatedData: ''
+            updatedData: '',
+            topicsStatus: true
 
         }
         this.getreserchtopic = this.getreserchtopic.bind(this);
         this.pendingMsgHandler = this.pendingMsgHandler.bind(this);
         this.onToggle = this.onToggle.bind(this);
         this.updateStatus = this.updateStatus.bind(this);
-        this.onChat= this.onChat.bind(this);
+        this.onChat = this.onChat.bind(this);
 
     }
 
-    onChat(e){
-        console.log("eeeeeeeee",e)
+    onChat(e) {
+        console.log("eeeeeeeee", e)
         this.props.history.push(`/staffMsg/${e}`);
     }
 
@@ -92,11 +93,27 @@ class studentsGroups extends Component {
         const url = 'http://localhost:8000/api/reserchTpoic/getbySup'
         axios.post(url, data).then((res) => {
 
-            console.log(res.data.data)
+
+
+            const num = res.data.data.length == 0 ? true : false
+            console.log("xoxo", num)
+
+            this.setState({
+
+                topicsStatus: num
+
+
+            })
 
             this.setState({
                 topics: res.data.data
+
             }, () => {
+
+                this.setState({
+                    topicsStatus: false
+
+                })
                 console.log("...", this.state.topics)
             })
 
@@ -237,7 +254,7 @@ class studentsGroups extends Component {
                                 <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "500", "WebkitTextStroke": "thin", "marginBottom": "5px", "fontSize": "40px" }}><span >{this.state.groupDetails.groupName}</span></div>
 
 
-                              
+
                                 {this.state.groupDetails.groupName &&
 
                                     <><><><><div style={{ "marginLeft": "15px", "fontWeight": "400", "WebkitTextStroke": "thin" }}><p>ResearchField: &nbsp;{" "}{this.state.researchField}</p><p>ResearchTopic: &nbsp;{" "}{this.state.researchTopic}</p><p>Status: &nbsp;{" "}
@@ -274,30 +291,30 @@ class studentsGroups extends Component {
                                                 <th scope="row">1</th>
                                                 <td>{this.state.groupDetails.groupLeaderName}</td>
                                                 <td>{this.state.groupDetails.groupLeaderId}</td>
-                                                <td><Link to={{pathname: "/staffMsg",state:this.state.groupDetails.groupLeaderId}}><Button><BsMessenger /> </Button></Link></td>
+                                                <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails.groupLeaderId }}><Button><BsMessenger /> </Button></Link></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                
+
                                                 <td>{this.state.groupDetails.memberTwoName}</td>
                                                 <td>{this.state.groupDetails.memberTwoId}</td>
-                                                <td><Link to={{pathname: "/staffMsg",state:this.state.groupDetails.memberTwoId}}><Button><BsMessenger /> </Button></Link></td>
+                                                <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails.memberTwoId }}><Button><BsMessenger /> </Button></Link></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <td>{this.state.groupDetails.memberThreeName}</td>
                                                 <td>{this.state.groupDetails.memberThreeId}</td>
-                                                <td><Link to={{pathname: "/staffMsg",state:this.state.groupDetails.memberThreeId}}><Button><BsMessenger /> </Button></Link></td>
+                                                <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails.memberThreeId }}><Button><BsMessenger /> </Button></Link></td>
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <td>{this.state.groupDetails.memberFourName}</td>
                                                 <td>{this.state.groupDetails.memberFourId}</td>
-                                                <td><Link to={{pathname: "/staffMsg",state:this.state.groupDetails.memberFourId}}><Button><BsMessenger /> </Button></Link></td>
+                                                <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails.memberFourId }}><Button><BsMessenger /> </Button></Link></td>
                                             </tr>
                                         </tbody>
                                     </table></div></>
-                                    <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "500", "WebkitTextStroke": "thin", "marginBottom": "5px", "fontSize": "25px" }}><span>Documents</span></div></>
+                                        <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "500", "WebkitTextStroke": "thin", "marginBottom": "5px", "fontSize": "25px" }}><span>Documents</span></div></>
                                 }
                                 {/* 
 
@@ -333,6 +350,7 @@ class studentsGroups extends Component {
 
                                 <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "700", "WebkitTextStroke": "thin", "marginBottom": "5px" }}><span >PENDING GROUPS</span></div>
 
+                                {this.state.topics.length == 0 && <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "700", "WebkitTextStroke": "thin", "marginBottom": "5px", "marginLeft": "100px", "marginTop": "30px", "fontSize": "50", "color": "#b9cad6" }}><span >NO DATA</span></div>}
 
                                 <ScrollableFeed>
 
@@ -360,7 +378,7 @@ class studentsGroups extends Component {
 
                             <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "minWidth": "460px", "position": "absolute", "height": "370px", "float": "left", "minHeight": "35vh", "borderRadius": "10px", "marginTop": "270px" }}>
                                 <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "700", "WebkitTextStroke": "thin", "marginBottom": "0px", "marginTop": "10px" }}><span style={{ "marginTop": "10px" }}>ASSIGNED GROUPS</span></div>
-
+                                {this.state.approvedTopics.length == 0 && <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "700", "WebkitTextStroke": "thin", "marginBottom": "5px", "marginLeft": "100px", "marginTop": "90px", "fontSize": "50", "color": "#b9cad6" }}><span >NO DATA</span></div>}
                                 <ScrollableFeed>
 
                                     {

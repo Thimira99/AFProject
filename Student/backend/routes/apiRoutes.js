@@ -14,6 +14,9 @@ const { getStudentDetails} = require('../Controller/studentMsgController')
 const { postTypnigMesage , getTypingStatus , updateByTypnigMsg , getAllobjects} = require('../Controller/MessageTypngConroller')
 const { getOnereserchbySupervisors , updateReserchbyPending} = require('../Controller/reserchTopicsController')
 const { getGroupDetailsByName } = require('../Controller/groupcontoleller')
+const { postMarkings, getMarking, getMarkingcategoryA, getMarkingcategoryB, getMarkingcategoryC, getMarkingcategoryD, getAMarking, updateMarking, deleteMarking } = require('../Controller/markingSchemaConroller')
+const {postEvaluation} = require('../Controller/eveluationConroller')
+const {getPaneletailsByName , getPaneletailsByID} = require('../Controller/panelController')
 
 
 
@@ -64,5 +67,28 @@ router.post("/reserchTpoic/getbySup",getOnereserchbySupervisors);
 /* group details */
 router.post("/groupDetails/get",getGroupDetailsByName);
 router.put("/groupDetails/update/:id", updateReserchbyPending);
+
+
+/*Marking Scheme routes */
+
+router.post("/markings/create", postMarkings)
+router.get("/markings/get", getMarking)
+router.get("/markings/getcategoryA", getMarkingcategoryA)
+router.get("/markings/getcategoryB", getMarkingcategoryB)
+router.get("/markings/getcategoryC", getMarkingcategoryC)
+router.get("/markings/getcategoryD", getMarkingcategoryD)
+router.get("/markings/get/:id", getAMarking)
+router.put("/markings/update/:id", updateMarking)
+router.delete("/markings/delete/:id", deleteMarking)
+
+
+/* group details */
+router.post("/eveluation/post",postEvaluation);
+
+
+/*panel details */
+router.post("/panel/getbyname",getPaneletailsByName);
+router.post("/panel/getbyId",getPaneletailsByID);
+
 
 module.exports = router;

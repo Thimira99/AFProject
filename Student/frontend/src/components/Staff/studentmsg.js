@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Table, Row, Col } from "react-bootstrap";
 import axios from 'axios';
-import { BsFillPersonFill, BsCheckAll, BsCheck, BsChatLeftTextFill, BsPersonSquare } from "react-icons/bs";
+import { BsFillPersonFill, BsCheckAll, BsCheck, BsChatLeftTextFill, BsPersonSquare,BsChatDots } from "react-icons/bs";
 import { IoMdSend } from "react-icons/io";
 import Header from '../header/header'
 import Sidebar from '../sidebar/Sidebar'
@@ -638,93 +638,93 @@ class studentmsg extends Component {
                         <div className='app-sidebar'>
                             <Sidebar />
                         </div>
-                      {/* <div className='app-contents' style={{ "backgroundColor": "hsl(0deg 0% 97%)" }}> */}
+                        {/* <div className='app-contents' style={{ "backgroundColor": "hsl(0deg 0% 97%)" }}> */}
 
-                            {/* <div className='homeMains'> */}
+                        {/* <div className='homeMains'> */}
 
-                            <div style={{ "height":"669px", "width": "1290px", "backgroundColor": "hsl(0deg 0% 97%)","marginTop":"10px", "boxShadow": "0px 3px 3px -2px rgb(0 0 0/20%), 0px 3px 4px 0px rgb(0 0 0/14%), 0px 1px 8px 0px rgb(0 0 0/12%)" ,"marginLeft":"10px"}} className="container ">
+                        <div style={{ "height": "669px", "width": "1290px", "backgroundColor": "hsl(0deg 0% 97%)", "marginTop": "10px", "boxShadow": "0px 3px 3px -2px rgb(0 0 0/20%), 0px 3px 4px 0px rgb(0 0 0/14%), 0px 1px 8px 0px rgb(0 0 0/12%)", "marginLeft": "10px" }} className="container ">
 
-<div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "400px", "position": "absolute" }}>
-    <Row style={{ "height": "55px" , "marginTop":"10px"}}>
+                            <div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "400px", "position": "absolute" }}>
+                                <Row style={{ "height": "55px", "marginTop": "10px" }}>
 
-        <Col>
-            {this.state.selectAllStatus ? <Button style={{ "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
-                <BsChatLeftTextFill style={{ "siz": "10px", }} />
+                                    <Col>
+                                        {this.state.selectAllStatus ? <Button style={{ "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
+                                            <BsChatLeftTextFill style={{ "siz": "10px", }} />
 
-            </Button> : <Button style={{ "backgroundColor": "#afcdf9" }} className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
-                <BsChatLeftTextFill style={{ "siz": "10px", }} />
+                                        </Button> : <Button style={{ "backgroundColor": "#afcdf9" }} className="btn " variant="addDel" type="submit" onClick={this.selectChat}>
+                                            <BsChatLeftTextFill style={{ "siz": "10px", }} />
 
-            </Button>}
+                                        </Button>}
 
-            <p>Chat</p>
+                                        <p>Chat</p>
 
-        </Col>
+                                    </Col>
 
-        <Col>
-            {this.state.selectChatStatus ? <Button style={{ "marginBottom": "1px", "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
-                <BsPersonSquare style={{ "siz": "10px" }} />
-            </Button> : <Button style={{ "marginBottom": "1px", "backgroundColor": "#afcdf9" }} className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
-                <BsPersonSquare style={{ "siz": "10px" }} />
-            </Button>}
+                                    <Col>
+                                        {this.state.selectChatStatus ? <Button style={{ "marginBottom": "1px", "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
+                                            <BsPersonSquare style={{ "siz": "10px" }} />
+                                        </Button> : <Button style={{ "marginBottom": "1px", "backgroundColor": "#afcdf9" }} className="btn " variant="addDel" type="submit" onClick={this.selectAll}>
+                                            <BsPersonSquare style={{ "siz": "10px" }} />
+                                        </Button>}
 
 
-            <p>All</p>
+                                        <p>All</p>
 
 
-        </Col>
+                                    </Col>
 
-        <Col></Col>
+                                    <Col></Col>
 
-        <Col>
-            {this.state.selectAllStatus && <div>
-                <input
-                    className="form-control"
-                    type="search"
-                    placeholder="Search"
-                    name="searchQuery"
-                    onChange={this.handleSearchArea}
-                    style={{
-                        width: "180px",
+                                    <Col>
+                                        {this.state.selectAllStatus && <div>
+                                            <input
+                                                className="form-control"
+                                                type="search"
+                                                placeholder="Search"
+                                                name="searchQuery"
+                                                onChange={this.handleSearchArea}
+                                                style={{
+                                                    width: "180px",
 
-                        marginRight: "18px",
+                                                    marginRight: "18px",
 
-                        borderColor: "rgba(6, 21, 117,0.5)",
-                        float: "right"
-                    }}
-                ></input>
-            </div>}
-        </Col>
+                                                    borderColor: "rgba(6, 21, 117,0.5)",
+                                                    float: "right"
+                                                }}
+                                            ></input>
+                                        </div>}
+                                    </Col>
 
-    </Row>
+                                </Row>
 
-</div>
+                            </div>
 
 
 
-{this.state.selectChatStatus &&
+                            {this.state.selectChatStatus &&
 
-    <><div className='containera' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px", 'height': '590px', 'display': 'block' }}>
+                                <><div className='containera' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px", 'height': '590px', 'display': 'block' }}>
 
-        {this.state.msgSennderNames &&
+                                    {this.state.msgSennderNames &&
 
-            this.state.msgSennderNames.map(obj =>
+                                        this.state.msgSennderNames.map(obj =>
 
 
-                this.getByUnseen(obj) ? <p style={{ "backgroundColor": "rgb(184 202 228)", "padding": "10", "fontWeight": "700", "WebkitTextStroke": "thin" ,"marginLeft":"5px","marginBottom":"7px"}} onClick={() => this.selectedChatUser(obj)}>
+                                            this.getByUnseen(obj) ? <p style={{ "backgroundColor": "rgb(184 202 228)", "padding": "10", "fontWeight": "700", "WebkitTextStroke": "thin", "marginLeft": "5px", "marginBottom": "7px" }} onClick={() => this.selectedChatUser(obj)}>
 
-                    {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{
-                        "color": "rgb(255 255 255)", "marginRight": "10px", "padding": "5px", "float": "right",
-                        "paddingLeft": "inherit", "paddingRight": "inherit", "backgroundColor": "#2e4d7a",
-                        "borderRadius": "100px", "fontSize": "12px"
-                    }}>{this.unseenCount(obj)}</span> : ""}</p> : this.state.selectChat == obj ? <p style={{ "backgroundColor": "rgb(109 140 186)", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin" ,"marginBottom":"7px"}} onClick={() => this.selectedChatUser(obj)}>
+                                                {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.unseenCount(obj) ? <span style={{
+                                                    "color": "rgb(255 255 255)", "marginRight": "10px", "padding": "5px", "float": "right",
+                                                    "paddingLeft": "inherit", "paddingRight": "inherit", "backgroundColor": "#2e4d7a",
+                                                    "borderRadius": "100px", "fontSize": "12px"
+                                                }}>{this.unseenCount(obj)}</span> : ""}</p> : this.state.selectChat == obj ? <p style={{ "backgroundColor": "rgb(109 140 186)", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin", "marginBottom": "7px" }} onClick={() => this.selectedChatUser(obj)}>
 
-                        {obj}{" "}{this.getByUnseen(obj)}{"  "}</p> : <p style={{ "backgroundColor": "#b8cae4", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin","marginBottom":"7px" }} onClick={() => this.selectedChatUser(obj)}>
+                                                    {obj}{" "}{this.getByUnseen(obj)}{"  "}</p> : <p style={{ "backgroundColor": "#b8cae4", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin", "marginBottom": "7px" }} onClick={() => this.selectedChatUser(obj)}>
 
-                    {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.state.selectChat == obj ? <span style={{
-                        "color": "rgb(255 255 255)", "float": "right", "padding": "5px",
-                        "paddingLeft": "inherit", "paddingRight": "inherit", "backgroundColor": "#2e4d7a",
-                        "borderRadius": "100px", "fontSize": "12px"
-                    }}>"xoxaaaa"</span> : ""}</p>
+                                                {obj}{" "}{this.getByUnseen(obj)}{"  "}{this.state.selectChat == obj ? <span style={{
+                                                    "color": "rgb(255 255 255)", "float": "right", "padding": "5px",
+                                                    "paddingLeft": "inherit", "paddingRight": "inherit", "backgroundColor": "#2e4d7a",
+                                                    "borderRadius": "100px", "fontSize": "12px"
+                                                }}>"xoxaaaa"</span> : ""}</p>
 
 
 
@@ -733,83 +733,66 @@ class studentmsg extends Component {
 
 
 
-            )}
+                                        )}
 
-    </div></>
+                                </div></>
 
-}
+                            }
 
 
-{/*   this is for all students */}
+                            {/*   this is for all students */}
 
 
-{this.state.selectAllStatus && <div className='containerA' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px", 'height': '560px', 'overflow': 'auto', 'display': 'block' }}>
+                            {this.state.selectAllStatus && <div className='containerA' style={{ "backgroundColor": "rgb(144 169 206 / 25%)", "width": "400px", "position": "absolute", "marginTop": "75px", 'height': '560px', 'overflow': 'auto', 'display': 'block' }}>
 
-    {
-        this.state.allStaff &&
+                                {
+                                    this.state.allStaff &&
 
-        this.state.allStaff.map(obj => (
+                                    this.state.allStaff.map(obj => (
 
 
 
 
-            <p style={{ "backgroundColor": "#b8cae4", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin","marginBottom":"7px"  }} onClick={() => this.selectedUser(obj.stfStaffId, obj.stfName)} >{obj.stfName}{" "}{obj.stfStaffId}</p>
+                                        <p style={{ "backgroundColor": "#b8cae4", "padding": "10", "fontWeight": "400", "WebkitTextStroke": "thin", "marginBottom": "7px" }} onClick={() => this.selectedUser(obj.stfStaffId, obj.stfName)} >{obj.stfName}{" "}{obj.stfStaffId}</p>
 
 
-        ))}
-</div>}
+                                    ))}
+                            </div>}
 
-                                    <div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "890px", "position": "absolute", "marginLeft": "400px", "height": "40px" }}><span style={{ "fontWeight": "bolder", "WebkitTextStroke": "thin" }} >{this.state.selectStafftName}{" "}&nbsp;{" "}{this.state.staffId}</span></div>
+                            <div className='container' style={{ "backgroundColor": "rgb(142 164 184)", "width": "890px", "position": "absolute", "marginLeft": "400px", "height": "40px" }}><span style={{ "fontWeight": "bolder", "WebkitTextStroke": "thin" }} >{this.state.selectStafftName}{" "}&nbsp;{" "}{this.state.staffId}</span></div>
 
-                                    <div style={{ "minHeight": "20vh", "width": "880px", 'height': '485px', 'display': 'block', "marginLeft": "399px", "backgroundColor": "rgb(255 255 255)", "marginTop": "50px" }} className="container " >
-                                        <ScrollableFeed>
-                                            {
-                                                this.state.msgData &&
+                            <div style={{ "minHeight": "20vh", "width": "880px", 'height': '485px', 'display': 'block', "marginLeft": "399px", "backgroundColor": "rgb(255 255 255)", "marginTop": "50px" }} className="container " >
+                                <ScrollableFeed>
+                                    {
+                                        this.state.msgData &&
 
-                                                this.state.msgData.map(muBobject => (
+                                        this.state.msgData.map(muBobject => (
 
 
 
 
 
-                                                    <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "5px" }}>{muBobject.sennder == this.state.itnum && <span
-                                                        style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.itnum && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
-                                                        <span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.itnum ? muBobject.msg : ""}
-                                                        </span>
-                                                    </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px", "marginRight": "10px" }}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.itnum && <BsCheck />}</div><h5
-                                                        style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}>{muBobject.sennder != this.state.itnum && <span
-                                                            style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5", "marginRight": "10px" }}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
-                                                            <span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right", "marginRight": "10px" }} >{muBobject.sennder != this.state.itnum && muBobject.msg}</span></span>}</h5><div ref={this.messagesEndRef} /></>
+                                            <><h5 style={{ "textAlign": "left", "width": "300px", "display": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "5px" }}>{muBobject.sennder == this.state.itnum && <span
+                                                style={{ "backgroundColor": " #c7e0f4", "fontSize": "16px" }}><div style={{ "fontSize": "12px", "marginBottom": "5px" }}>{muBobject.sennder == this.state.itnum && <BsFillPersonFill />}{" "}{muBobject.sennder == this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
+                                                <span style={{ "padding": "9px", "backgroundColor": "rgb(173 206 255 / 50%)", "borderRadius": "10px", "float": "left" }}>{muBobject.sennder == this.state.itnum ? muBobject.msg : ""}
+                                                </span>
+                                            </span>}</h5> <div style={{ "fontSize": "small", "marginBottom": "12px", "marginTop": "-5px", "marginLeft": "5px", "marginRight": "10px" }}>{muBobject.sennder == this.state.itnum && muBobject.seenStatus == 'true' ? <BsCheckAll /> : muBobject.sennder == this.state.itnum && <BsCheck />}</div><h5
+                                                style={{ "textAlign": "right", "width": "310px", "position": "inline-block", "overflow": "hidden", "wordBreak": "break-all", "marginLeft": "auto" }}>{muBobject.sennder != this.state.itnum && <span
+                                                    style={{ "fontSize": "16px" }}><div style={{ "fontSize": "small", "marginBottom": "5", "marginRight": "10px" }}>{muBobject.sennder != this.state.itnum && muBobject.sennder}{"  "}&nbsp;{" "}{muBobject.sennder != this.state.itnum && this.dateConverter(muBobject.createdAt)}</div>
+                                                    <span style={{ "padding": "9px", "backgroundColor": "rgb(240 240 241)", "borderRadius": "10px", "float": "right", "marginRight": "10px" }} >{muBobject.sennder != this.state.itnum && muBobject.msg}</span></span>}</h5><div ref={this.messagesEndRef} /></>
 
-                                                ))
+                                        ))
 
 
 
 
-                                            }
-                                        </ScrollableFeed>
-                                        {this.state.typingUser == "true" && <div><span style={{ "float": "left", "fontWeight": "600", "WebkitTextStroke": "thin" }}>{this.state.selectStafftName}</span><div style={{ "float": "left", "marginLeft": "25px", "marginTop": "8px" }}><Typing /></div></div>}
+                                    }
 
+                                    {this.state.msgData.length == 0 && <div style={{ "width": "500px", "backgroundColor": "rgb(210 220 228 / 11%)", "padding": "10px", "fontWeight": "700", "WebkitTextStroke": "thin", "marginBottom": "5px", "marginLeft": "200px", "marginTop": "190px", "fontSize": "50", "color": "#b9cad6" }}><span style={{ "marginLeft": "40PX" }}><BsChatDots />   NO MESSAGES</span></div>}
 
-                                      
 
-
-                                    </div>
-
-                                    <div style={{ "minHeight": "10vh", "marginLeft": "400px", "width": "880px", "backgroundColor": "rgb(255 255 255)" }} className="container" >
-                                        <Form >
-
-                                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                                <Form.Label></Form.Label>
-                                                <Form.Control onChange={this.changeMessageHandler} value={this.state.message} as="textarea" rows={2} style={{"marginTop":"14px"}}/>
-                                            </Form.Group>
-
-                                            <Button style={{ "marginBottom": "10px", "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.addMessage}>
-                                                <IoMdSend style={{ "siz": "10px" }} />
-                                            </Button>
-                                        </Form>
-                                    </div>
-                                </div>
+                                </ScrollableFeed>
+                                {this.state.typingUser == "true" && <div><span style={{ "float": "left", "fontWeight": "600", "WebkitTextStroke": "thin" }}>{this.state.selectStafftName}</span><div style={{ "float": "left", "marginLeft": "25px", "marginTop": "8px" }}><Typing /></div></div>}
 
 
 
@@ -817,8 +800,29 @@ class studentmsg extends Component {
 
                             </div>
 
+                            <div style={{ "minHeight": "10vh", "marginLeft": "400px", "width": "880px", "backgroundColor": "rgb(255 255 255)" }} className="container" >
+                                <Form >
+
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                        <Form.Label></Form.Label>
+                                        <Form.Control onChange={this.changeMessageHandler} value={this.state.message} as="textarea" rows={2} style={{ "marginTop": "14px" }} />
+                                    </Form.Group>
+
+                                    <Button style={{ "marginBottom": "10px", "backgroundColor": "#e8e5e5" }} className="btn " variant="addDel" type="submit" onClick={this.addMessage}>
+                                        <IoMdSend style={{ "siz": "10px" }} />
+                                    </Button>
+                                </Form>
+                            </div>
                         </div>
+
+
+
+
+
                     </div>
+
+                </div>
+            </div>
             //     </div>
 
             // </div>

@@ -8,7 +8,7 @@ import ScrollableFeed from 'react-scrollable-feed';
 import { BsPersonCircle, BsMessenger, BsFillSave2Fill, BsFilePdfFill, BsPlusLg } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
-class staffPanel extends Component {
+class Evaluation extends Component {
 
 
     constructor(props) {
@@ -19,7 +19,7 @@ class staffPanel extends Component {
 
             markingSchemas: [],
             approvedTopics: [],
-            groupDetails: [],
+            groupDetails: '',
             submissions: [],
             selectedmarking: '',
             selectedname: '',
@@ -32,16 +32,10 @@ class staffPanel extends Component {
             row7: 0,
             row8: 0,
             total: 0,
-            markingDiscription: '',
-            groupname: '',
-            logUser: '',
-            submissionsLink: [],
-            groupDetailsName: '',
-            groupDetails2: '',
-            staffName:'',
-            staffid:'',
-            panelsbyid:'',
-            panelsallname:[]
+            markingDiscription:'',
+            groupname:'',
+            logUser:'',
+            submissionsLink:[]
 
 
         }
@@ -54,7 +48,6 @@ class staffPanel extends Component {
         this.creditschange = this.creditschange.bind(this);
         this.getTotal = this.getTotal.bind(this);
         this.addEvaluation = this.addEvaluation.bind(this);
-        this.getGroupDetails = this.getGroupDetails.bind(this);
 
     }
 
@@ -78,24 +71,24 @@ class staffPanel extends Component {
 
         const url = 'http://localhost:8000/api/eveluation/post'
 
-        let num = this.state.total
-        let tot = num.toString();
+         let num = this.state.total
+         let tot = num.toString();
         const data = {
 
             "markingschemaTit": this.state.selectedmarking,
             "markingschemaDis": this.state.markingDiscription,
             "groupName": this.state.groupname,
-            "memeberName": this.state.selectedname,
-            "totalMarks": tot,
+            "memeberName":this.state.selectedname,
+            "totalMarks":tot,
             "submission": this.state.submissions,
             "supervisor": this.state.logUser
 
 
         }
 
-        axios.post(url, data).then((res) => {
+        axios.post(url,data).then((res)=>{
 
-            console.log("res me", res)
+        console.log("res me",res)
 
         })
 
@@ -203,7 +196,7 @@ class staffPanel extends Component {
 
 
         this.setState({
-            total: row1 + row2 + row3 + row4 + row5 + row6 + row7 + row8
+            total: row1 + row2 + row3 + row4+ row5+ row6 + row7 + row8
         }, () => {
             console.log("zxzx 8", this.state.total)
         })
@@ -212,13 +205,13 @@ class staffPanel extends Component {
     }
 
 
-    selectMarking(obj, title) {
+    selectMarking(obj,title) {
 
-        console.log("mnmnmnmnm", obj + title)
+        console.log("mnmnmnmnm",obj+title)
 
         this.setState({
             selectedmarking: obj,
-            markingDiscription: title
+            markingDiscription:title
         })
 
 
@@ -227,8 +220,6 @@ class staffPanel extends Component {
 
 
     selectedName(obj) {
-
-        console.log("mnmnmnmnmnmmmmmmmmmm",obj)
         this.setState({
             selectedname: obj
         })
@@ -293,138 +284,90 @@ class staffPanel extends Component {
 
     }
 
-    getGroupDetails(name) {
+    pendingMsgHandler(id, name, researchField, status, mongoid) {
 
-        console.log("ststzzzzccccz", name)
+        console.log("ststzzzzz", id)
 
         this.setState({
+       
+            groupname : id})
 
-            groupname: name
-        })
-
-
-        const url1 = 'http://localhost:8000/api/groupDetails/get'
-        const names = {
-            "name": name
+    
+        const url1 = 'http://localhost:8000/api/student/submissions/get/gropupname'
+        const groupName = {
+            "groupname": id
         }
 
-        axios.post(url1, names).then((res) => {
+        axios.post(url1, groupName).then((res) => {
 
 
             this.setState({
-                groupDetails2: res.data.data
+                submissions: res.data,
+                submissionsLink: res.data.avatar
             }, () => {
 
-                console.log("ststzzzzz", this.state.groupDetails2)
+                console.log("ststzzzzz", this.state.submissions)
 
 
             })
         })
 
-        // const value = status == "Pending" ? false : true
+        const value = status == "Pending" ? false : true
 
-       
-        // this.setState({
-        //     researchField: researchField,
-        //     status: status,
-        //     groupName: id,
-        //     researchTopic: name,
-        //     isToggled: value,
-        //     mongoid: mongoid
+        console.log("stst", mongoid)
 
-        // })
-
-        // console.log("...", id + " " + name)
-
-        // const data = {
-        //     name: "id"
-        // }
-
-        // const url = 'http://localhost:8000/api/groupDetails/get'
-
-        // axios.post(url, data).then((res) => {
-
-        //     this.setState({
-        //         groupDetails: res.data.data
-        //     })
-
-        //     console.log("...a", this.state.groupDetails)
-
-        // })
-
-    }
-
-    pendingMsgHandler(ids, names) {
-
-        console.log("111111,",ids)
-        console.log("22222",names)
-
-
-        var valu1 = ids
-        var valu2 = names
         this.setState({
+            researchField: researchField,
+            status: status,
+            groupName: id,
+            researchTopic: name,
+            isToggled: value,
+            mongoid: mongoid
 
-            staffName: valu1,
-            staffid: valu2
- 
-         })
+        })
 
-        this.getGroupDetails(names);
+        console.log("...", id + " " + name)
 
-
-        const url = 'http://localhost:8000/api/panel/getbyId'
         const data = {
-            "name" : ids
+            name: id
         }
 
-        axios.post(url,data).then((res)=>{
+        const url = 'http://localhost:8000/api/groupDetails/get'
+
+        axios.post(url, data).then((res) => {
 
             this.setState({
-
-                panelsbyid:res.data.data,
-                panelsallname:res.data.data[0].memberName
-
-            },()=>{
-
+                groupDetails: res.data.data
             })
-           
-            console.log("m,m,m,", this.state.panelsbyid)
+
+            console.log("...a", this.state.groupDetails)
+
         })
-
-       
-
-
-       
 
     }
 
 
     getAssignedreserchtopic(logUser) {
 
-        const logUser2 = sessionStorage.getItem('LogUserId')
-        const url1 = 'http://localhost:8000/api/panel/getbyname'
-        const data1 = {
-            "name": logUser2,
 
+
+        const url = 'http://localhost:8000/api/reserchTpoic/getbySup'
+        const data = {
+            "name": logUser,
+            "resStatus": "Approved"
         }
 
-        axios.post(url1, data1).then((res) => {
+        axios.post(url, data).then((res) => {
+
+            console.log(res.data.data)
+
             this.setState({
                 approvedTopics: res.data.data
             }, () => {
                 console.log("...", this.state.approvedTopics)
             })
 
-
-            console.log("da...", res.data.data)
-
-
         })
-
-
-
-
-
 
 
     }
@@ -436,7 +379,7 @@ class staffPanel extends Component {
         const LogUserName = sessionStorage.getItem('LogUserName')
 
         this.setState({
-            logUser: LogUserName
+            logUser:LogUserName
         })
 
         this.getAllMarkingSchemas()
@@ -505,7 +448,7 @@ class staffPanel extends Component {
 
 
 
-                                                            <div className='container' style={{ "backgroundColor": "white", "minWidth": "870px", "marginTop": "15px", "height": "390px", "float": "right", "minHeight": "25vh", "borderRadius": "10px" }} onClick={() => this.selectMarking(obj.title, obj.description)}>
+                                                            <div className='container' style={{ "backgroundColor": "white", "minWidth": "870px", "marginTop": "15px", "height": "390px", "float": "right", "minHeight": "25vh", "borderRadius": "10px" }} onClick={() => this.selectMarking(obj.title,obj.description)}>
                                                                 <ScrollableFeed>
                                                                     <p style={{ "fontSize": "35px" }}>{obj.category}.</p>
 
@@ -677,7 +620,7 @@ class staffPanel extends Component {
 
                                                 </tr>
                                             </tbody>
-                                        </table> 
+                                        </table>
 
 
 
@@ -697,7 +640,7 @@ class staffPanel extends Component {
 
                             <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "minWidth": "400px", "position": "absolute", "height": "250px", "float": "left", "minHeight": "37vh", "borderRadius": "10px", "marginLeft": "-10px", "marginTop": "-10px" }}>
 
-                                <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "700", "WebkitTextStroke": "thin", "marginBottom": "5px" }}><span >ASSIGNED PANELS</span></div>
+                                <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "700", "WebkitTextStroke": "thin", "marginBottom": "5px" }}><span >ASSIGNED GROUPS</span></div>
 
                                 {/* {this.state.topics.length == 0 && <div className='containerA' style={{ "backgroundColor": "rgb(210 220 228)", "padding": "10px", "fontWeight": "700", "WebkitTextStroke": "thin", "marginBottom": "5px", "marginLeft": "100px", "marginTop": "30px", "fontSize": "50", "color": "#b9cad6" }}><span >NO DATA</span></div>} */}
 
@@ -710,8 +653,8 @@ class staffPanel extends Component {
                                         this.state.approvedTopics.map((obj, index) =>
 
 
-                                            <p style={{ "backgroundColor": "rgb(184 202 228)", "padding": "20px", "fontWeight": "400", "WebkitTextStroke": "thin" }} onClick={() => this.pendingMsgHandler(obj.panelId, obj.studentGroup)}>
-                                                {index + 1}{". "}Panel Id:{" "}&nbsp;{"  "}{obj.panelId} <br />{" "}<span style={{ "marginLeft": "18px" }}>Student Group:{ }&nbsp;{" "}{obj.studentGroup}</span> </p>
+                                            <p style={{ "backgroundColor": "rgb(184 202 228)", "padding": "20px", "fontWeight": "400", "WebkitTextStroke": "thin" }} onClick={() => this.pendingMsgHandler(obj.groupName, obj.researchTopic, obj.researchField, obj.status, obj._id)}>
+                                                {index + 1}{". "}Group Name:{" "}&nbsp;{"  "}{obj.groupName} <br />{" "}<span style={{ "marginLeft": "18px" }}>researchTopic:{ }&nbsp;{" "}{obj.researchTopic}</span> </p>
 
 
 
@@ -744,65 +687,31 @@ class staffPanel extends Component {
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row">1</th>
-                                                        <td onClick={() => this.selectedName(this.state.groupDetails2.groupLeaderName)}>{this.state.groupDetails2.groupLeaderName}</td>
-                                                        <td>{this.state.groupDetails2.groupLeaderId}</td>
-                                                        <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails2.groupLeaderId }}><Button><BsMessenger /> </Button></Link></td>
+                                                        <td onClick={() => this.selectedName(this.state.groupDetails.groupLeaderName)}>{this.state.groupDetails.groupLeaderName}</td>
+                                                        <td>{this.state.groupDetails.groupLeaderId}</td>
+                                                        <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails.groupLeaderId }}><Button><BsMessenger /> </Button></Link></td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">2</th>
 
-                                                        <td onClick={() => this.selectedName(this.state.groupDetails2.memberTwoName)}>{this.state.groupDetails2.memberTwoName}</td>
-                                                        <td>{this.state.groupDetails2.memberTwoId}</td>
-                                                        <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails2.memberTwoId }}><Button><BsMessenger /> </Button></Link></td>
+                                                        <td onClick={() => this.selectedName(this.state.groupDetails.memberTwoName)}>{this.state.groupDetails.memberTwoName}</td>
+                                                        <td>{this.state.groupDetails.memberTwoId}</td>
+                                                        <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails.memberTwoId }}><Button><BsMessenger /> </Button></Link></td>
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">3</th>
-                                                        <td onClick={() => this.selectedName(this.state.groupDetails2.memberThreeName)}>{this.state.groupDetails2.memberThreeName}</td>
-                                                        <td>{this.state.groupDetails2.memberThreeId}</td>
-                                                        <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails2.memberThreeId }}><Button><BsMessenger /> </Button></Link></td>
+                                                        <td onClick={() => this.selectedName(this.state.groupDetails.memberThreeName)}>{this.state.groupDetails.memberThreeName}</td>
+                                                        <td>{this.state.groupDetails.memberThreeId}</td>
+                                                        <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails.memberThreeId }}><Button><BsMessenger /> </Button></Link></td>
                                                     </tr>
                                                     <tr>
-                                                        <th scope="row">4</th>
-                                                        <td onClick={() => this.selectedName(this.state.groupDetails2.memberFourName)}>{this.state.groupDetails2.memberFourName}</td>
-                                                        <td>{this.state.groupDetails2.memberFourId}</td>
-                                                        <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails2.memberFourId }}><Button><BsMessenger /> </Button></Link></td>
+                                                        <th scope="row">3</th>
+                                                        <td onClick={() => this.selectedName(this.state.groupDetails.memberFourName)}>{this.state.groupDetails.memberFourName}</td>
+                                                        <td>{this.state.groupDetails.memberFourId}</td>
+                                                        <td><Link to={{ pathname: "/staffMsg", state: this.state.groupDetails.memberFourId }}><Button><BsMessenger /> </Button></Link></td>
                                                     </tr>
                                                 </tbody>
                                             </table></div>
-
-
-
-                                           {this.state.staffName && <div style={{ "marginRight": "15px", "marginLeft": "15px", "marginTop": "0px" }}><table class="table table-dark">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">Staff Number</th>
-                                                        <th scope="col">staff ID</th>
-                                                        
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    {this.state.panelsallname && this.state.panelsallname.map(obj =>
-                                                        
-                                                        <tr>
-
-                                                        <td>1</td>
-                                                        <td>{obj.memberName}</td>
-                                                        <td>{obj._id}</td>
-                                                     
-                                                        </tr>
-    
-                                                        
-                                                        
-                                                        
-                                                        )}
-                                                  
-                                                </tbody>
-                                            </table></div>
-}
-
-
 
 
 
@@ -814,7 +723,7 @@ class staffPanel extends Component {
 
 
 
-{/* 
+
                                             <div style={{ "marginRight": "15px", "marginLeft": "15px", "marginTop": "0px" }}><table class="table table-dark">
                                                 <thead>
                                                     <tr>
@@ -847,10 +756,11 @@ class staffPanel extends Component {
 
 
                                                 </tbody>
-                                            </table></div> */}
+                                            </table></div>
 
 
                                         </div>
+
 
 
 
@@ -870,4 +780,4 @@ class staffPanel extends Component {
     }
 }
 
-export default staffPanel;
+export default Evaluation;
