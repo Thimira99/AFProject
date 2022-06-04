@@ -23,10 +23,10 @@ it("renders Cards correctly", () => {
     expect(getByTestId('cards')).toHaveTextContent("DASHBOARD")
 })
 
-it("renders Cards correctly", () => {
-    const {getByTestId} = render(<BrowserRouter><Cards><div><h1>"DISPLAY DASHBOARD"</h1></div></Cards></BrowserRouter>)
-    expect(getByTestId('cards')).toHaveTextContent("DASHBOARD")
-})
+// it("renders Cards correctly", () => {
+//     const {getByTestId} = render(<BrowserRouter><Cards><div><h1>"DISPLAY DASHBOARD"</h1></div></Cards></BrowserRouter>)
+//     expect(getByTestId('cards')).toHaveTextContent("DASHBOARD")
+// })
 
 //This will convert this to like a virtual DOM object
 it("matches snapshot", () =>{

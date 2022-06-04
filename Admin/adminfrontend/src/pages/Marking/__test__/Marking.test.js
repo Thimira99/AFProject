@@ -23,10 +23,10 @@ it("renders Create Marking correctly", () => {
     expect(getByTestId('marking')).toHaveTextContent("Create New Marking Scheme")
 })
 
-it("renders Create Marking correctly", () => {
-    const {getByTestId} = render(<BrowserRouter><CreateMarking><div><h2>"DISPLAY Create New Marking Scheme"</h2></div></CreateMarking></BrowserRouter>)
-    expect(getByTestId('marking')).toHaveTextContent("Create New Marking Scheme")
-})
+// it("renders Create Marking correctly", () => {
+//     const {getByTestId} = render(<BrowserRouter><CreateMarking><div><h2>"DISPLAY Create New Marking Scheme"</h2></div></CreateMarking></BrowserRouter>)
+//     expect(getByTestId('marking')).toHaveTextContent("Create New Marking Scheme")
+// })
 
 // //This will convert this to like a virtual DOM object
 it("matches snapshot", () =>{
