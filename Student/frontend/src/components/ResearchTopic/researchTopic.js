@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../header/header';
 import Sidebar from '../sidebar/Sidebar';
 
@@ -7,6 +8,7 @@ import topicCss from './researchTopic.module.css';
 
 function ResearchTopic() {
 
+    const history = useHistory();
     const groupLeaderId = localStorage.getItem('leaderId');
 
 
@@ -225,9 +227,16 @@ function ResearchTopic() {
                                 </table>
                             </div>
                         </div>
-                        <div>
-                            <a href='/viewRegDetails'><button className='btn btn-dark'>View Details</button></a>
+                        <div className={topicCss.footer}>
+                            <div>
+                                <a href='/viewRegDetails'><button className='btn btn-dark'>View Details</button></a>
+                            </div>
+                            <div>
+                                <button className='btn btn-light' onClick={() => history.push('/studentMsg')}>Chat With Supervisors</button>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
